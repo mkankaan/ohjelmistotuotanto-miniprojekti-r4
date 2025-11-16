@@ -3,6 +3,7 @@ CREATE TABLE todos (
   content TEXT NOT NULL,
   done BOOLEAN DEFAULT FALSE
 );
+
 CREATE TABLE citations (
   id SERIAL PRIMARY KEY,
   type TEXT NOT NULL,            -- esim. 'book', 'article', 'webpage'
@@ -14,6 +15,7 @@ CREATE TABLE citations (
   url TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE authors (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
