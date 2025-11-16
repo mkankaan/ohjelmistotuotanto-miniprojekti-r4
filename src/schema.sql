@@ -2,4 +2,13 @@ CREATE TABLE todos (
   id SERIAL PRIMARY KEY, 
   content TEXT NOT NULL,
   done BOOLEAN DEFAULT FALSE
-)
+);
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  author TEXT NOT NULL,
+  year INTEGER,
+  publisher TEXT,
+  isbn TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
