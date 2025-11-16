@@ -10,6 +10,7 @@ def validate_todo(content):
 
 def split_names(content):
     if content["author"].find(" and ") == -1:
+        content["author"] = [content["author"]]
         return
     name_list = content["author"].split(" and ")
     content["author"] = name_list

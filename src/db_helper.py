@@ -3,11 +3,19 @@ from sqlalchemy import text
 import os
 
 def reset_db():
-  print(f"Clearing contents from table todos")
-  sql = text(f"DELETE FROM todos")
+  print(f"Clearing contents from tables citations, authors and citations_authors")
+  sql = text(f"DELETE * FROM citations")
   db.session.execute(sql)
   db.session.commit()
 
+  sql = text(f"DELETE * FROM authors")
+  db.session.execute(sql)
+  db.session.commit()
+  
+  sql = text(f"DELETE * FROM citations_authors")
+  db.session.execute(sql)
+  db.session.commit()
+  
 def tables():
   """Returns all table names from the database except those ending with _id_seq"""
   sql = text(
@@ -29,7 +37,7 @@ def setup_db():
   if len(tables_in_db) > 0:
     print(f"Tables exist, dropping: {', '.join(tables_in_db)}")
     for table in tables_in_db:
-      sql = text(f"DROP TABLE {table}")
+      sql = text(f"DROP TABLE {table} CASCADE")
       db.session.execute(sql)
     db.session.commit()
 

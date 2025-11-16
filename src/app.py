@@ -1,13 +1,13 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_todos, create_todo, set_done
+from repositories.todo_repository import get_citations, create_citation, set_done
 from config import app, test_env
+from util import split_names
 
 @app.route("/")
 def index():
-    todos = get_todos()
-    unfinished = len([todo for todo in todos if not todo.done])
-    return render_template("index.html", todos=todos, unfinished=unfinished) 
+    citations = get_citations()
+    return render_template("index.html", citations=citations)
 
 @app.route("/new_citation")
 def new():
@@ -15,10 +15,11 @@ def new():
 
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
-    content = request.form
+    content = request.form.to_dict()
 
     try:
-        create_todo(content)
+        split_names(content)
+        create_citation(content)
         return redirect("/")
     except Exception as error:
         flash(str(error))
