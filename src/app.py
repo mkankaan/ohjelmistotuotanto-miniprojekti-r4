@@ -16,6 +16,14 @@ def new():
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
     content = request.form.to_dict()
+    if content.get("year", "") == "":
+        content["year"] = None
+    else:
+        try:
+            content["year"] = int(content["year"])
+        except ValueError:
+            flash("Year must be a number or left empty.")
+            return redirect("/new_citation")
 
     try:
         split_names(content)

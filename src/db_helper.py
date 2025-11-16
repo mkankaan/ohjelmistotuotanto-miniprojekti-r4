@@ -4,17 +4,19 @@ import os
 
 def reset_db():
   print(f"Clearing contents from tables citations, authors and citations_authors")
-  sql = text(f"DELETE * FROM citations")
-  db.session.execute(sql)
-  db.session.commit()
-
-  sql = text(f"DELETE * FROM authors")
+  sql = text(f"DELETE FROM citations_authors")
   db.session.execute(sql)
   db.session.commit()
   
-  sql = text(f"DELETE * FROM citations_authors")
+  sql = text(f"DELETE FROM citations")
   db.session.execute(sql)
   db.session.commit()
+
+  sql = text(f"DELETE FROM authors")
+  db.session.execute(sql)
+  db.session.commit()
+  
+
   
 def tables():
   """Returns all table names from the database except those ending with _id_seq"""
