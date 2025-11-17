@@ -15,26 +15,35 @@ Citation helper
 <ul>
   {% for citation in citations %}
   <li>
-    <p>Title: {{ citation.title }}</p>
-    <p>Type: {{ citation.type }}</p>
-    {% if citation.publisher %}
-      <p>Publisher: {{ citation.publisher }}</p>
+    <p>Title: {{ citation.info.title }}</p>
+    <p>Type: {{ citation.info.type }}</p>
+
+    {% if citation.authors %}
+      <p>Author(s):
+        {% for author in citation.authors %}
+        {{ author.0 }}
+        {% endfor %}
+      </p>
     {% endif %}
 
-    {% if citation.year %}
-      <p>Year: {{ citation.year }}</p>
+    {% if citation.info.publisher %}
+      <p>Publisher: {{ citation.info.publisher }}</p>
     {% endif %}
 
-    {% if citation.isbn %}
-      <p>ISBN: {{ citation.isbn }}</p>
+    {% if citation.info.year %}
+      <p>Year: {{ citation.info.year }}</p>
     {% endif %}
 
-    {% if citation.doi %}
-      <p>DOI: {{ citation.doi }}</p>
+    {% if citation.info.isbn %}
+      <p>ISBN: {{ citation.info.isbn }}</p>
     {% endif %}
 
-    {% if citation.url %}
-      <p>URL: {{ citation.url }}</p>
+    {% if citation.info.doi %}
+      <p>DOI: {{ citation.info.doi }}</p>
+    {% endif %}
+
+    {% if citation.info.url %}
+      <p>URL: {{ citation.info.url }}</p>
     {% endif %}
   </li>
   {% endfor %}
