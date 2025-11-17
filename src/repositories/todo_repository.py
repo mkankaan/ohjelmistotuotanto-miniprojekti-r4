@@ -5,7 +5,7 @@ from entities.todo import Todo # Useless import, delete or change later
 
 # Currently only returns amount of citations for testing.
 def get_citations():
-    result = db.session.execute(text("SELECT title, type, publisher FROM citations"))
+    result = db.session.execute(text("SELECT title, type, publisher, year, isbn, doi FROM citations"))
     citations = result.fetchall()
     return citations
 

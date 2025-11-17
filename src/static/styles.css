@@ -34,3 +34,8 @@
 .info-icon:hover .tooltip-text {
   visibility: visible;
 }
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
