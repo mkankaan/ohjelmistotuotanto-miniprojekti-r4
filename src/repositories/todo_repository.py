@@ -5,9 +5,9 @@ from entities.todo import Todo # Useless import, delete or change later
 
 # Currently only returns amount of citations for testing.
 def get_citations():
-    result = db.session.execute(text("SELECT title FROM citations"))
+    result = db.session.execute(text("SELECT title, type, publisher FROM citations"))
     citations = result.fetchall()
-    return len(citations)
+    return citations
 
 def set_done(todo_id):
     sql = text("UPDATE todos SET done = TRUE WHERE id = :id")

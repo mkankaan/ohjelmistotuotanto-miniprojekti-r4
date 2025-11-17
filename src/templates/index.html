@@ -9,20 +9,15 @@ Citation helper
 <h2>Citation helper</h2>
 
 <div>
-  Amount of citations: {{ citations }}
+  Amount of citations: {{ citations | count }}
 </div>
 
 <ul>
-  {% for todo in todos %}
-  <li style="display: flex">
-    <div>
-      {{ todo }}
-    </div>
-    {% if not todo.done %}
-    <form action="/toggle_todo/{{ todo.id }}" method="post" style="margin-left: 10px;">
-      <button type="submit">mark as done</button>
-    </form>
-    {% endif %}
+  {% for citation in citations %}
+  <li>
+    <p>Title {{ citation.title }}</p>
+    <p>Type {{ citation.type }}</p>
+    <p>Publisher {{ citation.publisher }}</p>
   </li>
   {% endfor %}
 </ul>
