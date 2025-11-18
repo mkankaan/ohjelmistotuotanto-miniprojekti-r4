@@ -21,6 +21,17 @@ All Citation Fields Are Shown
     Page Should Contain  10.1000/182
     Page Should Contain  https://www.example.com
 
+Multiple Citations Are Shown
+    Reset Citations And Go To Start Page
+    Page Should Contain  Amount of citations: 0
+    Create Book Citation Required Fields  Example1
+    Create Book Citation Required Fields  Example2
+    Create Book Citation Required Fields  Example3
+    Page Should Contain  Example1
+    Page Should Contain  Example2
+    Page Should Contain  Example3
+
+
 *** Keywords ***
 Create Book Citation
     [Arguments]  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}
@@ -33,6 +44,13 @@ Create Book Citation
     Input Text  name=isbn  ${isbn}
     Input Text  name=doi  ${doi}
     Input Text  name=url  ${url}
+    Click Button  Create
+
+Create Book Citation Required Fields
+    [Arguments]  ${title}
+    Go To  ${NEW_CITATION_URL}
+    Select From List By Label  name=type  Book
+    Input Text  name=title  ${title}
     Click Button  Create
 
 

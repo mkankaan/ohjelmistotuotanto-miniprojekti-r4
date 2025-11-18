@@ -30,3 +30,7 @@ Open And Configure Browser
 Reset Citations
     Go To  ${RESET_URL}
 
+Reset Citations And Go To Start Page
+    Go To  ${RESET_URL}
+    Go To  ${HOME_URL}
+
