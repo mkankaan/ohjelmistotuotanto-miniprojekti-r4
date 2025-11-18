@@ -1,30 +1,37 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.todo_repository import get_todos, create_todo, set_done
+from repositories.todo_repository import get_citations, create_citation, set_done
 from config import app, test_env
-from util import validate_todo
+from util import split_names
 
 @app.route("/")
 def index():
-    todos = get_todos()
-    unfinished = len([todo for todo in todos if not todo.done])
-    return render_template("index.html", todos=todos, unfinished=unfinished) 
+    citations = get_citations()
+    return render_template("index.html", citations=citations)
 
-@app.route("/new_todo")
+@app.route("/new_citation")
 def new():
-    return render_template("new_todo.html")
+    return render_template("new_citation.html")
 
-@app.route("/create_todo", methods=["POST"])
-def todo_creation():
-    content = request.form.get("content")
+@app.route("/create_citation", methods=["POST"])
+def citation_creation():
+    content = request.form.to_dict()
+    if content.get("year", "") == "":
+        content["year"] = None
+    else:
+        try:
+            content["year"] = int(content["year"])
+        except ValueError:
+            flash("Year must be a number or left empty.")
+            return redirect("/new_citation")
 
     try:
-        validate_todo(content)
-        create_todo(content)
+        split_names(content)
+        create_citation(content)
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return  redirect("/new_todo")
+        return  redirect("/new_citation")
 
 @app.route("/toggle_todo/<todo_id>", methods=["POST"])
 def toggle_todo(todo_id):
