@@ -1,5 +1,6 @@
 from config import db
 from sqlalchemy import text
+from util import format_authors
 
 from entities.todo import Todo # Useless import, delete or change later
 
@@ -11,10 +12,21 @@ def get_citations():
     for citation in citations:
         citation_id = citation[0]
         authors = get_citation_authors(citation_id)
-        citation_dict = {"info": citation, "authors": authors}
+        formatted_author_list = format_authors(get_authors_as_list(authors))
+        citation_dict = {"info": citation, "authors": formatted_author_list}
         citation_dicts.append(citation_dict)
 
     return citation_dicts
+
+
+def get_authors_as_list(row_object):
+    author_list = []
+
+    for row in row_object:
+        author_list.append(row[0])
+    print(author_list)
+    return author_list
+
 
 def set_done(todo_id):
     sql = text("UPDATE todos SET done = TRUE WHERE id = :id")

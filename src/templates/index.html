@@ -20,9 +20,7 @@ Citation helper
 
     {% if citation.authors %}
       <p>Author(s):
-        {% for author in citation.authors %}
-        {{ author.0 }}
-        {% endfor %}
+        {{ citation.authors }}
       </p>
     {% endif %}
 
