@@ -1,7 +1,6 @@
 import pytest
 from app import app, test_env
 from db_helper import reset_db
-import repositories.todo_repository as todo_repo
 
 @pytest.fixture
 def client():

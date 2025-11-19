@@ -1,8 +1,3 @@
-CREATE TABLE todos (
-  id SERIAL PRIMARY KEY, 
-  content TEXT NOT NULL,
-  done BOOLEAN DEFAULT FALSE
-);
 
 CREATE TABLE citations (
   id SERIAL PRIMARY KEY,

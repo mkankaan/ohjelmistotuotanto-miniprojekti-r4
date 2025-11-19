@@ -2,7 +2,7 @@ import pytest
 import uuid
 from app import app
 from db_helper import reset_db
-import repositories.todo_repository as todo_repo
+import repositories.cit_repository as cit_repo
 
 @pytest.fixture(autouse=True)
 def client():
@@ -18,7 +18,7 @@ def test_create_and_get_citation():
         "author": ["Author"],
         "title": "Test"
     }
-    new_id = todo_repo.create_citation(content)
-    citations = todo_repo.get_citations()
+    new_id = cit_repo.create_citation(content)
+    citations = cit_repo.get_citations()
     assert any(c['info'][1] == content["title"] for c in citations)
 
