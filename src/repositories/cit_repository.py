@@ -12,7 +12,7 @@ def get_citations():
         citation_id = citation[0]
         authors = get_citation_authors(citation_id)
         formatted_author_list = format_authors(get_authors_as_list(authors))
-        citation_dict = {"info": citation, "authors": formatted_author_list}
+        citation_dict = {"info": citation, "author": formatted_author_list}
         citation_dicts.append(citation_dict)
 
     return citation_dicts

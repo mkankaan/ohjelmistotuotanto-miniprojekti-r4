@@ -18,7 +18,24 @@ def test_create_and_get_citation():
         "author": ["Author"],
         "title": "Test"
     }
-    new_id = cit_repo.create_citation(content)
+    cit_repo.create_citation(content)
     citations = cit_repo.get_citations()
     assert any(c['info'][1] == content["title"] for c in citations)
 
+def test_create_citation_for_existing_author():
+    content = {
+        "type": "book",
+        "author": ["Luukkainen"],
+        "title": "Uusi Testamentti"
+    }
+    cit_repo.create_citation(content)
+
+    content = {
+        "type": "book",
+        "author": ["Luukkainen"],
+        "title": "Uudempi Testamentti"
+    }
+    cit_repo.create_citation(content)
+    cits = cit_repo.get_citations()
+    
+    assert cits[0]["author"] == cits[1]["author"]
