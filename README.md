@@ -1,4 +1,5 @@
 # Citation helper
+
 [![CI](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/actions/workflows/ci.yaml/badge.svg)](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/mkankaan/ohjelmistotuotanto-miniprojekti-r4/graph/badge.svg?token=EV73KLLNA0)](https://codecov.io/gh/mkankaan/ohjelmistotuotanto-miniprojekti-r4)
 
@@ -11,6 +12,7 @@ A Python web application for managing citations in LaTeX and converting citation
 ## Changelog v1.0.0
 
 **Added features**
+
 - Add a book citation
 - View all added citations
 
