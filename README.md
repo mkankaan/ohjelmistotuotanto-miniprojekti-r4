@@ -3,10 +3,11 @@
 
 [BACKLOG](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAWshwMsht0EJbNXPVjgYSlE?e=QAMZ1i)
 
-## Ohtu miniprojekti boilerplate
+## Definition of Done
 
-Lue [täältä](https://ohjelmistotuotanto-hy.github.io/flask/) lisää.
-
-Muutamia vihjeitä projektin alkuun [täällä](https://github.com/ohjelmistotuotanto-hy/miniprojekti-boilerplate/blob/main/misc/ohjeita.md).
-
-
+- Each user story has clearly defined acceptance criteria, which can be found in the backlog that is linked in the README file.
+- Test coverage is kept at a sufficient level, and all implementation-related tests are run in the CI service, with results visible to everyone.
+- The code follows a consistent style, which is verified with the Pylint tool before acceptance.
+- The application's architecture is clear, and naming conventions are consistent and descriptive of their purpose.
+- Documentation is kept up to date. The README includes instructions for running and testing the application locally.
+- Change history is maintained in a clear and documented way: commit messages describe the changes made.
