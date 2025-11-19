@@ -8,7 +8,11 @@ A Python web application for managing citations in LaTeX and converting citation
 
 ## Installation
 
-## Changelog
+## Changelog v1.0.0
+
+**Added features**
+- Add a book citation
+- View all added citations
 
 ## Definition of Done
 
