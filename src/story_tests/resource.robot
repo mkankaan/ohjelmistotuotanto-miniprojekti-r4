@@ -2,12 +2,13 @@
 Library  SeleniumLibrary
 
 *** Variables ***
-${SERVER}     localhost:5001
-${DELAY}      0.5 seconds
-${HOME_URL}   http://${SERVER}
-${RESET_URL}  http://${SERVER}/reset_db
-${BROWSER}    chrome
-${HEADLESS}   false
+${SERVER}             localhost:5001
+${DELAY}              0.5 seconds
+${HOME_URL}           http://${SERVER}
+${RESET_URL}          http://${SERVER}/reset_db
+${NEW_CITATION_URL}   http://${SERVER}/new_citation
+${BROWSER}            chrome
+${HEADLESS}           false
 
 *** Keywords ***
 Open And Configure Browser
@@ -26,6 +27,10 @@ Open And Configure Browser
     END
     Open Browser  browser=${BROWSER}  options=${options}
 
-Reset Todos
+Reset Citations
     Go To  ${RESET_URL}
+
+Reset Citations And Go To Start Page
+    Go To  ${RESET_URL}
+    Go To  ${HOME_URL}
 

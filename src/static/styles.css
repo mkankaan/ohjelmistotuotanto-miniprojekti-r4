@@ -13,43 +13,12 @@
   position: relative;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
+.info-icon:hover .tooltip-text {
+  visibility: visible;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
-.form-item {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  height: 35px;
-  font-size: large;
-}
-
-select {
-  height: 35px;
-  font-size: large;
-}
-
-.buttons {
-  align-self: end;
-}
-
-button {
-  font-size: large;
-  width: fit-content;
-}
-
-.form-wrapper {
-  width: 750px;
-  display: flex;
-  justify-self: center;
-  flex-direction: column;
-}
