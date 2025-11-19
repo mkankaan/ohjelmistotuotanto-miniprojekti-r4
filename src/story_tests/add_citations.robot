@@ -12,7 +12,7 @@ At start there are no citations
 
 Citing a book should succeed
     Go To  ${HOME_URL}
-    Click Link  Create new citation
+    Click Button  Create new citation
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
     Input Text  name=author  Example
@@ -22,7 +22,7 @@ Citing a book should succeed
 
 Citing a book with only a name should succeed
     Go To  ${HOME_URL}
-    Click Link  Create new citation
+    Click Button  Create new citation
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
     Click Button  Create
@@ -30,7 +30,7 @@ Citing a book with only a name should succeed
 
 Citing with a non numerical year should result in an error
     Go To  ${HOME_URL}
-    Click Link  Create new citation
+    Click Button  Create new citation
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
     Input Text  name=year  YES
