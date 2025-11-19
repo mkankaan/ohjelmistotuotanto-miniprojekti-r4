@@ -1,8 +1,7 @@
-from config import db
 from sqlalchemy import text
+from config import db
 from util import format_authors
 
-from entities.todo import Todo # Useless import, delete or change later
 
 def get_citations():
     result = db.session.execute(text("SELECT id, title, type, publisher, year, isbn, doi, url FROM citations"))

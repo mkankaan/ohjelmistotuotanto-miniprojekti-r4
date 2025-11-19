@@ -1,0 +1,24 @@
+[MASTER]
+
+ignore-paths=src/tests,src/story_tests
+ignore=single_file_to_ignore.py
+
+[MESSAGE CONTROL]
+
+disable=raw-checker-failed,
+        bad-inline-option,
+        locally-disabled,
+        file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-symbolic-message-instead,
+        missing-module-docstring,
+        missing-function-docstring,
+        missing-class-docstring
+
+[FORMAT]
+
+[REFACTORING]
+
+[DESIGN]
