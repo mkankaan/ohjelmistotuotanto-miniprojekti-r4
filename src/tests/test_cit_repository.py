@@ -20,7 +20,7 @@ def test_create_and_get_citation():
     }
     cit_repo.create_citation(content)
     citations = cit_repo.get_citations()
-    assert any(c['info'][1] == content["title"] for c in citations)
+    assert any(c["title"] == content["title"] for c in citations)
 
 def test_create_citation_for_existing_author():
     content = {
