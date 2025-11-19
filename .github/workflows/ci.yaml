@@ -41,7 +41,7 @@ jobs:
       - name: Run pylint
         run: poetry run pylint src  --fail-under=8
       - name: Set up database schema
-        run: poetry run python -c "from db_helper import setup_db; setup_db()"
+        run: poetry run python src/db_helper.py
       - name: Run unit tests
         run: poetry run coverage run --branch -m pytest src/tests
       - name: Setup chromedriver
