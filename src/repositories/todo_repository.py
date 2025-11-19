@@ -1,7 +1,5 @@
-from config import db
 from sqlalchemy import text
-
-from entities.todo import Todo # Useless import, delete or change later
+from config import db
 
 # Currently only returns amount of citations for testing.
 def get_citations():
