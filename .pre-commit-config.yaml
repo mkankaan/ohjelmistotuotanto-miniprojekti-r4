@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        entry: pylint --fail-under=8 src/
+        language: system
+        types: [python]
