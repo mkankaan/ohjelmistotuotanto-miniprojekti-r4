@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: poetry install    
       - name: Run pylint
-        run: poetry run pylint src
+        run: poetry run pylint src  --fail-under=8
       - name: Run unit tests
         run: poetry run coverage run --branch -m pytest src/tests
       - name: Setup chromedriver
