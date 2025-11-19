@@ -27,12 +27,6 @@ def get_authors_as_list(row_object):
     return author_list
 
 
-def set_done(todo_id):
-    sql = text("UPDATE todos SET done = TRUE WHERE id = :id")
-    db.session.execute(sql, { "id": todo_id })
-    db.session.commit()
-
-
 def create_citation(content):
     # Insert citation
     citation_sql = text("""
