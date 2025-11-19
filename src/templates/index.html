@@ -1,54 +1,38 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block title %} Citation helper {% endblock %} {%
+block body %}
 
-{% block title %}
-Citation helper
-{% endblock %}
+<div class="list-wrapper">
+  <h2>Citation helper</h2>
+  <div class="top-row">
+    <div class="left">Amount of citations: {{ citations | count }}</div>
+    <div class="right">
+      <button onclick="document.location='new_citation'">
+        Create new citation
+      </button>
+    </div>
+  </div>
+  <ul>
+    {% for citation in citations %}
+    <li>
+      <p class="cit-title">{{ citation.info.title }}</p>
+      <p>{{ citation.info.type }}</p>
 
-{% block body %}
-
-<h2>Citation helper</h2>
-
-<div>
-  Amount of citations: {{ citations | count }}
-</div>
-
-<ul>
-  {% for citation in citations %}
-  <li>
-    <p>Title: {{ citation.info.title }}</p>
-    <p>Type: {{ citation.info.type }}</p>
-
-    {% if citation.authors %}
-      <p>Author(s):
-        {{ citation.authors }}
-      </p>
-    {% endif %}
-
-    {% if citation.info.publisher %}
-      <p>Publisher: {{ citation.info.publisher }}</p>
-    {% endif %}
-
-    {% if citation.info.year %}
-      <p>Year: {{ citation.info.year }}</p>
-    {% endif %}
-
-    {% if citation.info.isbn %}
-      <p>ISBN: {{ citation.info.isbn }}</p>
-    {% endif %}
-
-    {% if citation.info.doi %}
-      <p>DOI: {{ citation.info.doi }}</p>
-    {% endif %}
-
-    {% if citation.info.url %}
-      <p>URL: {{ citation.info.url }}</p>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
-
-<div>
-  <a href="/new_citation">Create new citation</a>
+      {% if citation.authors %}
+      <p>{{ citation.authors }}</p>
+      {% endif %} {% if citation.info.publisher %}
+      <p>{{ citation.info.publisher }}</p>
+      {% endif %} {% if citation.info.year %}
+      <p>{{ citation.info.year }}</p>
+      {% endif %} {% if citation.info.isbn %}
+      <p>{{ citation.info.isbn }}</p>
+      {% endif %} {% if citation.info.doi %}
+      <p>{{ citation.info.doi }}</p>
+      {% endif %} {% if citation.info.url %}
+      <p>{{ citation.info.url }}</p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 
 {% endblock %}
