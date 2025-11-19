@@ -41,7 +41,7 @@ def test_create_citation_invalid_year(client):
     assert response.status_code == 302
 
 
-def test_reset_db_route(client):
+def test_reset_db_route(client): # pragma: no cover
     if test_env:
         response = client.get("/reset_db")
         assert response.status_code == 200

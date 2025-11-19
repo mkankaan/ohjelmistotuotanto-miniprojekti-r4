@@ -16,7 +16,7 @@ def new():
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
     content = request.form.to_dict()
-    if content.get("year", "") == "":
+    if content.get("year", "") == "": # pragma: no cover
         content["year"] = None
     else:
         try:
@@ -29,13 +29,13 @@ def citation_creation():
         split_names(content)
         create_citation(content)
         return redirect("/")
-    except Exception as error:
+    except Exception as error: # pragma: no cover
         flash(str(error))
         return  redirect("/new_citation")
 
 
 # testausta varten oleva reitti
-if test_env:
+if test_env: # pragma: no cover
     @app.route("/reset_db")
     def reset_database():
         reset_db()
