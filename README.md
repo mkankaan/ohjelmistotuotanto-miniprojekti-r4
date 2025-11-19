@@ -8,6 +8,8 @@ A Python web application for managing citations in LaTeX and converting citation
 
 ## Installation
 
+## Changelog
+
 ## Definition of Done
 
 - Each user story has clearly defined acceptance criteria, which can be found in the backlog that is linked in the README file.
