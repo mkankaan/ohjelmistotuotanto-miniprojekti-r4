@@ -1,7 +1,12 @@
-# Ohtu miniprojekti r4
+# Citation helper
 [![CI](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/actions/workflows/ci.yaml/badge.svg)](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/mkankaan/ohjelmistotuotanto-miniprojekti-r4/graph/badge.svg?token=EV73KLLNA0)](https://codecov.io/gh/mkankaan/ohjelmistotuotanto-miniprojekti-r4)
+
+A Python web application for managing citations in LaTeX and converting citations to BibTeX.
 
 [BACKLOG](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAWshwMsht0EJbNXPVjgYSlE?e=QAMZ1i)
+
+## Installation
 
 ## Definition of Done
 
