@@ -8,6 +8,25 @@ A Python web application for managing citations in LaTeX and converting citation
 [BACKLOG](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAWshwMsht0EJbNXPVjgYSlE?e=QAMZ1i)
 
 ## Installation
+### Database Setup
+Clone the project and create a file called `.env` to the root of the project. The file should have the following contents:
+```
+DATABASE_URL=postgresql://xxx
+TEST_ENV=true
+SECRET_KEY=satunnainen_merkkijono
+```
+The URL must start with `postgresql`, not `postgres`.
+
+### Run The Application
+1. Make sure Poetry is installed. Run `$ poetry install` in the root folder.
+2. Enter the Poetry virtual environment by running `$ eval $(poetry env activate)`.
+3. **Before running for the first time**, run `$ python src/db_helper.py` to create the needed database tables.
+4. Start the application by running `$ python src/index.py`.
+
+### Testing
+Unitests can be run with `$ pytest src/tests`.
+
+Robot tests can be run with `$ robot src/story_tests`.
 
 ## Changelog v1.0.0
 
