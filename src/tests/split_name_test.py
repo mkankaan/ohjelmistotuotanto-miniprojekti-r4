@@ -12,5 +12,3 @@ class TestSplitNames(unittest.TestCase):
         split_names(content)
         self.assertEqual(content["author"], ["Example 1", "Example 2"])
 
-if __name__ == "__main__":
-    unittest.main()
