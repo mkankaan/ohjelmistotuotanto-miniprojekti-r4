@@ -44,4 +44,35 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Documentation is kept up to date. The README includes instructions for running and testing the application locally.
 - Change history is maintained in a clear and documented way: commit messages describe the changes made.
 
-## Acceptance criteria
+## Acceptance criteria (priority #)
+
+### The contents of the creation form do not disappear during page reload (#1)
+- The contents of the creation form remain when the page is reloaded
+
+### The fields of the form do not accept wrong data types and the form does not allow sending them (#1)
+- The user can only input numbers into the 'year' field
+- The submit button is not pressable if certain fields contain invalid values
+
+### The user can see the names of different fields related to a citation (#1)
+- Correct names are displayed next to corresponding fields
+
+### The user can fetch citation information using a DOI (#2)
+
+If there is time:
+
+### The user can generate a BibTeX file containing the citations (#3)
+- The user can click a Generate BibTeX button to generate a copy-pasteable BibTeX snippet of all citations in the database
+- The button is unclickable if there are no citations
+
+### The user can edit citations (#4)
+- The user can click on an Edit button next to a citation to open the edit form
+- The content of the citation is pre-filled in the edit form fields
+- The user can edit the fields and press Save to save changes
+- The edit form fields don't accept wrong data types and the form does not allow sending them
+- The edited citation is shown correctly
+
+### The user can delete citation (#4)
+- The user can click on a Delete button next to a citation
+- A pop-up asks the user to confirm if they want to delete the citation
+- If the user clicks yes, the start page will reload and the deleted citation is gone
+- If the user clicks no, the citation is still on the page
