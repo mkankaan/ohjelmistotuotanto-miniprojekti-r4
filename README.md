@@ -71,7 +71,7 @@ If there is time:
 - The edit form fields don't accept wrong data types and the form does not allow sending them
 - The edited citation is shown correctly
 
-### The user can delete citation (#4)
+### The user can delete a citation (#4)
 - The user can click on a Delete button next to a citation
 - A pop-up asks the user to confirm if they want to delete the citation
 - If the user clicks yes, the start page will reload and the deleted citation is gone
