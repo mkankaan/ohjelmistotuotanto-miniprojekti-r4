@@ -13,7 +13,7 @@ Clone the project and create a file called `.env` to the root of the project. Th
 ```
 DATABASE_URL=postgresql://xxx
 TEST_ENV=true
-SECRET_KEY=satunnainen_merkkijono
+SECRET_KEY=random_string
 ```
 The URL must start with `postgresql`, not `postgres`.
 
