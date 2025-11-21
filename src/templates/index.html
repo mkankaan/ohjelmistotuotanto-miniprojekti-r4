@@ -14,21 +14,32 @@ block body %}
   <ul>
     {% for citation in citations %}
     <li>
-      <p class="cit-title">{{ citation.title }}</p>
-      <p>{{ citation.type }}</p>
+      <p class="cit-title"><strong>Title:</strong> {{ citation.title }}</p>
+      <p><strong>Type:</strong> {{ citation.type }}</p>
 
       {% if citation.author %}
-      <p>{{ citation.author }}</p>
-      {% endif %} {% if citation.publisher %}
-      <p>{{ citation.publisher }}</p>
-      {% endif %} {% if citation.year %}
-      <p>{{ citation.year }}</p>
-      {% endif %} {% if citation.isbn %}
-      <p>{{ citation.isbn }}</p>
-      {% endif %} {% if citation.doi %}
-      <p>{{ citation.doi }}</p>
-      {% endif %} {% if citation.url %}
-      <p>{{ citation.url }}</p>
+        {% if " and " in citation.author %}
+          <p><strong>Authors:</strong> {{ citation.author }}</p>
+        {% else %}
+          <p><strong>Author:</strong> {{ citation.author }}</p>
+        {% endif %}
+      {% endif %}
+
+
+      {% if citation.publisher %}
+        <p><strong>Publisher:</strong> {{ citation.publisher }}</p>
+      {% endif %}
+      {% if citation.year %}
+        <p><strong>Year:</strong> {{ citation.year }}</p>
+      {% endif %}
+      {% if citation.isbn %}
+        <p><strong>ISBN:</strong> {{ citation.isbn }}</p>
+      {% endif %}
+      {% if citation.doi %}
+        <p><strong>DOI:</strong> {{ citation.doi }}</p>
+      {% endif %}
+      {% if citation.url %}
+        <p><strong>URL:</strong> {{ citation.url }}</p>
       {% endif %}
     </li>
     {% endfor %}
