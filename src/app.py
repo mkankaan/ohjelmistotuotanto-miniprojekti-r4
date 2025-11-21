@@ -3,6 +3,13 @@ from db_helper import reset_db
 from repositories.cit_repository import get_citations, create_citation
 from config import app, test_env
 from util import split_names
+import markupsafe
+
+@app.template_filter()
+def show_lines(content):
+    content = str(markupsafe.escape(content))
+    content = content.replace("\n", "<br />")
+    return markupsafe.Markup(content)
 
 @app.route("/")
 def index():
@@ -32,6 +39,11 @@ def citation_creation():
     except Exception as error: # pragma: no cover
         flash(str(error))
         return  redirect("/new_citation")
+    
+@app.route("/bibtex")
+def bibtex():
+    bibtex = "jdlsdjalsj"
+    return render_template("bibtex.html", bibtex=bibtex)
 
 
 # testausta varten oleva reitti
