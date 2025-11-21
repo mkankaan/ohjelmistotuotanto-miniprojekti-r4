@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.cit_repository import get_citations, create_citation
 from config import app, test_env
-from util import split_names
+from util import split_names, generate_bibtex
 import markupsafe
 
 @app.template_filter()
@@ -42,7 +42,7 @@ def citation_creation():
     
 @app.route("/bibtex")
 def bibtex():
-    bibtex = "jdlsdjalsj"
+    bibtex = generate_bibtex(get_citations())
     return render_template("bibtex.html", bibtex=bibtex)
 
 
