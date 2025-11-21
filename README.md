@@ -46,9 +46,6 @@ Robot tests can be run with `$ robot src/story_tests`.
 
 ## Acceptance criteria (priority #)
 
-### The contents of the creation form do not disappear during page reload (#1)
-- The contents of the creation form remain when the page is reloaded
-
 ### The fields of the form do not accept wrong data types and the form does not allow sending them (#1)
 - The user can only input numbers into the 'year' field
 - The submit button is not pressable if certain fields contain invalid values
@@ -63,6 +60,7 @@ If there is time:
 ### The user can generate a BibTeX file containing the citations (#3)
 - The user can click a Generate BibTeX button to generate a copy-pasteable BibTeX snippet of all citations in the database
 - The button is unclickable if there are no citations
+- The generated BibTeX is usable in a LaTeX document
 
 ### The user can edit citations (#4)
 - The user can click on an Edit button next to a citation to open the edit form
