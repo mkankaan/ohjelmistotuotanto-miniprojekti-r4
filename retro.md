@@ -1,4 +1,4 @@
-# Sprint 1 retrospective
+# Sprint 1 retrospective notes
 
 The first sprint retrospective was held in the evening after the customer meeting and demo. The retrospective was held over Discord due to time constraints, although the team agreed that meeting face-to-face would be preferable. The Glad, Sad, Mad icebreaker was used. Points that were raised were:
 
