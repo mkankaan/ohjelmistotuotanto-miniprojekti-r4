@@ -19,9 +19,6 @@ def new():
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
     content = request.form.to_dict()
-
-    content["citation_key"] = "testkey"
-
     if content.get("year", "") == "": # pragma: no cover
         content["year"] = None
     else:
