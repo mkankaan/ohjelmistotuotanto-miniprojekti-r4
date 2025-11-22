@@ -12,16 +12,16 @@ def format_authors(author_list):
     return " and ".join(author_list)
 
 def get_bibtex(citations):
-    return ",\n".join(citation_bibtex(c) for c in citations)
+    return "\n\n".join(citation_bibtex(c) for c in citations)
 
 def citation_bibtex(citation):
     s = f"@{citation["type"]}{{{citation["citation_key"]},\n"
-    fields = [bibtex_field(key, value) for key, value in citation.items() if value and key is not "citation_key"]
+    fields = [bibtex_field(key, value) for key, value in citation.items() if value and key is not "citation_key" and key is not "type"]
     s += ",\n".join(fields)
     return s + "\n}"
 
 def bibtex_field(key, value):
-    return f'\xa0"{key}": "{value}"'
+    return f"\xa0{key} = {{{value}}}"
 
 def citation_as_dict(citation, authors):
     return {
