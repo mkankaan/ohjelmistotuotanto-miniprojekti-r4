@@ -52,7 +52,6 @@ def bibtex():
     bibtex = get_bibtex(get_citations())
     return render_template("bibtex.html", bibtex=bibtex)
 
-
 # testausta varten oleva reitti
 if test_env: # pragma: no cover
     @app.route("/reset_db")
