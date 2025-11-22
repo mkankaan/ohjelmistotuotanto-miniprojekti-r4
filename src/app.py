@@ -7,8 +7,6 @@ from util import split_names
 @app.route("/")
 def index():
     citations = get_citations()
-
-    print(citations)
     return render_template("index.html", citations=citations)
 
 @app.route("/new_citation")
