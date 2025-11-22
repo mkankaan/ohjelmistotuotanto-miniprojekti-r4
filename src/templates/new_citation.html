@@ -13,6 +13,11 @@
     </ul>
     {% endif %} {% endwith %}
     <div class="form-item">
+      <label for="citation_key">Citation key</label>
+      <input type="text" name="citation_key" id="citation_key" required />
+    </div>
+
+    <div class="form-item">
       <label for="type">Type</label>
       <select name="type" required>
         <option value="article">Article</option>
