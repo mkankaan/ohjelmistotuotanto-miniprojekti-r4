@@ -28,11 +28,10 @@ Citing a book with only a name should succeed
     Click Button  Create
     Page Should Contain  Amount of citations: 1
 
-Citing with a non numerical year should result in an error
+Create button should be disabled if year field contains a non numerical value
     Go To  ${HOME_URL}
     Click Button  Create new citation
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
     Input Text  name=year  YES
-    Click Button  Create
-    Page Should Contain  Year must be a number or left empty.
+    Element Should Be Disabled  create
