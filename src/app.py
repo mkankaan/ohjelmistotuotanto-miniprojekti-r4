@@ -3,6 +3,9 @@ from db_helper import reset_db
 from repositories.cit_repository import get_citations, create_citation
 from config import app, test_env
 from util import split_names
+from psycopg2.errorcodes import UNIQUE_VIOLATION
+from psycopg2 import errors
+from sqlalchemy import exc
 
 @app.route("/")
 def index():
@@ -32,9 +35,12 @@ def citation_creation():
         split_names(content)
         create_citation(content)
         return redirect("/")
+    except exc.IntegrityError: # pragma: no cover
+        flash(f"Key {content["citation_key"]} already in use")
+        return redirect("/new_citation")
     except Exception as error: # pragma: no cover
-        flash(str(error))
-        return  redirect("/new_citation")
+       flash(str(error))
+       return redirect("/new_citation")
 
 
 # testausta varten oleva reitti
