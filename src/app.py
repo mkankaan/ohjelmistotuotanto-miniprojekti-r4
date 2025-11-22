@@ -7,6 +7,8 @@ from util import split_names
 @app.route("/")
 def index():
     citations = get_citations()
+
+    print(citations)
     return render_template("index.html", citations=citations)
 
 @app.route("/new_citation")
@@ -16,6 +18,9 @@ def new():
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
     content = request.form.to_dict()
+
+    content["citation_key"] = "testkey"
+
     if content.get("year", "") == "": # pragma: no cover
         content["year"] = None
     else:

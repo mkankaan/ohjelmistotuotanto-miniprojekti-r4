@@ -1,7 +1,8 @@
 
 CREATE TABLE citations (
   id SERIAL PRIMARY KEY,
-  type TEXT NOT NULL,            -- esim. 'book', 'article', 'webpage'
+  citation_key TEXT UNIQUE NOT NULL,
+  type TEXT NOT NULL,                 -- esim. 'book', 'article', 'webpage'
   title TEXT NOT NULL,
   year INTEGER,
   publisher TEXT,
