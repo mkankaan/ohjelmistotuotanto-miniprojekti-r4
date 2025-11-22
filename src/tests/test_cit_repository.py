@@ -14,6 +14,7 @@ def client():
 
 def test_create_and_get_citation():
     content = {
+        "citation_key": "key3",
         "type": "book",
         "author": ["Author"],
         "title": "Test"
@@ -24,6 +25,7 @@ def test_create_and_get_citation():
 
 def test_create_citation_for_existing_author():
     content = {
+        "citation_key": "key4",
         "type": "book",
         "author": ["Luukkainen"],
         "title": "Uusi Testamentti"
@@ -31,6 +33,7 @@ def test_create_citation_for_existing_author():
     cit_repo.create_citation(content)
 
     content = {
+        "citation_key": "key5",
         "type": "book",
         "author": ["Luukkainen"],
         "title": "Uudempi Testamentti"

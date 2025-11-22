@@ -1,5 +1,6 @@
-{% extends "layout.html" %} {% block title %} Create a new citation {% endblock
-%} {% block body %}
+{% extends "layout.html" %} {% block title %} Create a new citation {% endblock %}
+{% block script %} <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script> {% endblock %}
+{% block body %}
 <div class="form-wrapper">
   <h2>Create a new citation</h2>
 
@@ -11,6 +12,11 @@
       {% endfor %}
     </ul>
     {% endif %} {% endwith %}
+    <div class="form-item">
+      <label for="citation_key">Citation key</label>
+      <input type="text" name="citation_key" required />
+    </div>
+
     <div class="form-item">
       <label for="type">Type</label>
       <select name="type" required>
@@ -41,7 +47,7 @@
 
     <div class="form-item">
       <label for="year">Year</label>
-      <input type="text" name="year" />
+      <input type="text" name="year" pattern="^\d*$" />
     </div>
 
     <div class="form-item">
@@ -66,7 +72,7 @@
 
     <div class="buttons">
       <button onclick="document.location='/'">Cancel</button>
-      <button type="submit">Create</button>
+      <button type="submit" id="create">Create</button>
     </div>
   </form>
 </div>

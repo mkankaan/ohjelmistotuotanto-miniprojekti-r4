@@ -12,7 +12,8 @@ At start there are no citations
 
 All Citation Fields Are Shown
     Go To  ${HOME_URL}
-    Create Book Citation  Clean Code  Martin, Robert  2008  Prentice Hall  123-456-78987-6-5  10.1000/182  https://www.example.com
+    Create Book Citation  testkey  Clean Code  Martin, Robert  2008  Prentice Hall  123-456-78987-6-5  10.1000/182  https://www.example.com
+    Page Should Contain  testkey
     Page Should Contain  Clean Code
     Page Should Contain  Martin, Robert
     Page Should Contain  2008
@@ -24,18 +25,22 @@ All Citation Fields Are Shown
 Multiple Citations Are Shown
     Reset Citations And Go To Start Page
     Page Should Contain  Amount of citations: 0
-    Create Book Citation Required Fields  Example1
-    Create Book Citation Required Fields  Example2
-    Create Book Citation Required Fields  Example3
+    Create Book Citation Required Fields  key1  Example1
+    Create Book Citation Required Fields  key2  Example2
+    Create Book Citation Required Fields  key3  Example3
+    Page Should Contain  key1
     Page Should Contain  Example1
+    Page Should Contain  key2
     Page Should Contain  Example2
+    Page Should Contain  key3
     Page Should Contain  Example3
 
 
 *** Keywords ***
 Create Book Citation
-    [Arguments]  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}
+    [Arguments]  ${citation_key}  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}
     Go To  ${NEW_CITATION_URL}
+    Input Text  name=citation_key  ${citation_key}
     Select From List By Label  name=type  Book
     Input Text  name=title  ${title}
     Input Text  name=author  ${authors}
@@ -47,8 +52,9 @@ Create Book Citation
     Click Button  Create
 
 Create Book Citation Required Fields
-    [Arguments]  ${title}
+    [Arguments]  ${citation_key}  ${title}
     Go To  ${NEW_CITATION_URL}
+    Input Text  name=citation_key  ${citation_key}
     Select From List By Label  name=type  Book
     Input Text  name=title  ${title}
     Click Button  Create

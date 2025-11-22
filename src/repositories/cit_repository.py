@@ -4,7 +4,7 @@ from util import format_authors
 
 
 def get_citations():
-    result = db.session.execute(text("SELECT id, title, type, publisher, year, isbn, doi, url FROM citations"))
+    result = db.session.execute(text("SELECT id, citation_key, title, type, publisher, year, isbn, doi, url FROM citations"))
     citations = result.fetchall()
     citation_dicts = []
 
@@ -13,14 +13,15 @@ def get_citations():
         authors = get_citation_authors(citation_id)
         formatted_author_list = format_authors(get_authors_as_list(authors))
         citation_dict = {
-            "title": citation[1],
-            "type": citation[2],
+            "citation_key": citation[1],
+            "title": citation[2],
+            "type": citation[3],
             "author": formatted_author_list,
-            "publisher": citation[3],
-            "year": citation[4],
-            "isbn": citation[5],
-            "doi": citation[6],
-            "url": citation[7],
+            "publisher": citation[4],
+            "year": citation[5],
+            "isbn": citation[6],
+            "doi": citation[7],
+            "url": citation[8],
         }        
         citation_dicts.append(citation_dict)
 
@@ -39,12 +40,13 @@ def get_authors_as_list(row_object):
 def create_citation(content):
     # Insert citation
     citation_sql = text("""
-        INSERT INTO citations (type, title, year, publisher, isbn, doi, url)
-        VALUES (:type, :title, :year, :publisher, :isbn, :doi, :url)
+        INSERT INTO citations (citation_key, type, title, year, publisher, isbn, doi, url)
+        VALUES (:citation_key, :type, :title, :year, :publisher, :isbn, :doi, :url)
         RETURNING id;
     """)
 
     citation_result = db.session.execute(citation_sql, {
+        "citation_key": content["citation_key"],
         "type": content["type"],
         "title": content["title"],
         "year": content.get("year"),

@@ -19,6 +19,7 @@ block body %}
   <ul>
     {% for citation in citations %}
     <li>
+      <p><strong>Citation key:</strong> {{ citation.citation_key }}</p>
       <p class="cit-title"><strong>Title:</strong> {{ citation.title }}</p>
       <p><strong>Type:</strong> {{ citation.type }}</p>
 

@@ -21,6 +21,7 @@ def test_new_citation_route(client):
 
 def test_create_citation_valid(client):
     data = {
+        "citation_key": "key1",
         "type": "book",
         "author": "Test Author",
         "title": "Test Title",
@@ -32,6 +33,7 @@ def test_create_citation_valid(client):
 
 def test_create_citation_invalid_year(client):
     data = {
+        "citation_key": "key2",
         "type": "article",
         "author": "Test Author",
         "title": "Test Title",
