@@ -22,7 +22,6 @@ def get_authors_as_list(row_object):
 
     for row in row_object:
         author_list.append(row[0])
-    print(author_list)
     return author_list
 
 

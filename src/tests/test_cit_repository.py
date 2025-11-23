@@ -1,5 +1,4 @@
 import pytest
-import uuid
 from app import app
 from db_helper import reset_db
 import repositories.cit_repository as cit_repo
