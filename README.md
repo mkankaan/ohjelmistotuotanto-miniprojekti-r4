@@ -43,6 +43,7 @@ Robot tests can be run with `$ robot src/story_tests`.
 - The application's architecture is clear, and naming conventions are consistent and descriptive of their purpose.
 - Documentation is kept up to date. The README includes instructions for running and testing the application locally.
 - Change history is maintained in a clear and documented way: commit messages describe the changes made.
+- Code is refactored for better quality.
 
 ## Acceptance criteria (priority #)
 
