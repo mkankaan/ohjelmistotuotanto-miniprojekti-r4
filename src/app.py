@@ -13,7 +13,6 @@ def show_lines(content): # pragma: no cover
     content = content.replace("\n", "<br />")
     return markupsafe.Markup(content)
 
-
 @app.route("/")
 def index():
     citations = get_citations()

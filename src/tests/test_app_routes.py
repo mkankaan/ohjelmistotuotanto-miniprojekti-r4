@@ -42,6 +42,10 @@ def test_create_citation_invalid_year(client):
     response = client.post("/create_citation", data=data)
     assert response.status_code == 302
 
+def test_bibtex_route(client):
+    response = client.get("/bibtex")
+    assert response.status_code == 200
+    assert b"bibtex" in response.data
 
 def test_reset_db_route(client): # pragma: no cover
     if test_env:
