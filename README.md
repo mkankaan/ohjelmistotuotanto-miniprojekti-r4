@@ -28,7 +28,7 @@ Unitests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## Changelog v1.0.0 (2025-11-20)
+## Changelog
 
 **Added features**
 - The user can generate a BibTeX snippet of all citations
