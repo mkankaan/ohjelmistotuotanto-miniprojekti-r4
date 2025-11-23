@@ -7,7 +7,11 @@ block body %}
     {% if citations | count > 0 %}
     <button onclick="document.location='bibtex'">
         Generate BibTeX
-      </button>
+    </button>
+    {% else %}
+    <button onclick="document.location='bibtex'" disabled="true">
+        Generate BibTeX
+    </button>
     {% endif %}
     <div class="left">Amount of citations: {{ citations | count }}</div>
     <div class="right">

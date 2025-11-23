@@ -39,9 +39,6 @@ def citation_creation():
         split_names(content)
         create_citation(content)
         return redirect("/")
-    except exc.IntegrityError: # pragma: no cover
-        flash(f"Key {content["citation_key"]} already in use")
-        return redirect("/new_citation")
     except Exception as error: # pragma: no cover
         flash(str(error))
         return  redirect("/new_citation")
