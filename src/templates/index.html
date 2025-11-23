@@ -4,6 +4,11 @@ block body %}
 <div class="list-wrapper">
   <h2>Citation helper</h2>
   <div class="top-row">
+    {% if citations | count > 0 %}
+    <button onclick="document.location='bibtex'">
+        Generate BibTeX
+      </button>
+    {% endif %}
     <div class="left">Amount of citations: {{ citations | count }}</div>
     <div class="right">
       <button onclick="document.location='new_citation'">

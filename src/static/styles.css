@@ -102,3 +102,9 @@ li {
   align-items: center;
   margin-bottom: 20px;
 }
+
+.bibtex {
+  font-family: monospace;
+  background-color: #f5f5f5;
+  padding: 0 1rem;
+}

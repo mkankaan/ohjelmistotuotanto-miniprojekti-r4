@@ -2,10 +2,17 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.cit_repository import get_citations, create_citation
 from config import app, test_env
-from util import split_names
-from psycopg2.errorcodes import UNIQUE_VIOLATION
-from psycopg2 import errors
+from util import split_names, get_bibtex
 from sqlalchemy import exc
+import markupsafe
+
+
+@app.template_filter()
+def show_lines(content):
+    content = str(markupsafe.escape(content))
+    content = content.replace("\n", "<br />")
+    return markupsafe.Markup(content)
+
 
 @app.route("/")
 def index():
@@ -36,9 +43,14 @@ def citation_creation():
         flash(f"Key {content["citation_key"]} already in use")
         return redirect("/new_citation")
     except Exception as error: # pragma: no cover
-       flash(str(error))
-       return redirect("/new_citation")
+        flash(str(error))
+        return  redirect("/new_citation")
 
+
+@app.route("/bibtex")
+def bibtex():
+    bibtex = get_bibtex(get_citations())
+    return render_template("bibtex.html", bibtex=bibtex)
 
 # testausta varten oleva reitti
 if test_env: # pragma: no cover

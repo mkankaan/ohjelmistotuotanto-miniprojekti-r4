@@ -1,6 +1,6 @@
 from sqlalchemy import text
 from config import db
-from util import format_authors
+from util import format_authors, citation_as_dict
 
 
 def get_citations():
@@ -12,18 +12,7 @@ def get_citations():
         citation_id = citation[0]
         authors = get_citation_authors(citation_id)
         formatted_author_list = format_authors(get_authors_as_list(authors))
-        citation_dict = {
-            "citation_key": citation[1],
-            "title": citation[2],
-            "type": citation[3],
-            "author": formatted_author_list,
-            "publisher": citation[4],
-            "year": citation[5],
-            "isbn": citation[6],
-            "doi": citation[7],
-            "url": citation[8],
-        }        
-        citation_dicts.append(citation_dict)
+        citation_dicts.append(citation_as_dict(citation, formatted_author_list))
 
     return citation_dicts
 
