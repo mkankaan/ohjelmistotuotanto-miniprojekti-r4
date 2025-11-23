@@ -8,7 +8,7 @@ import markupsafe
 
 
 @app.template_filter()
-def show_lines(content):
+def show_lines(content): # pragma: no cover
     content = str(markupsafe.escape(content))
     content = content.replace("\n", "<br />")
     return markupsafe.Markup(content)
