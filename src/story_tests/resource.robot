@@ -38,3 +38,26 @@ Reset Citations And Go To Start Page
 Reset Citations And Go To Bibtex Page
     Go To  ${RESET_URL}
     Go To  ${BIBTEX_URL}
+
+Create Citation
+    [Arguments]  ${citation_key}  ${type}  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}
+    Go To  ${NEW_CITATION_URL}
+    Input Text  name=citation_key  ${citation_key}
+    Select From List By Label  name=type  ${type}
+    Input Text  name=title  ${title}
+    Input Text  name=author  ${authors}
+    Input Text  name=year  ${year}
+    Input Text  name=publisher  ${publisher}
+    Input Text  name=isbn  ${isbn}
+    Input Text  name=doi  ${doi}
+    Input Text  name=url  ${url}
+    Click Button  Create
+
+Create Citation Required Fields
+    [Arguments]  ${citation_key}  ${type}  ${title}
+    Go To  ${NEW_CITATION_URL}
+    Input Text  name=citation_key  ${citation_key}
+    Select From List By Label  name=type  ${type}
+    Input Text  name=title  ${title}
+    Click Button  Create
+

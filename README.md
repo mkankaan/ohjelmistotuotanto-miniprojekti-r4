@@ -31,9 +31,10 @@ Robot tests can be run with `$ robot src/story_tests`.
 ## Changelog v1.0.0 (2025-11-20)
 
 **Added features**
+- The user can generate a BibTeX snippet of all citations
 
-- Add a book citation
-- View all added citations
+**Fixed issues**
+- Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly
 
 ## Definition of Done
 
