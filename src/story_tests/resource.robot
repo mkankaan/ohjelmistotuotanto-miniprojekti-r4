@@ -7,6 +7,7 @@ ${DELAY}              0.5 seconds
 ${HOME_URL}           http://${SERVER}
 ${RESET_URL}          http://${SERVER}/reset_db
 ${NEW_CITATION_URL}   http://${SERVER}/new_citation
+${BIBTEX_URL}         http://${SERVER}/bibtex
 ${BROWSER}            chrome
 ${HEADLESS}           false
 
@@ -34,3 +35,6 @@ Reset Citations And Go To Start Page
     Go To  ${RESET_URL}
     Go To  ${HOME_URL}
 
+Reset Citations And Go To Bibtex Page
+    Go To  ${RESET_URL}
+    Go To  ${BIBTEX_URL}
