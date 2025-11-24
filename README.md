@@ -5,7 +5,7 @@
 
 A Python web application for managing citations in LaTeX and converting citations to BibTeX. 
 
-[BACKLOG](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAWshwMsht0EJbNXPVjgYSlE?e=QAMZ1i)
+[BACKLOG](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAQ5L4NhVh8tueMy3X8KeSVg?e=9jUfL5)
 
 ## Installation
 ### Database Setup
