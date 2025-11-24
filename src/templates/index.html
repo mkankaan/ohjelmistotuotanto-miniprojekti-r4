@@ -5,12 +5,10 @@ block body %}
   <h2>Citation helper</h2>
   <div class="top-row">
     {% if citations | count > 0 %}
-    <button onclick="document.location='bibtex'">
-        Generate BibTeX
-    </button>
+    <button onclick="document.location='bibtex'">Generate BibTeX</button>
     {% else %}
     <button onclick="document.location='bibtex'" disabled="true">
-        Generate BibTeX
+      Generate BibTeX
     </button>
     {% endif %}
     <div class="left">Amount of citations: {{ citations | count }}</div>
@@ -27,29 +25,21 @@ block body %}
       <p class="cit-title"><strong>Title:</strong> {{ citation.title }}</p>
       <p><strong>Type:</strong> {{ citation.type }}</p>
 
-      {% if citation.author %}
-        {% if " and " in citation.author %}
-          <p><strong>Authors:</strong> {{ citation.author }}</p>
-        {% else %}
-          <p><strong>Author:</strong> {{ citation.author }}</p>
-        {% endif %}
-      {% endif %}
-
-
-      {% if citation.publisher %}
-        <p><strong>Publisher:</strong> {{ citation.publisher }}</p>
-      {% endif %}
-      {% if citation.year %}
-        <p><strong>Year:</strong> {{ citation.year }}</p>
-      {% endif %}
-      {% if citation.isbn %}
-        <p><strong>ISBN:</strong> {{ citation.isbn }}</p>
-      {% endif %}
-      {% if citation.doi %}
-        <p><strong>DOI:</strong> {{ citation.doi }}</p>
-      {% endif %}
-      {% if citation.url %}
-        <p><strong>URL:</strong> {{ citation.url }}</p>
+      {% if citation.author %} {% if " and " in citation.author %}
+      <p><strong>Authors:</strong> {{ citation.author }}</p>
+      {% else %}
+      <p><strong>Author:</strong> {{ citation.author }}</p>
+      {% endif %} {% endif %} {% if citation.publisher %}
+      <p><strong>Publisher:</strong> {{ citation.publisher }}</p>
+      {% endif %} {% if citation.year %}
+      <p><strong>Year:</strong> {{ citation.year }}</p>
+      {% endif %} {% if citation.isbn %}
+      <p><strong>ISBN:</strong> {{ citation.isbn }}</p>
+      {% endif %} {% if citation.doi %}
+      <p><strong>DOI:</strong> {{ citation.doi }}</p>
+      {% endif %} {% if citation.url %}
+      <p><strong>URL:</strong> {{ citation.url }}</p>
+      <!--visited: {date}-->
       {% endif %}
     </li>
     {% endfor %}
