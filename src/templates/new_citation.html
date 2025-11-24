@@ -3,81 +3,92 @@
   <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script>
 {% endblock %}
 {% block body %}
+<h2 id="header-create">Create a new citation</h2>
 <div class="form-wrapper">
-  <h2>Create a new citation</h2>
+  <div class="form-element-wrapper left-form">
+    <form action="/create_citation" method="post">
+      {% with messages = get_flashed_messages() %} {% if messages %}  
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+      <div class="form-item">
+        <label for="citation_key">Citation key*</label>
+        <input type="text" name="citation_key" required />
+      </div>
 
-  <form action="/create_citation" method="post">
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
-    <div class="form-item">
-      <label for="citation_key">Citation key</label>
-      <input type="text" name="citation_key" required />
-      <span id="ck-error" style="color:red"></span>
-    </div>
+      <div class="form-item">
+        <label for="type">Type*</label>
+        <select name="type" required>
+          <option value="article">Article</option>
+          <option value="book">Book</option>
+          <option value="inproceedings">Conference</option>
+          <option value="misc">Other</option>
+        </select>
+      </div>
 
+      <div class="form-item">
+        <label for="title">Title*</label>
+        <input type="text" name="title" required />
+      </div>
 
-    <div class="form-item">
-      <label for="type">Type</label>
-      <select name="type" required>
-        <option value="article">Article</option>
-        <option value="book">Book</option>
-        <option value="inproceedings">Conference</option>
-        <option value="misc">Other</option>
-      </select>
-    </div>
+      <div class="form-item">
+        <label for="author"
+          >Author(s):
+          <div
+            class="info-icon"
+            title="The name(s) of the author(s) (in the case of more than one author, separated by and)"
+          >
+            i
+          </div>
+        </label>
+        <input type="text" name="author" />
+      </div>
 
-    <div class="form-item">
-      <label for="title">Title</label>
-      <input type="text" name="title" required />
-    </div>
+      <div class="form-item">
+        <label for="year">Year</label>
+        <input type="text" name="year" pattern="^\d*$" />
+      </div>
 
-    <div class="form-item">
-      <label for="author"
-        >Author(s):
-        <div
-          class="info-icon"
-          title="The name(s) of the author(s) (in the case of more than one author, separated by and)"
-        >
-          i
-        </div>
-      </label>
-      <input type="text" name="author" />
-    </div>
+      <div class="form-item">
+        <label for="publisher">Publisher</label>
+        <input type="text" name="publisher" />
+      </div>
 
-    <div class="form-item">
-      <label for="year">Year</label>
-      <input type="text" name="year" pattern="^\d*$" />
-    </div>
+      <div class="form-item">
+        <label for="isbn">ISBN</label>
+        <input type="text" name="isbn" />
+      </div>
 
-    <div class="form-item">
-      <label for="publisher">Publisher</label>
-      <input type="text" name="publisher" />
-    </div>
+      <div class="form-item">
+        <label for="doi">DOI</label>
+        <input type="text" name="doi" />
+      </div>
 
-    <div class="form-item">
-      <label for="isbn">ISBN</label>
-      <input type="text" name="isbn" pattern="^(?:\d+-){3,4}\d$" />
-    </div>
+      <div class="form-item">
+        <label for="url">URL</label>
+        <input type="text" name="url" />
+      </div>
 
-    <div class="form-item">
-      <label for="doi">DOI</label>
-      <input type="text" name="doi" pattern="^\d+(?:\.\d+)*/\S+$" />
-    </div>
-
-    <div class="form-item">
-      <label for="url">URL</label>
-      <input type="url" name="url" />
-    </div>
-
-    <div class="buttons">
-      <button type="button" onclick="document.location='/'">Cancel</button>
-      <button type="submit" id="create">Create</button>
-    </div>
-  </form>
+      <div class="buttons">
+        <button onclick="document.location='/'">Cancel</button>
+        <button type="submit" id="create">Create</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="form-element-wrapper right-form">
+    <form action="/populate-form" method="post">
+      <div class="form-item">
+        <label for="doi-populate">Populate fields with DOI</label>
+        <input type="text" name="doi-populate" />
+      </div>
+      <div class="buttons">
+        <button type="submit" id="submit-doi">Populate</button>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}

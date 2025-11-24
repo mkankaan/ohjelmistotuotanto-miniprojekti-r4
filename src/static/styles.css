@@ -47,15 +47,36 @@ button {
   width: fit-content;
 }
 
+#header-create {
+  margin-left: 50px;
+}
+
+.left-form {
+  flex: 1;
+  margin: 0px 25px 50px 50px;
+}
+
+.right-form {
+  max-width: 400px;
+  flex-shrink: 0;
+  margin: 0px 50px 50px 25px;
+}
+
 .form-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+}
+
+.form-element-wrapper {
   width: 750px;
   display: flex;
   justify-self: center;
   flex-direction: column;
 }
 
-.form-wrapper input,
-.form-wrapper select {
+.form-element-wrapper input,
+.form-element-wrapper select {
   width: 100%;
   box-sizing: border-box;
 }
