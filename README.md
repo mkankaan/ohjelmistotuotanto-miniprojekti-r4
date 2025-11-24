@@ -3,12 +3,20 @@
 [![CI](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/actions/workflows/ci.yaml/badge.svg)](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/mkankaan/ohjelmistotuotanto-miniprojekti-r4/graph/badge.svg?token=EV73KLLNA0)](https://codecov.io/gh/mkankaan/ohjelmistotuotanto-miniprojekti-r4)
 
-A Python web application for managing citations in LaTeX and converting citations to BibTeX. 
+A Flask web application for managing citations in LaTeX and converting citations to BibTeX. 
 
-[BACKLOG](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAQ5L4NhVh8tueMy3X8KeSVg?e=9jUfL5)
+- [Backlog](https://helsinkifi-my.sharepoint.com/:x:/g/personal/kmatleen_ad_helsinki_fi/IQB_5FRo87a0QpDoPP9JqRrwAQ5L4NhVh8tueMy3X8KeSVg?e=9jUfL5)<br/>
+- [Installation](#installation) <br/>
+    - [Database Setup](#setup) <br/>
+    - [Run the Application](#run) <br/>
+    - [Testing](#testing) <br/>
+- [Changelog](#changelog) <br/>
+- [Definition of Done](#dod) <br/>
+- [Acceptance Criteria](#acc) <br/>
+    - [Sprint 2](#sprint2) <br/>
 
-## Installation
-### Database Setup
+## <a name="installation"></a> Installation
+### <a name="setup"></a> Database Setup
 Clone the project and create a file called `.env` to the root of the project. The file should have the following contents:
 ```
 DATABASE_URL=postgresql://xxx
@@ -17,28 +25,28 @@ SECRET_KEY=random_string
 ```
 The URL must start with `postgresql`, not `postgres`.
 
-### Run The Application
+### <a name="run"></a> Run The Application
 1. Make sure Poetry is installed. Run `$ poetry install` in the root folder.
 2. Enter the Poetry virtual environment by running `$ eval $(poetry env activate)`.
 3. **Before running for the first time**, run `$ python src/db_helper.py` to create the needed database tables.
 4. Start the application by running `$ python src/index.py`.
 
-### Testing
+### <a name="testing"></a> Testing
 Unitests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## Changelog
+## <a name="changelog"></a> Changelog
 
 **Added features**
-- The user can generate a BibTeX snippet of all citations
+- The user can generate a BibTeX snippet of all citations.
 
 **Fixed issues**
-- Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly
+- Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly.
 
-## Definition of Done
+## <a name="dod"></a> Definition of Done
 
-- Each user story has clearly defined acceptance criteria, which can be found in the backlog that is linked in the README file.
+- Each user story has clearly defined acceptance criteria, which can be found in the README file and also the backlog that is linked in the README file.
 - Test coverage is kept at a sufficient level, and all implementation-related tests are run in the CI service, with results visible to everyone.
 - The code follows a consistent style, which is verified with the Pylint tool before acceptance.
 - The application's architecture is clear, and naming conventions are consistent and descriptive of their purpose.
@@ -46,32 +54,40 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Change history is maintained in a clear and documented way: commit messages describe the changes made.
 - Code is refactored for better quality.
 
-## Acceptance criteria (priority #)
+## <a name="acc"></a> Acceptance criteria
 
-### The fields of the form do not accept wrong data types and the form does not allow sending them (#1)
+(#) = priority
+
+### Sprint 1
+
+Forgot!
+
+### <a name="sprint2"></a> Sprint 2
+
+#### The fields of the form do not accept wrong data types and the form does not allow sending them (#1)
 - The user can only input numbers into the 'year' field
 - The submit button is not pressable if certain fields contain invalid values
 
-### The user can see the names of different fields related to a citation (#1)
+#### The user can see the names of different fields related to a citation (#1)
 - Correct names are displayed next to corresponding fields
 
-### The user can fetch citation information using a DOI (#2)
+#### The user can fetch citation information using a DOI (#2)
 
 If there is time:
 
-### The user can generate a BibTeX file containing the citations (#3)
+#### The user can generate a BibTeX file containing the citations (#3)
 - The user can click a Generate BibTeX button to generate a copy-pasteable BibTeX snippet of all citations in the database
 - The button is unclickable if there are no citations
 - The generated BibTeX is usable in a LaTeX document
 
-### The user can edit citations (#4)
+#### The user can edit citations (#4)
 - The user can click on an Edit button next to a citation to open the edit form
 - The content of the citation is pre-filled in the edit form fields
 - The user can edit the fields and press Save to save changes
 - The edit form fields don't accept wrong data types and the form does not allow sending them
 - The edited citation is shown correctly
 
-### The user can delete a citation (#4)
+#### The user can delete a citation (#4)
 - The user can click on a Delete button next to a citation
 - A pop-up asks the user to confirm if they want to delete the citation
 - If the user clicks yes, the start page will reload and the deleted citation is gone
