@@ -57,17 +57,17 @@
 
     <div class="form-item">
       <label for="isbn">ISBN</label>
-      <input type="text" name="isbn" />
+      <input type="text" name="isbn" pattern="^(?:\d+-){3,4}\d$" />
     </div>
 
     <div class="form-item">
       <label for="doi">DOI</label>
-      <input type="text" name="doi" />
+      <input type="text" name="doi" pattern="^\d+(?:\.\d+)*/\S+$" />
     </div>
 
     <div class="form-item">
       <label for="url">URL</label>
-      <input type="text" name="url" />
+      <input type="url" name="url" />
     </div>
 
     <div class="buttons">
