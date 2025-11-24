@@ -35,7 +35,8 @@ Create button should be disabled if year field contains a non numerical value
 
 Citing a book with one author should succeed with all fields visible
     Go To  ${HOME_URL}
-    Create Citation  example  Book  Example  Ex1  3033  Ex  Ex  Ex  Ex
+    Create Citation  example  Book  Example  Ex1  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com
+    Title Should Be  Citation helper
     Page Should Contain  Citation key
     Page Should Contain  Title
     Page Should Contain  Author
@@ -47,5 +48,5 @@ Citing a book with one author should succeed with all fields visible
 
 Citing a book with multiple authors should succeed
     Go To  ${HOME_URL}
-    Create Citation  example  Book  Example  Ex1 and Ex2  3033  Ex  Ex  Ex  Ex
+    Create Citation  example  Book  Example  Ex1 and Ex2  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com
     Page Should Contain  Authors
