@@ -55,7 +55,9 @@ jobs:
       - name: Coverage report to Codecov
         uses: codecov/codecov-action@v5
       - name: Run robot tests
-        run: bash run_robot_tests.sh
+        run: |
+          sleep 5
+          bash run_robot_tests.sh
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
