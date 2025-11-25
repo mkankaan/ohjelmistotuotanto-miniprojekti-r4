@@ -36,13 +36,14 @@ Unitests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog
+## <a name="changelog"></a> Changelog v1.1.0 (2025-11-26)
 
 **Added features**
 - The user can generate a BibTeX snippet of all citations.
 
 **Fixed issues**
 - Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly.
+- Fixed the issue where the field names were not shown on the front page.
 
 ## <a name="dod"></a> Definition of Done
 
@@ -64,18 +65,21 @@ Forgot!
 
 ### <a name="sprint2"></a> Sprint 2
 
-#### The fields of the form do not accept wrong data types and the form does not allow sending them (#1)
+#### The fields of the form do not accept wrong data types and the form does not allow sending them (#1) [complete]
 - The user can only input numbers into the 'year' field
+- The user can only input a valid URL into the 'URL' field
+- The user can only input a valid ISBN into the 'ISBN' field
+- The user can only input a valid DOI into the 'DOI' field
 - The submit button is not pressable if certain fields contain invalid values
 
-#### The user can see the names of different fields related to a citation (#1)
+#### The user can see the names of different fields related to a citation (#1) [complete]
 - Correct names are displayed next to corresponding fields
 
 #### The user can fetch citation information using a DOI (#2)
 
 If there is time:
 
-#### The user can generate a BibTeX file containing the citations (#3)
+#### The user can generate a BibTeX file containing the citations (#3) [complete]
 - The user can click a Generate BibTeX button to generate a copy-pasteable BibTeX snippet of all citations in the database
 - The button is unclickable if there are no citations
 - The generated BibTeX is usable in a LaTeX document
