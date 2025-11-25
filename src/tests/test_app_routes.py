@@ -52,3 +52,23 @@ def test_reset_db_route(client): # pragma: no cover
         response = client.get("/reset_db")
         assert response.status_code == 200
         assert b"db reset" in response.data
+
+def test_check_citation_key_exists(client):
+    data = {
+        "citation_key": "key1",
+        "type": "book",
+        "author": "Test Author",
+        "title": "Test Title",
+        "year": "2024"
+    }
+    client.post("/create_citation", data=data)
+    response = client.get("/check_citation_key?key=key1")
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["exists"] is True
+
+def test_check_citation_key_not_exists(client):
+    response = client.get("/check_citation_key?key=notpresent")
+    assert response.status_code == 200
+    json_data = response.get_json()
+    assert json_data["exists"] is False

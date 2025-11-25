@@ -1,9 +1,9 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.cit_repository import get_citations, create_citation
-from config import app, test_env
+from config import app, test_env, db
 from util import split_names, get_bibtex
-from sqlalchemy import exc
+from sqlalchemy import exc, text
 import markupsafe
 
 
@@ -47,6 +47,15 @@ def citation_creation():
 def bibtex():
     bibtex = get_bibtex(get_citations())
     return render_template("bibtex.html", bibtex=bibtex)
+
+@app.route("/check_citation_key")
+def check_citation_key():
+    key = request.args.get("key", "").lower()
+    sql = text("SELECT 1 FROM citations WHERE lower(citation_key) = :key LIMIT 1")
+    result = db.session.execute(sql, {"key": key}).first()
+    exists = result is not None
+    return jsonify({"exists": exists})
+
 
 # testausta varten oleva reitti
 if test_env: # pragma: no cover

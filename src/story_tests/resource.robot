@@ -42,6 +42,7 @@ Reset Citations And Go To Bibtex Page
 Create Citation
     [Arguments]  ${citation_key}  ${type}  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}
     Go To  ${NEW_CITATION_URL}
+    Wait Until Element Is Visible    name=citation_key    timeout=10
     Input Text  name=citation_key  ${citation_key}
     Select From List By Label  name=type  ${type}
     Input Text  name=title  ${title}
@@ -56,6 +57,7 @@ Create Citation
 Create Citation Required Fields
     [Arguments]  ${citation_key}  ${type}  ${title}
     Go To  ${NEW_CITATION_URL}
+    Wait Until Element Is Visible    name=citation_key    timeout=10
     Input Text  name=citation_key  ${citation_key}
     Select From List By Label  name=type  ${type}
     Input Text  name=title  ${title}

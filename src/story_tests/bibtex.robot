@@ -20,6 +20,7 @@ Show Bibtex Correctly
     Go To  ${HOME_URL}
     Create Citation Required Fields  testkey  Book  Clean Code
     Go To  ${BIBTEX_URL}
+    Wait Until Page Contains    @book{    timeout=10
     Page Should Contain  @book{testkey,
     Page Should Contain  title = \{Clean Code\}
 
@@ -28,6 +29,7 @@ Show Bibtex Of Multiple Citations
     Create Citation Required Fields  testkey1  Book  Clean Code
     Create Citation Required Fields  testkey2  Book  Even Cleaner Code
     Go To  ${BIBTEX_URL}
+    Wait Until Page Contains    @book{    timeout=10
     Page Should Contain  @book{testkey1,
     Page Should Contain  @book{testkey2,
     Page Should Contain  title = \{Clean Code\}
