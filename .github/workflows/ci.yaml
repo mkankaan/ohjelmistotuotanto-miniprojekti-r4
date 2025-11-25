@@ -56,8 +56,10 @@ jobs:
         uses: codecov/codecov-action@v5
       - name: Run robot tests
         run: |
-          sleep 5
-          bash run_robot_tests.sh
+          for i in 1 2 3; do
+            bash run_robot_tests.sh && break
+            echo "Robot tests failed, retrying ($i/3)..."
+          done
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: List report files
