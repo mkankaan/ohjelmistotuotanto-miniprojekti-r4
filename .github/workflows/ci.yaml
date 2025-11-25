@@ -65,10 +65,6 @@ jobs:
         with:
           name: robot-results
           path: |
-            log.html
-            report.html
-            output.xml
-            selenium*.png
-            *.png
-
-
+            ohjelmistotuotanto-miniprojekti-r4/log.html
+            ohjelmistotuotanto-miniprojekti-r4/report.html
+            ohjelmistotuotanto-miniprojekti-r4/output.xml
