@@ -79,7 +79,7 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
     })
     .then(response => response.json())
     .then(data => {
-        if (typeOptions.includes(data.type)){
+        if (typeOptions.some(option => option.value === data.type)) {
             document.getElementById('type').value = data.type;        
         } else {
             document.getElementById('type').value = 'misc'
