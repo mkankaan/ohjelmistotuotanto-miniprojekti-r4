@@ -62,13 +62,13 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: List report files
         if: failure() 
-        run: ls -l ohjelmistotuotanto-miniprojekti-r4/
+        run: ls -l
       - name: Upload Robot Framework reports
         if: failure() 
         uses: actions/upload-artifact@v4
         with:
           name: robot-results
           path: |
-            ohjelmistotuotanto-miniprojekti-r4/log.html
-            ohjelmistotuotanto-miniprojekti-r4/report.html
-            ohjelmistotuotanto-miniprojekti-r4/output.xml
+            log.html
+            report.html
+            output.xml
