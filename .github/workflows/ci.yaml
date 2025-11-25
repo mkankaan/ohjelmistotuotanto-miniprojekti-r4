@@ -60,5 +60,15 @@ jobs:
           bash run_robot_tests.sh
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload Robot Framework reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-results
+          path: |
+            log.html
+            report.html
+            output.xml
+            selenium*.png
+            *.png
 
 
