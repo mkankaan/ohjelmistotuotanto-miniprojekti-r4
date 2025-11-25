@@ -80,13 +80,13 @@
   </div>
   
   <div class="form-element-wrapper right-form">
-    <form action="/populate-form" method="post">
+    <form action="/populate-form" method="post" name="doi-populate-form">
       <div class="form-item">
         <label for="doi-populate">Populate fields with DOI</label>
-        <input type="text" name="doi-populate" />
+        <input type="text" name="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-]+" />
       </div>
       <div class="buttons">
-        <button type="submit" id="submit-doi">Populate</button>
+        <button type="submit" id="submit-doi" disabled>Populate</button>
       </div>
     </form>
   </div>
