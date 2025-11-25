@@ -6,7 +6,7 @@
 <h2 id="header-create">Create a new citation</h2>
 <div class="form-wrapper">
   <div class="form-element-wrapper left-form">
-    <form action="/create_citation" method="post">
+    <form action="/create_citation" method="post" name="creation-form">
       {% with messages = get_flashed_messages() %} {% if messages %}  
       <ul>
         {% for message in messages %}
@@ -21,17 +21,12 @@
 
       <div class="form-item">
         <label for="type">Type*</label>
-        <select name="type" required>
-          <option value="article">Article</option>
-          <option value="book">Book</option>
-          <option value="inproceedings">Conference</option>
-          <option value="misc">Other</option>
-        </select>
+        <select name="type" id="type" required></select>
       </div>
 
       <div class="form-item">
         <label for="title">Title*</label>
-        <input type="text" name="title" required />
+        <input type="text" name="title" id="title" required />
       </div>
 
       <div class="form-item">
@@ -44,32 +39,32 @@
             i
           </div>
         </label>
-        <input type="text" name="author" />
+        <input type="text" name="author" id="author" />
       </div>
 
       <div class="form-item">
         <label for="year">Year</label>
-        <input type="text" name="year" pattern="^\d*$" />
+        <input type="text" name="year" id="year" pattern="^\d*$" />
       </div>
 
       <div class="form-item">
         <label for="publisher">Publisher</label>
-        <input type="text" name="publisher" />
+        <input type="text" name="publisher" id="publisher" />
       </div>
 
       <div class="form-item">
         <label for="isbn">ISBN</label>
-        <input type="text" name="isbn" />
+        <input type="text" name="isbn" id="isbn" />
       </div>
 
       <div class="form-item">
         <label for="doi">DOI</label>
-        <input type="text" name="doi" />
+        <input type="text" name="doi" id="doi" />
       </div>
 
       <div class="form-item">
         <label for="url">URL</label>
-        <input type="text" name="url" />
+        <input type="text" name="url" id="url" />
       </div>
 
       <div class="buttons">
@@ -80,10 +75,17 @@
   </div>
   
   <div class="form-element-wrapper right-form">
-    <form action="/populate-form" method="post" name="doi-populate-form">
+    <form name="doi-populate-form" id="doi-populate-form">
       <div class="form-item">
-        <label for="doi-populate">Populate fields with DOI</label>
-        <input type="text" name="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-]+" />
+        <label for="doi-populate">Populate fields with DOI
+          <div
+            class="info-icon"
+            title="At the moment the search only works for Crossref DOIs"
+          >
+            i
+          </div>
+        </label>
+        <input type="text" name="doi-populate" id="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+" />
       </div>
       <div class="buttons">
         <button type="submit" id="submit-doi" disabled>Populate</button>

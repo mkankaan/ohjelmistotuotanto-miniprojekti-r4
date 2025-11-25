@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from repositories.cit_repository import get_citations, create_citation
 from config import app, test_env, db
-from util import split_names, get_bibtex
+from util import request_crossref_data, split_names, get_bibtex, format_doi
 from sqlalchemy import exc, text
 import markupsafe
 
@@ -13,14 +13,17 @@ def show_lines(content): # pragma: no cover
     content = content.replace("\n", "<br />")
     return markupsafe.Markup(content)
 
+
 @app.route("/")
 def index():
     citations = get_citations()
     return render_template("index.html", citations=citations)
 
+
 @app.route("/new_citation")
 def new():
     return render_template("new_citation.html")
+
 
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
@@ -40,13 +43,14 @@ def citation_creation():
         return redirect("/")
     except Exception as error: # pragma: no cover
         flash(str(error))
-        return  redirect("/new_citation")
+        return redirect("/new_citation")
 
 
 @app.route("/bibtex")
 def bibtex():
     bibtex = get_bibtex(get_citations())
     return render_template("bibtex.html", bibtex=bibtex)
+
 
 @app.route("/check_citation_key")
 def check_citation_key():
@@ -56,6 +60,31 @@ def check_citation_key():
     exists = result is not None
     return jsonify({"exists": exists})
 
+
+@app.route("/populate-form", methods=["POST"])
+def doi_population():
+    try:
+        data = request.get_json()
+        doi = data.get("query")
+        doi = format_doi(doi)
+        data = request_crossref_data(doi)
+        print(data)
+    except Exception as error:
+        flash(str(error))
+        return redirect("/new_citation")
+
+    return jsonify({
+        "type": data.get("type"),
+        "title": data.get("title")[0] if data.get("title") is not None else "",
+        "author": data.get("author"),
+        "publisher": data.get("publisher"),
+        "year": data.get("created").get("date-parts")[0][0],
+        "isbn": data.get("ISBN")[0] if data.get("ISBN") is not None else "",
+        "doi": data.get("DOI"),
+        "url": data.get("link")[0].get("URL") if data.get("link") is not None else "",
+        
+    })
+    
 
 # testausta varten oleva reitti
 if test_env: # pragma: no cover

@@ -1,3 +1,7 @@
+from csv import Error
+import requests
+import re
+
 class UserInputError(Exception):
     pass
 
@@ -35,3 +39,31 @@ def citation_as_dict(citation, authors):
             "doi": citation[7],
             "url": citation[8],
     }
+
+def format_doi(doi):
+    pattern = r'10\.(?:[1-9]\d{3,}(?:[.\d]*)?)/[A-Za-z0-9._-]+'
+
+    match = re.search(pattern, doi)
+    match = match.group()
+    match.replace("/", "%2F")
+    return match
+
+def authors_to_list(auths):
+    auth_list = []
+    for auth in auths:
+        name = f"{auth.get("given")} {auth.get("family")}"
+        auth_list.append(name)
+    return auth_list
+
+def request_crossref_data(doi):
+    url = "https://api.crossref.org/works/"
+    url += doi
+
+    response = requests.get(url)
+    response.raise_for_status()
+    message = response.json().get("message")
+
+    auth_list = authors_to_list(message.get("author"))
+    message["author"] = format_authors(auth_list)
+
+    return message

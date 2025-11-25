@@ -57,3 +57,53 @@ for (const doi_input of doi_form.elements) {
         populate_button.disabled = !doi_form.checkValidity();
     });
 }
+
+
+const typeOptions = [
+    { value: 'article', label: 'Article' },
+    { value: 'book', label: 'Book' },
+    { value: 'inproceedings', label: 'Conference' },
+    { value: 'book-chapter', label: 'Book Chapter' },
+    { value: 'misc', label: 'Other' }
+];
+
+
+document.getElementById('doi-populate-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const doi = document.getElementById('doi-populate').value;
+
+    fetch('/populate-form', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({query: doi})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (typeOptions.includes(data.type)){
+            document.getElementById('type').value = data.type;        
+        } else {
+            document.getElementById('type').value = 'misc'
+        }
+        document.getElementById('title').value = data.title;
+        document.getElementById('author').value = data.author;
+        document.getElementById('publisher').value = data.publisher;
+        document.getElementById('year').value = data.year;
+        document.getElementById('isbn').value = data.isbn;
+        document.getElementById('doi').value = data.doi;
+        document.getElementById('url').value = data.url;
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    populate_button.disabled = !doi_form.checkValidity();
+    create_button.disabled = !form.checkValidity();
+
+    const selectElement = document.getElementById('type');
+    typeOptions.forEach(option => {
+        const opt = document.createElement('option');
+        opt.value = option.value;
+        opt.textContent = option.label;
+        selectElement.appendChild(opt);
+    });
+});
