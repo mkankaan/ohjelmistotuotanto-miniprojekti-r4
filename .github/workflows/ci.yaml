@@ -60,7 +60,11 @@ jobs:
           bash run_robot_tests.sh
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: List report files
+        if: failure() 
+        run: ls -l ohjelmistotuotanto-miniprojekti-r4/
       - name: Upload Robot Framework reports
+        if: failure() 
         uses: actions/upload-artifact@v4
         with:
           name: robot-results
