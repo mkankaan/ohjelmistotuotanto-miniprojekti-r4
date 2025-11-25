@@ -46,3 +46,14 @@ for (const input of form.elements) {
 function updateButtonState() {
     create_button.disabled = !form.checkValidity();
 }
+
+
+const doi_form = document.forms["doi-populate-form"]
+const populate_button = document.getElementById("submit-doi")
+populate_button.disabled = true;
+
+for (const doi_input of doi_form.elements) {
+    doi_input.addEventListener("input", () => {
+        populate_button.disabled = !doi_form.checkValidity();
+    });
+}
