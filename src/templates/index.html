@@ -38,7 +38,7 @@ block body %}
       {% endif %} {% if citation.doi %}
       <p><strong>DOI:</strong> {{ citation.doi }}</p>
       {% endif %} {% if citation.url %}
-      <p><strong>URL:</strong> {{ citation.url }}</p>
+      <p><strong>URL:</strong> <a href="{{  citation.url  }}">{{ citation.url }}</a></p>
       <!--visited: {date}-->
       {% endif %}
     </li>
