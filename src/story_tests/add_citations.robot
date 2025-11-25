@@ -63,7 +63,7 @@ Citing a book after editing a non unique citation key should succeed
     Input Text  name=title  Example
     Page Should Contain  Citation key already in use.
     Element Should Be Disabled  create
-    Input Text  name=citation_key  example1
+    Input Text  name=citation_key  notExample
     Input Text  name=title  Example
     Click Button  Create
     Page Should Contain  Amount of citations: 2
