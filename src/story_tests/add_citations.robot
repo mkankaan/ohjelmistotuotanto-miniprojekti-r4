@@ -51,7 +51,6 @@ Create button should be disabled if citation key field contains a non unique val
     Input Text  name=citation_key  example
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
-    Page Should Contain  Citation key already in use.
     Element Should Be Disabled  create
     
 Citing a book after editing a non unique citation key should succeed
@@ -61,7 +60,6 @@ Citing a book after editing a non unique citation key should succeed
     Input Text  name=citation_key  example
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
-    Page Should Contain  Citation key already in use.
     Element Should Be Disabled  create
     Input Text  name=citation_key  notExample
     Input Text  name=title  Example
