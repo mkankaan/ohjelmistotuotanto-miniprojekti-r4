@@ -10,7 +10,7 @@ A Flask web application for managing citations in LaTeX and converting citations
     - [Database Setup](#setup) <br/>
     - [Run the Application](#run) <br/>
     - [Testing](#testing) <br/>
-- [Changelog](#changelog) <br/>
+- [Changelog v1.1.0 (2025-11-26)](#changelog) <br/>
 - [Definition of Done](#dod) <br/>
 - [Acceptance Criteria](#acc) <br/>
     - [Sprint 2](#sprint2) <br/>
@@ -25,21 +25,21 @@ SECRET_KEY=random_string
 ```
 The URL must start with `postgresql`, not `postgres`.
 
-### <a name="run"></a> Run The Application
+### <a name="run"></a> Run the Application
 1. Make sure Poetry is installed. Run `$ poetry install` in the root folder.
 2. Enter the Poetry virtual environment by running `$ eval $(poetry env activate)`.
 3. **Before running for the first time**, run `$ python src/db_helper.py` to create the needed database tables.
 4. Start the application by running `$ python src/index.py`.
 
 ### <a name="testing"></a> Testing
-Unitests can be run with `$ pytest src/tests`.
+Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
 ## <a name="changelog"></a> Changelog v1.1.0 (2025-11-26)
 
 **Added features**
-- The user can generate a BibTeX snippet of all citations.
+- The user can generate a BibTeX snippet of all citations stored in the database.
 
 **Fixed issues**
 - Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly.
@@ -67,31 +67,31 @@ Forgot!
 
 #### The fields of the form do not accept wrong data types and the form does not allow sending them (#1) [complete]
 - The user can only input numbers into the 'year' field
-- The user can only input a valid URL into the 'URL' field
-- The user can only input a valid ISBN into the 'ISBN' field
-- The user can only input a valid DOI into the 'DOI' field
+- The user can only input a valid URL, ISBN and DOI into the respective fields
 - The submit button is not pressable if certain fields contain invalid values
 
 #### The user can see the names of different fields related to a citation (#1) [complete]
 - Correct names are displayed next to corresponding fields
 
 #### The user can fetch citation information using a DOI (#2)
+- Correct data is displayed
+- The form accepts DOIs and links containing a DOI
 
 If there is time:
 
-#### The user can generate a BibTeX file containing the citations (#3) [complete]
+#### The user can generate a BibTeX snippet containing the citations (#3) [complete]
 - The user can click a Generate BibTeX button to generate a copy-pasteable BibTeX snippet of all citations in the database
 - The button is unclickable if there are no citations
-- The generated BibTeX is usable in a LaTeX document
+- The generated BibTeX works correctly when pasted into a LaTeX document and the sources can be referred to with the citation key
 
-#### The user can edit citations (#4)
+#### The user can edit citations (#4) [incomplete]
 - The user can click on an Edit button next to a citation to open the edit form
 - The content of the citation is pre-filled in the edit form fields
 - The user can edit the fields and press Save to save changes
 - The edit form fields don't accept wrong data types and the form does not allow sending them
 - The edited citation is shown correctly
 
-#### The user can delete a citation (#4)
+#### The user can delete a citation (#4) [incomplete]
 - The user can click on a Delete button next to a citation
 - A pop-up asks the user to confirm if they want to delete the citation
 - If the user clicks yes, the start page will reload and the deleted citation is gone
