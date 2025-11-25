@@ -1,9 +1,9 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
-from repositories.cit_repository import get_citations, create_citation
 from config import app, test_env, db
 from util import request_crossref_data, split_names, get_bibtex, format_doi
 from sqlalchemy import exc, text
+from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
 import markupsafe
 
 
@@ -45,6 +45,7 @@ def citation_creation():
         flash(str(error))
         return redirect("/new_citation")
 
+        return redirect("/new_citation")
 
 @app.route("/bibtex")
 def bibtex():
@@ -82,11 +83,37 @@ def doi_population():
         "isbn": data.get("ISBN")[0] if data.get("ISBN") is not None else "",
         "doi": data.get("DOI"),
         "url": data.get("link")[0].get("URL") if data.get("link") is not None else "",
-        
+
     })
-    
+
 
 # testausta varten oleva reitti
+@app.route("/edit/<int:citation_id>", methods=["GET", "POST"])
+def edit(citation_id):
+    citation = get_citation(citation_id)
+    print(citation)
+
+    if request.method == "GET":
+        return render_template("edit.html", citation=citation)
+
+    if request.method == "POST":
+        data = {
+            "citation_key": request.form.get("citation_key"),
+            "type": request.form.get("type"),
+            "title": request.form.get("title"),
+            "author": request.form.get("author"),
+            "year": request.form.get("year"),
+            "publisher": request.form.get("publisher"),
+            "isbn": request.form.get("isbn"),
+            "doi": request.form.get("doi"),
+            "url": request.form.get("url"),
+            "author_string": request.form.get("author"),
+        }
+
+        update_citation(citation_id, data)
+        return redirect("/")
+
+#testausta varten oleva reitti
 if test_env: # pragma: no cover
     @app.route("/reset_db")
     def reset_database():

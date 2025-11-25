@@ -86,9 +86,16 @@ li {
   padding: 12px 16px;
   margin-bottom: 10px;
   border-radius: 8px;
-  box-shadow: 0 4xp 8px rgba(0, 0, 0, 0.35);
+  box-shadow: 8px rgba(0, 0, 0, 0.35);
   list-style: none;
+  display: flex;
+  flex-direction: column;
 }
+
+li p {
+  margin: 8px 0;
+}
+
 .list-wrapper {
   width: 750px;
   display: flex;

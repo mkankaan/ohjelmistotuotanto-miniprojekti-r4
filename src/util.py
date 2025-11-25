@@ -29,6 +29,7 @@ def bibtex_field(key, value):
 
 def citation_as_dict(citation, authors):
     return {
+            "id": citation[0],
             "citation_key": citation[1],
             "title": citation[2],
             "type": citation[3],

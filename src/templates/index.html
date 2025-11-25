@@ -20,9 +20,12 @@ block body %}
   </div>
   <ul>
     {% for citation in citations %}
-    <li>
+    <li class="list-item">
+      <p>
+        <strong>Title:</strong>
+        <span class="cit-title">{{ citation.title }}</span>
+      </p>
       <p><strong>Citation key:</strong> {{ citation.citation_key }}</p>
-      <p class="cit-title"><strong>Title:</strong> {{ citation.title }}</p>
       <p><strong>Type:</strong> {{ citation.type }}</p>
 
       {% if citation.author %} {% if " and " in citation.author %}
@@ -41,6 +44,13 @@ block body %}
       <p><strong>URL:</strong> <a href="{{  citation.url  }}">{{ citation.url }}</a></p>
       <!--visited: {date}-->
       {% endif %}
+
+      <div class="buttons">
+        <button onclick="document.location='/edit/{{citation.id}}'">
+          Edit
+        </button>
+        <!--<button onclick="">Delete</button>-->
+      </div>
     </li>
     {% endfor %}
   </ul>
