@@ -1,13 +1,13 @@
 {% extends "layout.html" %} {% block title %} Create a new citation {% endblock %}
 {% block script %}
-  <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script>
+<script defer src={{ url_for('static', filename='new_citation.js' ) }}></script>
 {% endblock %}
 {% block body %}
 <h2 id="header-create">Create a new citation</h2>
 <div class="form-wrapper">
   <div class="form-element-wrapper left-form">
     <form action="/create_citation" method="post" name="creation-form">
-      {% with messages = get_flashed_messages() %} {% if messages %}  
+      {% with messages = get_flashed_messages() %} {% if messages %}
       <ul>
         {% for message in messages %}
         <li>{{ message }}</li>
@@ -30,12 +30,9 @@
       </div>
 
       <div class="form-item">
-        <label for="author"
-          >Author(s):
-          <div
-            class="info-icon"
-            title="The name(s) of the author(s) (in the case of more than one author, separated by and)"
-          >
+        <label for="author">Author(s):
+          <div class="info-icon"
+            title="The name(s) of the author(s) (in the case of more than one author, separated by and)">
             i
           </div>
         </label>
@@ -73,19 +70,17 @@
       </div>
     </form>
   </div>
-  
+
   <div class="form-element-wrapper right-form">
     <form name="doi-populate-form" id="doi-populate-form">
       <div class="form-item">
         <label for="doi-populate">Populate fields with DOI
-          <div
-            class="info-icon"
-            title="At the moment the search only works for Crossref DOIs"
-          >
+          <div class="info-icon" title="At the moment the search only works for Crossref DOIs">
             i
           </div>
         </label>
-        <input type="text" name="doi-populate" id="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+" />
+        <input type="text" name="doi-populate" id="doi-populate" required
+          pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+\s*" />
       </div>
       <div class="buttons">
         <button type="submit" id="submit-doi" disabled>Populate</button>
