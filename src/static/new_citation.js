@@ -1,9 +1,48 @@
 const form = document.forms[0];
 const create_button = document.getElementById("create");
+const citationKeyInput = form.elements["citation_key"];
+const errorSpan = document.getElementById("ck-error");
+
 create_button.disabled = true;
 
+let lastCheckedKey = "";
+
+citationKeyInput.addEventListener("input", async function() {
+    const key = this.value;
+    lastCheckedKey = key;
+
+    if (!key) {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+        updateButtonState();
+        return;
+    }
+
+    const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
+    const data = await response.json();
+
+    if (this.value !== lastCheckedKey) {
+        return;
+    }
+
+    if (data.exists) {
+        this.setCustomValidity("Citation key already in use.");
+        errorSpan.textContent = "Citation key already in use.";
+    } else {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+    }
+    updateButtonState();
+});
+
+
+
 for (const input of form.elements) {
-    input.addEventListener("input", () => {
-        create_button.disabled = !form.checkValidity();
-    });
+    if (input !== citationKeyInput) {
+        input.addEventListener("input", updateButtonState);
+    }
+}
+
+function updateButtonState() {
+    create_button.disabled = !form.checkValidity();
 }
