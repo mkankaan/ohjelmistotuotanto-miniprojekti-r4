@@ -36,7 +36,7 @@ Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog v1.2.0 (2025-11-26)
+## <a name="changelog"></a> Changelog v1.1.0 (2025-11-26)
 
 **Added features**
 - The user can generate a BibTeX snippet of all citations stored in the database.
@@ -74,7 +74,7 @@ Forgot!
 #### The user can see the names of different fields related to a citation (#1) [complete]
 - Correct names are displayed next to corresponding fields
 
-#### The user can fetch citation information using a DOI (#2)
+#### The user can fetch citation information using a DOI (#2) [complete]
 - The Populate button is disabled when field does not contain a valid DOI, or a string (such as an URL) ending in a valid DOI
 - Populating fills up all fields where information is found
 - Populating also checks validity of Submit button
