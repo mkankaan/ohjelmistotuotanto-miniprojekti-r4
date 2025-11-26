@@ -46,6 +46,9 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly.
 - Fixed the issue where the field names were not shown on the front page.
 
+**Known issues**
+- Cancelling the creation of a new citation creates said citation.
+
 ## <a name="dod"></a> Definition of Done
 
 - Each user story has clearly defined acceptance criteria, which can be found in the README file and also the backlog that is linked in the README file.
