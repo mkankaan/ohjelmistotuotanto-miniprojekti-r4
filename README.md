@@ -36,10 +36,11 @@ Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog v1.1.0 (2025-11-26)
+## <a name="changelog"></a> Changelog v1.2.0 (2025-11-26)
 
 **Added features**
 - The user can generate a BibTeX snippet of all citations stored in the database.
+- The user can automatically fill the citation creation form using a Crossref DOI.
 
 **Fixed issues**
 - Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly.
