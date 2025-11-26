@@ -3,6 +3,7 @@ Resource  resource.robot
 Suite Setup      Open And Configure Browser
 Suite Teardown   Close Browser
 Test Setup       Reset Citations
+Test Teardown    Reset Citations
 
 *** Test Cases ***
 At start there are no citations
@@ -51,6 +52,7 @@ Create button should be disabled if citation key field contains a non unique val
     Input Text  name=citation_key  example
     Select From List By Label  name=type  Book
     Input Text  name=title  Example
+    Click Button  create
     Element Should Be Disabled  create
     
 Citing a book after editing a non unique citation key should succeed
