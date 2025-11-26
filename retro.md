@@ -40,7 +40,7 @@ The second retrospective was held right after the customer meeting, fortunately 
 - Good transparency among the team. In the last retrospective we were able to speak openly about things that bothered us.
 - Work was divided more evenly this time.
 - Unit tests were handled well.
-- Having someone in charge of important things was a good idea.
+- Having someone in charge of important things (backlogs etc.) was a good idea.
 
 **Sad:**
 - Found bugs that our Robot tests didn't catch so we will need to fix them in the next sprint.
@@ -53,7 +53,7 @@ The second retrospective was held right after the customer meeting, fortunately 
 
 **Measures for improvement:**
 - Meet up to work on the project together at least once.
-- Utilize branches more. Merge branches in the browser (instead of the CLI) so that the changes will go through the CI pipeline first.
+- Utilize branches more. Merge branches with a pull request (instead of the CLI) so that the changes will go through the CI pipeline first.
 - Assigned one more person to check that the grading criteria for each sprint are met.
 
 Overall the team felt accomplished with the last sprint and there wasn't much that we were sad about. We felt that after two sprints we had gotten better at estimating the time and workload of a given task. We now also have a better idea of how to decide who works on which user stories so that we can work efficiently and avoid overlaps. After the retrospective we decided on a time for the group dev session.
