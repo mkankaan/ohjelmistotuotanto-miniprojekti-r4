@@ -20,7 +20,11 @@ def get_bibtex(citations):
 
 def citation_bibtex(citation):
     s = f"@{citation["type"]}{{{citation["citation_key"]},\n"
-    fields = [bibtex_field(key, value) for key, value in citation.items() if value and key is not "citation_key" and key is not "type"]
+    fields = [bibtex_field(key, value) for key, value in citation.items()
+              if value
+              and key is not "citation_key"
+              and key is not "type"
+              and key is not "id"]
     s += ",\n".join(fields)
     return s + "\n}"
 
