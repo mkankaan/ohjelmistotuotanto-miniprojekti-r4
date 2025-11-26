@@ -74,8 +74,10 @@ Forgot!
 - Correct names are displayed next to corresponding fields
 
 #### The user can fetch citation information using a DOI (#2)
-- Correct data is displayed
-- The form accepts DOIs and links containing a DOI
+- The Populate button is disabled when field does not contain a valid DOI, or a string (such as an URL) ending in a valid DOI
+- Populating fills up all fields where information is found
+- Populating also checks validity of Submit button
+- Automatic fetching supports Crossref citations, more may be added later
 
 If there is time:
 
