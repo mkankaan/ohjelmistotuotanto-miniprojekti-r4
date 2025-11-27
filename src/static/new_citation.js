@@ -1,4 +1,4 @@
-const form = document.forms[0];
+const form = document.forms["creation-form"];
 const create_button = document.getElementById("create");
 const citationKeyInput = form.elements["citation_key"];
 const errorSpan = document.getElementById("ck-error");
