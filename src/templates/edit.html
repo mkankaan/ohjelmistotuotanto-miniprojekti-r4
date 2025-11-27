@@ -1,7 +1,7 @@
 {% extends "layout.html" %} {% block title %} Edit citation {% endblock %}
 {% block script %} <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script> {% endblock %}
 {% block body %}
-<div class="form-wrapper">
+<div class="form-container">
   <h2>Edit citation</h2>
 
   <form action="/edit/{{ citation.id }}", method="post">

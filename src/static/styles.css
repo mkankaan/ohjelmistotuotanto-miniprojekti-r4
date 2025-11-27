@@ -21,6 +21,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  width: 100%;
 }
 
 .form-item {
@@ -47,38 +48,27 @@ button {
   width: fit-content;
 }
 
-#header-create {
-  margin-left: 50px;
-}
-
-.left-form {
-  flex: 1;
-  margin: 0px 25px 50px 50px;
-}
-
-.right-form {
-  max-width: 400px;
-  flex-shrink: 0;
-  margin: 0px 50px 50px 25px;
-}
-
-.form-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-self: center;
-}
-
-.form-element-wrapper {
+.form-container {
   width: 750px;
-  display: flex;
-  justify-self: center;
-  flex-direction: column;
+  margin: 0 auto;
+  padding-top: 20px;
+  position: relative;
 }
 
-.form-element-wrapper input,
-.form-element-wrapper select {
+.form-container h2 {
+  margin-left: 0;
+  margin-bottom: 20px;
+}
+
+.form-container form[name="creation-form"] {
   width: 100%;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#header-list {
+  margin-top: 40px;
 }
 
 li {

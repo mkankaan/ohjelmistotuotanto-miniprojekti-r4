@@ -1,91 +1,88 @@
-{% extends "layout.html" %} {% block title %} Create a new citation {% endblock %}
+{% extends "layout.html" %}
+{% block title %} Create a new citation {% endblock %}
 {% block script %}
 <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script>
 {% endblock %}
 {% block body %}
-<h2 id="header-create">Create a new citation</h2>
-<div class="form-wrapper">
-  <div class="form-element-wrapper left-form">
-    <form action="/create_citation" method="post" name="creation-form">
-      {% with messages = get_flashed_messages() %} {% if messages %}
-      <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %} {% endwith %}
-      <div class="form-item">
-        <label for="citation_key">Citation key*</label>
-        <input type="text" name="citation_key" required />
-      </div>
+<div class="form-container">
+  <h2 id="header-create">Create a new citation</h2>
 
-      <div class="form-item">
-        <label for="type">Type*</label>
-        <select name="type" id="type" required></select>
-      </div>
-
-      <div class="form-item">
-        <label for="title">Title*</label>
-        <input type="text" name="title" id="title" required />
-      </div>
-
-      <div class="form-item">
-        <label for="author">Author(s):
-          <div class="info-icon"
-            title="The name(s) of the author(s) (in the case of more than one author, separated by and)">
-            i
-          </div>
-        </label>
-        <input type="text" name="author" id="author" />
-      </div>
-
-      <div class="form-item">
-        <label for="year">Year</label>
-        <input type="text" name="year" id="year" pattern="^\d*$" />
-      </div>
-
-      <div class="form-item">
-        <label for="publisher">Publisher</label>
-        <input type="text" name="publisher" id="publisher" />
-      </div>
-
-      <div class="form-item">
-        <label for="isbn">ISBN</label>
-        <input type="text" name="isbn" id="isbn" />
-      </div>
-
-      <div class="form-item">
-        <label for="doi">DOI</label>
-        <input type="text" name="doi" id="doi" />
-      </div>
-
-      <div class="form-item">
-        <label for="url">URL</label>
-        <input type="text" name="url" id="url" />
-      </div>
-
-      <div class="buttons">
-        <button onclick="document.location='/'">Cancel</button>
-        <button type="submit" id="create">Create</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="form-element-wrapper right-form">
     <form name="doi-populate-form" id="doi-populate-form">
       <div class="form-item">
-        <label for="doi-populate">Populate fields with DOI
-          <div class="info-icon" title="At the moment the search only works for Crossref DOIs">
-            i
-          </div>
+        <label for="doi-populate">
+          Populate fields with DOI
+          <div class="info-icon" title="At the moment the search only works for Crossref DOIs">i</div>
         </label>
-        <input type="text" name="doi-populate" id="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+\s*"
-          placeholder="10.nnnnnn/example" />
+        <input type="text" name="doi-populate" id="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+" />
       </div>
       <div class="buttons">
         <button type="submit" id="submit-doi" disabled>Populate</button>
       </div>
     </form>
-  </div>
+
+  <form action="/create_citation" method="post" name="creation-form">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <div class="form-item">
+      <label for="citation_key">Citation key*</label>
+      <input type="text" name="citation_key" required />
+    </div>
+
+    <div class="form-item">
+      <label for="type">Type*</label>
+      <select name="type" id="type" required></select>
+    </div>
+
+    <div class="form-item">
+      <label for="title">Title*</label>
+      <input type="text" name="title" id="title" required />
+    </div>
+
+    <div class="form-item">
+      <label for="author">
+        Author(s)
+        <div class="info-icon" title="The name(s) of the author(s) (in the case of more than one author, separated by and)">i</div>
+      </label>
+      <input type="text" name="author" id="author" />
+    </div>
+
+    <div class="form-item">
+      <label for="year">Year</label>
+      <input type="text" name="year" id="year" pattern="^\d*$" />
+    </div>
+
+    <div class="form-item">
+      <label for="publisher">Publisher</label>
+      <input type="text" name="publisher" id="publisher" />
+    </div>
+
+    <div class="form-item">
+      <label for="isbn">ISBN</label>
+      <input type="text" name="isbn" id="isbn" />
+    </div>
+
+    <div class="form-item">
+      <label for="doi">DOI</label>
+      <input type="text" name="doi" id="doi" />
+    </div>
+
+    <div class="form-item">
+      <label for="url">URL</label>
+      <input type="text" name="url" id="url" />
+    </div>
+
+    <div class="buttons">
+      <button type="button" onclick="document.location='/'">Cancel</button>
+      <button type="submit" id="create">Create</button>
+    </div>
+  </form>
 </div>
 {% endblock %}
