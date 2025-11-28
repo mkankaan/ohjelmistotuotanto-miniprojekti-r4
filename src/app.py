@@ -108,6 +108,14 @@ def edit(citation_id):
             "author_string": request.form.get("author"),
         }
 
+        new_key = data["citation_key"].lower()
+        sql = text("SELECT 1 FROM citations WHERE lower(citation_key) = :key AND id != :id LIMIT 1")
+        result = db.session.execute(sql, {"key": new_key, "id": citation_id}).first()
+
+        if result is not None:
+            flash("Citation key already exists.")
+            return redirect(f"/edit/{citation_id}")
+
         update_citation(citation_id, data)
         return redirect("/")
 
