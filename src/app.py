@@ -106,6 +106,7 @@ def edit(citation_id):
             "isbn": request.form.get("isbn"),
             "doi": request.form.get("doi"),
             "url": request.form.get("url"),
+            "urldate": request.form.get("urldate"),
             "author_string": request.form.get("author"),
         }
 

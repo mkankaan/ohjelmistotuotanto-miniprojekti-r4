@@ -92,7 +92,8 @@ def update_citation(citation_id, data):
             publisher = :publisher,
             isbn = :isbn,
             doi = :doi,
-            url = :url
+            url = :url,
+            urldate = :urldate
         WHERE id = :id
     """)
 
@@ -105,6 +106,7 @@ def update_citation(citation_id, data):
     "isbn": data["isbn"],
     "doi": data["doi"],
     "url": data["url"],
+    "urldate": data["urldate"],
     "id": citation_id
     }
 
@@ -149,12 +151,13 @@ def get_citation(citation_id):
                 c.isbn,
                 c.doi,
                 c.url,
+                c.urldate,
                 STRING_AGG(a.name, ' and ' ORDER BY ca.author_order) as author_string
             FROM citations c
             LEFT JOIN citations_authors ca ON ca.citation_id = c.id
             LEFT JOIN authors a ON a.id = ca.author_id
             WHERE c.id = :citation_id
-            GROUP BY c.id, c.citation_key, c.title, c.type, c.publisher, c.year, c.isbn, c.doi, c.url
+            GROUP BY c.id, c.citation_key, c.title, c.type, c.publisher, c.year, c.isbn, c.doi, c.url, c.urldate
         """),
         {"citation_id": citation_id}
     ).fetchone()
