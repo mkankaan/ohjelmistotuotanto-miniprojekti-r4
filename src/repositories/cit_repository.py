@@ -4,7 +4,7 @@ from util import format_authors, citation_as_dict
 
 
 def get_citations():
-    result = db.session.execute(text("SELECT id, citation_key, title, type, publisher, year, isbn, doi, url FROM citations"))
+    result = db.session.execute(text("SELECT id, citation_key, title, type, publisher, year, isbn, doi, url, urldate FROM citations"))
     citations = result.fetchall()
     citation_dicts = []
 
@@ -28,8 +28,8 @@ def get_authors_as_list(row_object):
 def create_citation(content):
     # Insert citation
     citation_sql = text("""
-        INSERT INTO citations (citation_key, type, title, year, publisher, isbn, doi, url)
-        VALUES (:citation_key, :type, :title, :year, :publisher, :isbn, :doi, :url)
+        INSERT INTO citations (citation_key, type, title, year, publisher, isbn, doi, url, urldate)
+        VALUES (:citation_key, :type, :title, :year, :publisher, :isbn, :doi, :url, :urldate)
         RETURNING id;
     """)
 
@@ -41,7 +41,8 @@ def create_citation(content):
         "publisher": content.get("publisher"),
         "isbn": content.get("isbn"),
         "doi": content.get("doi"),
-        "url": content.get("url")
+        "url": content.get("url"),
+        "urldate": content.get("urldate")
     })
 
     citation_id = citation_result.scalar()  # Get the inserted citation ID

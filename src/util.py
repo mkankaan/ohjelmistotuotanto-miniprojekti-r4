@@ -43,6 +43,7 @@ def citation_as_dict(citation, authors):
             "isbn": citation[6],
             "doi": citation[7],
             "url": citation[8],
+            "urldate": citation[9]
     }
 
 def format_doi(doi):

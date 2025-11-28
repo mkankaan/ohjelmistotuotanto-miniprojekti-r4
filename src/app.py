@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env, db
 from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options
-from sqlalchemy import exc, text
+from sqlalchemy import text
 from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
 import markupsafe
 
@@ -17,6 +17,7 @@ def show_lines(content): # pragma: no cover
 @app.route("/")
 def index():
     citations = get_citations()
+    print("cits:", citations)
     return render_template("index.html", citations=citations)
 
 

@@ -9,6 +9,7 @@ CREATE TABLE citations (
   isbn TEXT,
   doi TEXT,
   url TEXT,
+  urldate TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
