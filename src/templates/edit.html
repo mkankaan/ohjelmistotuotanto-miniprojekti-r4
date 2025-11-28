@@ -18,34 +18,17 @@
     </div>
 
 
-    <p>type: {{ citation.type }}</p>
 
     <div class="form-item">
       <label for="type">Type</label>
       <select name="type" required>
-        {% if citation.type == "article" %}
-          <option value="article" selected>Article</option>
-        {% else %}
-          <option value="article">Article</option>
-        {% endif %}
-
-        {% if citation.type == "book" %}
-          <option value="book" selected>Book</option>
-        {% else %}
-          <option value="book">Book</option>
-        {% endif %}
-
-        {% if citation.type == "inproceedings" %}
-          <option value="inproceedings" selected>Conference</option>
-        {% else %}
-          <option value="inproceedings">Conference</option>
-        {% endif %}
-
-        {% if citation.type == "misc" %}
-          <option value="misc" selected>Other</option>
-        {% else %}
-          <option value="misc">Other</option>
-        {% endif %}
+        {% for option in type_options %}
+          {% if citation.type == option["type"] %}
+            <option value={{ option["type"] }} selected>{{ option["display_text"] }}</option>
+          {% else %}
+            <option value={{ option["type"] }}>{{ option["display_text"] }}</option>
+          {% endif %}
+        {% endfor %}
       </select>
     </div>
 

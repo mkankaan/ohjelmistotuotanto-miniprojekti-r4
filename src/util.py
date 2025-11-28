@@ -72,3 +72,10 @@ def request_crossref_data(doi):
     message["author"] = format_authors(auth_list)
 
     return message
+
+type_options = [
+        { "type": "book", "display_text": "Book" },
+        { "type": "article", "display_text": "Article" },
+        { "type": "inproceedings", "display_text": "Conference" },
+        { "type": "misc", "display_text": "Other" }
+]
