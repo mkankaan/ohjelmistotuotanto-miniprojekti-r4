@@ -6,6 +6,8 @@ Test Setup       Reset Citations
 Test Teardown    Reset Citations
 
 *** Test Cases ***
+
+
 Edit page should display existing citation data
     Go To  ${HOME_URL}
     Create Citation Required Fields  example  Article  Example Article
@@ -15,61 +17,64 @@ Edit page should display existing citation data
     List Selection Should Be  name=type  Article
     Textfield Value Should Be  name=title  Example Article
 
-# Editing citation key should succeed
-#     Go To  ${HOME_URL}
-#     Create Citation Required Fields  example  Article  Example
-#     Click Button  Edit
-#     Input Text  name=citation_key  edited_example
-#     Click Button  Save changes
-#     Page Should Contain  edited_example
-#     Page Should Not Contain  example
+Editing citation key should succeed
+    Go To  ${HOME_URL}
+    Create Citation Required Fields  example  Article  Example
+    Click Button  Edit
+    Input Text  name=citation_key  edited_example
+    Click Button  Save changes
+    Page Should Contain  edited_example
+    Page Should Not Contain  Citation key: example
 
-# Editing title should succeed
-#     Go To  ${HOME_URL}
-#     Create Citation Required Fields  example  Book  Example
-#     Click Button  Edit
-#     Input Text  name=title  Edited Title
-#     Click Button  Save
-#     Page Should Contain  Edited Title
+ Editing title should succeed
+     Go To  ${HOME_URL}
+     Create Citation Required Fields  example  Book  Example
+     Click Button  Edit
+     Input Text  name=title  Edited Title
+     Click Button  Save changes
 
-# Editing all fields should succeed
-#     Go To  ${HOME_URL}
-#     Create Citation Required Fields  example  Book  Example
-#     Click Button  Edit
-#     Input Text  name=citation_key  edited_key
-#     Select From List By Label  name=type  Article
-#     Input Text  name=title  Edited Title
-#     Input Text  name=author  New Author
-#     Input Text  name=year  2024
-#     Input Text  name=publisher  New Publisher
-#     Input Text  name=isbn  978-3-16-148410-0
-#     Input Text  name=doi  10.1234/edited
-#     Input Text  name=url  https://edited.example.com
-#     Click Button  Save changes
-#     Page Should Contain  edited_key
-#     Page Should Contain  Edited Title
+     Wait Until Page Contains  Edited Title  timeout=10s
 
-# Editing citation to have non-unique key should fail
-#     Go To  ${HOME_URL}
-#     Create Citation Required Fields  first  Book  First Book
-#     Create Citation Required Fields  second  Book  Second Book
-#     Click Link  second
-#     Input Text  name=citation_key  first
-#     Click Button  Save changes
-#     Element Should Be Disabled  Save changes
+ Editing all fields should succeed
+     Go To  ${HOME_URL}
+     Create Citation Required Fields  example  Book  Example
+     Click Button  Edit
+     Input Text  name=citation_key  edited_key
+     Select From List By Label  name=type  Article
+     Input Text  name=title  Edited Title
+     Input Text  name=author  New Author
+     Input Text  name=year  2024
+     Input Text  name=publisher  New Publisher
+     Input Text  name=isbn  978-3-16-148410-0
+     Input Text  name=doi  10.1234/edited
+     Input Text  name=url  https://edited.example.com
+     Click Button  Save changes
+     Page Should Contain  edited_key
+     Page Should Contain  Edited Title
 
-# Canceling edit should return to home without changes
-#     Go To  ${HOME_URL}
-#     Create Citation Required Fields  example  Book  Original Title
-#     Click Button  Edit
-#     Input Text  name=title  Changed Title
-#     Click Button  Cancel
-#     Page Should Contain  Original Title
-#     Page Should Not Contain  Changed Title
+Editing citation to have non-unique key should fail
+    Go To  ${HOME_URL}
+    Create Citation Required Fields  first  Book  First Book
+    Create Citation Required Fields  second  Book  Second Book
+    Click Button   Edit
+    Input Text  name=citation_key  first
+    Click Button  Save changes
+    Page Should Contain  Error
 
-# Editing year to non-numerical value should disable save button
-#     Go To  ${HOME_URL}
-#     Create Citation Required Fields  example  Book  Example
-#     Click Button  edit
-#     Input Text  name=year  not_a_number
-#     Element Should Be Disabled  Save changes
+ Canceling edit should return to home without changes
+     Go To  ${HOME_URL}
+     Create Citation Required Fields  example  Book  Original Title
+     Click Button  Edit
+     Input Text  name=title  Changed Title
+     Click Button  Cancel
+     Page Should Contain  Original Title
+     Page Should Not Contain  Changed Title
+
+#Editing year to non-numerical value should disable save button
+     #Go To  ${HOME_URL}
+     #Create Citation Required Fields  example  Book  Example
+     #Click Button  Edit
+     #Input Text  name=year  not_a_number
+     #Element Should Be Disabled  id=create
+
+

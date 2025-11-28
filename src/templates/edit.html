@@ -52,7 +52,7 @@
 
     <div class="form-item">
       <label for="year">Year</label>
-      <input type="text" name="year" pattern="^\d*$" value="{{citation.year}}"/>
+      <input type="text" name="year" pattern="^\d*$" value="{{citation.year or ''}}"/>
     </div>
 
     <div class="form-item">
@@ -76,7 +76,7 @@
     </div>
 
     <div class="buttons">
-      <button onclick="document.location='/'">Cancel</button>
+      <button type="button" onclick="document.location='/'" id="cancel" >Cancel</button>
       <button type="submit" id="create">Save changes</button>
     </div>
   </form>
