@@ -2,6 +2,7 @@ from csv import Error
 import requests
 import re
 import time
+from datetime import datetime
 
 class UserInputError(Exception):
     pass
@@ -82,6 +83,11 @@ def is_date(s):
         return False
     else:
         return True
+    
+def is_date_in_past(date):
+    d, m, y = date.split(".")
+    return datetime(int(y),int(m), int(d)) <= datetime.now()
+
 
 type_options = [
         { "type": "book", "display_text": "Book" },
