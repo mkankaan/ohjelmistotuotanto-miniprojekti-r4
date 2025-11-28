@@ -1,6 +1,7 @@
 from csv import Error
 import requests
 import re
+import time
 
 class UserInputError(Exception):
     pass
@@ -22,9 +23,9 @@ def citation_bibtex(citation):
     s = f"@{citation["type"]}{{{citation["citation_key"]},\n"
     fields = [bibtex_field(key, value) for key, value in citation.items()
               if value
-              and key is not "citation_key"
-              and key is not "type"
-              and key is not "id"]
+              and key != "citation_key"
+              and key != "type"
+              and key != "id"]
     s += ",\n".join(fields)
     return s + "\n}"
 
@@ -73,6 +74,14 @@ def request_crossref_data(doi):
     message["author"] = format_authors(auth_list)
 
     return message
+
+def is_date(s):
+    try:
+        time.strptime(s.strip(), '%d.%m.%Y')
+    except ValueError:
+        return False
+    else:
+        return True
 
 type_options = [
         { "type": "book", "display_text": "Book" },
