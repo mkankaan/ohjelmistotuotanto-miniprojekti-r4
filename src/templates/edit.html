@@ -17,13 +17,35 @@
       <input type="text" name="citation_key" value="{{citation.citation_key}}" required />
     </div>
 
+
+    <p>type: {{ citation.type }}</p>
+
     <div class="form-item">
       <label for="type">Type</label>
-      <select name="type" value="{{citation.type}}" required>
-        <option value="article">Article</option>
-        <option value="book">Book</option>
-        <option value="inproceedings">Conference</option>
-        <option value="misc">Other</option>
+      <select name="type" required>
+        {% if citation.type == "article" %}
+          <option value="article" selected>Article</option>
+        {% else %}
+          <option value="article">Article</option>
+        {% endif %}
+
+        {% if citation.type == "book" %}
+          <option value="book" selected>Book</option>
+        {% else %}
+          <option value="book">Book</option>
+        {% endif %}
+
+        {% if citation.type == "inproceedings" %}
+          <option value="inproceedings" selected>Conference</option>
+        {% else %}
+          <option value="inproceedings">Conference</option>
+        {% endif %}
+
+        {% if citation.type == "misc" %}
+          <option value="misc" selected>Other</option>
+        {% else %}
+          <option value="misc">Other</option>
+        {% endif %}
       </select>
     </div>
 
