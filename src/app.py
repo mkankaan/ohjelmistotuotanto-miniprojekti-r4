@@ -60,18 +60,6 @@ def check_citation_key():
     exists = result is not None
     return jsonify({"exists": exists})
 
-@app.route("/check_urldate")
-def check_urldate():
-    date = request.args.get("date", "")
-    result = None
-
-    if is_date(date):
-        if(is_date_in_past(date)):
-            result = date
-
-    return jsonify({"date": result})
-
-
 @app.route("/populate-form", methods=["POST"])
 def doi_population():
     try:

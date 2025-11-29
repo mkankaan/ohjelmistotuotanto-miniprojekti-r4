@@ -72,7 +72,6 @@ citationKeyInput.addEventListener("input", async function() {
 
 urldateInput.addEventListener("input", async function() {
     const urldate = this.value;
-    let lastCheckedDate = urldate;
 
     if (!urldate) {
         this.setCustomValidity("");
@@ -81,15 +80,8 @@ urldateInput.addEventListener("input", async function() {
         console.log("no urldate")
         return;
     }
-
-    const response = await fetch('/check_urldate?date=' + encodeURIComponent(urldate));
-    const result = await response.json();
-
-    if (this.value !== lastCheckedDate) {
-        return;
-    }
    
-    if (result.date !== null) {
+    if (is_valid_date(urldate)) {
         this.setCustomValidity("");
         errorSpan.textContent = "";
     } else {
@@ -99,12 +91,37 @@ urldateInput.addEventListener("input", async function() {
     updateButtonState();
 });
 
+const is_valid_date = date_str => {
+    if(!/^\d{1,2}\.\d{1,2}\.\d{1,}$/.test(date_str))
+        return false
+
+    let parts = date_str.split(".");
+    let d = parseInt(parts[0])
+    let m = parseInt(parts[1])
+    let y = parseInt(parts[2])
+    date = new Date([y, m, d].join("-") + " 00:00:00")
+
+    if(isNaN(date)) {
+        return false
+    }
+
+    if ((m < 1) || (m > 12)) return false
+
+    if (m == 2 && ((y % 4 == 0) && (year % 100 != 0)) || (y % 400 == 0)) {
+        if (d > 29) return false
+    } else if (m in [1, 3, 5, 7, 8, 10, 12]) {
+        if (d > 31) return false
+    } else {
+        if (d > 30) return false
+    }
+    return !(date > new Date())
+}
+
 for (const input of form.elements) {
     if (input !== citationKeyInput) {
         input.addEventListener("input", updateButtonState);
     }
 }
-
 
 for (const doi_input of doi_form.elements) {
     doi_input.addEventListener("input", () => {
