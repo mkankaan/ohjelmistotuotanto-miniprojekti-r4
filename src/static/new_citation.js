@@ -1,6 +1,7 @@
 const form = document.forms["creation-form"];
 const create_button = document.getElementById("create");
 const citationKeyInput = form.elements["citation_key"];
+const urldateInput = form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
@@ -69,6 +70,65 @@ citationKeyInput.addEventListener("input", async function() {
     updateButtonState();
 });
 
+urldateInput.addEventListener("input", async function() {
+    const urldate = this.value;
+    console.log(urldate)
+
+    if (!urldate) {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+        updateButtonState();
+        console.log("no urldate")
+        return;
+    }
+
+    if(!/^\d{1,2}\.\d{1,2}\.\d{1,}$/.test(urldate)) {
+        this.setCustomValidity("Not a valid date");
+        errorSpan.textContent = "Not a valid date";
+        console.log("not valid date")
+    } else {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+        console.log("date ok")
+    }
+    updateButtonState();
+
+
+    // let parts = urldate.split(".");
+
+    // if(!isNaN(new Date([parseInt(parts[1]), parts[0], parts[2]].join("/"))))
+
+
+
+
+    /*
+    lastCheckedKey = key;
+
+    if (!key) {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+        updateButtonState();
+        return;
+    }
+
+    const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
+    const data = await response.json();
+
+    if (this.value !== lastCheckedKey) {
+        return;
+    }
+
+    if (data.exists) {
+        this.setCustomValidity("Citation key already in use.");
+        errorSpan.textContent = "Citation key already in use.";
+    } else {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+    }
+    updateButtonState();
+    */
+});
+
 
 for (const input of form.elements) {
     if (input !== citationKeyInput) {
@@ -112,5 +172,3 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         document.dispatchEvent(new Event('change', { bubbles: true }))
     });
 });
-
-
