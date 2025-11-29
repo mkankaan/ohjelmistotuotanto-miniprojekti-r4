@@ -1,26 +1,34 @@
-{% extends "layout.html" %} {% block title %} Citation helper {% endblock %} {%
-block body %}
+{% extends "layout.html" %} {% block title %} Citation helper {% endblock %}
+{% block script %}
+<script defer src={{ url_for('static', filename='index.js' ) }}></script>
+{% endblock %}
+{%block body %}
 
-<div class="list-wrapper">
-  <h2 id="header-list">Citation helper</h2>
-  <div class="top-row">
-    {% if citations | count > 0 %}
-    <button onclick="document.location='bibtex'">Generate BibTeX</button>
-    {% else %}
-    <button onclick="document.location='bibtex'" disabled="true">
-      Generate BibTeX
-    </button>
-    {% endif %}
-    <div class="left">Amount of citations: {{ citations | count }}</div>
-    <div class="right">
+<div class="fp-container">
+  <h2 id="fp-title">Citation helper</h2>
+  <div class="fp-header">
+    <div>
+      {% if citations | count > 0 %}
+      <button id="generate-bibtex" onclick="document.location='bibtex'" disabled="true">Generate BibTeX</button>
+      {% else %}
+      <button id="generate-bibtex" onclick="document.location='bibtex'" disabled="true">
+        Generate BibTeX
+      </button>
+      {% endif %}
+    </div>
+    <div>
+      <div id="cit-amount">Amount of citations: {{ citations | count }}</div>
+      <div id="selected-amount">Citations selected: 0</div>
+    </div>
+    <div>
       <button onclick="document.location='new_citation'">
         Create new citation
       </button>
     </div>
   </div>
-  <ul>
+  <ul class="cit-grid">
     {% for citation in citations %}
-    <li class="list-item">
+    <li class="list-item" data-id="{{  citation.citation_key  }}">
       <p>
         <strong>Title:</strong>
         <span class="cit-title">{{ citation.title }}</span>
@@ -33,19 +41,7 @@ block body %}
       {% else %}
       <p><strong>Author:</strong> {{ citation.author }}</p>
       {% endif %} {% endif %} {% if citation.publisher %}
-      <p><strong>Publisher:</strong> {{ citation.publisher }}</p>
-      {% endif %} {% if citation.year %}
       <p><strong>Year:</strong> {{ citation.year }}</p>
-      {% endif %} {% if citation.isbn %}
-      <p><strong>ISBN:</strong> {{ citation.isbn }}</p>
-      {% endif %} {% if citation.doi %}
-      <p><strong>DOI:</strong> {{ citation.doi }}</p>
-      {% endif %} {% if citation.url %}
-      <p>
-        <strong>URL:</strong>
-        <a href="{{  citation.url  }}">{{ citation.url }}</a>
-      </p>
-      <!--visited: {date}-->
       {% endif %}
 
       <div class="buttons">
