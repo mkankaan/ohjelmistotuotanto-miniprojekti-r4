@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env, db
-from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options, is_date, is_date_in_past
+from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options
 from sqlalchemy import text
 from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
 import markupsafe
