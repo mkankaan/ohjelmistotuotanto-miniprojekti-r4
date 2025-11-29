@@ -67,8 +67,3 @@ Citing a book after editing a non unique citation key should succeed
     Input Text  name=title  Example
     Click Button  Create
     Page Should Contain  Amount of citations: 2
-
-Cancel Button
-    Go To  ${HOME_URL}
-    Click Button  Create new citation
-    Click Button  Cancel

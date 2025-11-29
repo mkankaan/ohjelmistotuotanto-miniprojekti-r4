@@ -107,8 +107,12 @@ const is_valid_date = date_str => {
 
     if ((m < 1) || (m > 12)) return false
 
-    if (m == 2 && ((y % 4 == 0) && (year % 100 != 0)) || (y % 400 == 0)) {
-        if (d > 29) return false
+    if (m == 2) {
+        if (((y % 4 == 0) && (year % 100 != 0)) || (y % 400 == 0)) {
+            if (d > 29) return false
+        } else {
+            if (d > 28) return false
+        }
     } else if (m in [1, 3, 5, 7, 8, 10, 12]) {
         if (d > 31) return false
     } else {
