@@ -77,7 +77,6 @@ urldateInput.addEventListener("input", async function() {
         this.setCustomValidity("");
         errorSpan.textContent = "";
         updateButtonState();
-        console.log("no urldate")
         return;
     }
    

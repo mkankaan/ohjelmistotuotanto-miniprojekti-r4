@@ -76,19 +76,6 @@ def request_crossref_data(doi):
 
     return message
 
-def is_date(s):
-    try:
-        time.strptime(s.strip(), '%d.%m.%Y')
-    except ValueError:
-        return False
-    else:
-        return True
-    
-def is_date_in_past(date):
-    d, m, y = date.split(".")
-    return datetime(int(y),int(m), int(d)) <= datetime.now()
-
-
 type_options = [
         { "type": "book", "display_text": "Book" },
         { "type": "article", "display_text": "Article" },
