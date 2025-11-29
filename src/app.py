@@ -1,8 +1,8 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env, db
-from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options
-from sqlalchemy import exc, text
+from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options, is_date, is_date_in_past
+from sqlalchemy import text
 from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
 import markupsafe
 
@@ -17,6 +17,7 @@ def show_lines(content): # pragma: no cover
 @app.route("/")
 def index():
     citations = get_citations()
+    print("cits:", citations)
     return render_template("index.html", citations=citations)
 
 
@@ -59,7 +60,6 @@ def check_citation_key():
     exists = result is not None
     return jsonify({"exists": exists})
 
-
 @app.route("/populate-form", methods=["POST"])
 def doi_population():
     try:
@@ -84,8 +84,6 @@ def doi_population():
 
     })
 
-
-# testausta varten oleva reitti
 @app.route("/edit/<int:citation_id>", methods=["GET", "POST"])
 def edit(citation_id):
     citation = get_citation(citation_id)
@@ -105,6 +103,7 @@ def edit(citation_id):
             "isbn": request.form.get("isbn"),
             "doi": request.form.get("doi"),
             "url": request.form.get("url"),
+            "urldate": request.form.get("urldate"),
             "author_string": request.form.get("author"),
         }
 

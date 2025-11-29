@@ -45,7 +45,10 @@ block body %}
         <strong>URL:</strong>
         <a href="{{  citation.url  }}">{{ citation.url }}</a>
       </p>
-      <!--visited: {date}-->
+      {% endif %}
+
+      {% if citation.urldate %}
+      <p><strong>Visited:</strong> {{ citation.urldate }}</p>
       {% endif %}
 
       <div class="buttons">

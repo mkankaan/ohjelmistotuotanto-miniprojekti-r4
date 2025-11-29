@@ -4,7 +4,7 @@ from util import format_authors, citation_as_dict
 
 
 def get_citations():
-    result = db.session.execute(text("SELECT id, citation_key, title, type, publisher, year, isbn, doi, url FROM citations"))
+    result = db.session.execute(text("SELECT id, citation_key, title, type, publisher, year, isbn, doi, url, urldate FROM citations"))
     citations = result.fetchall()
     citation_dicts = []
 
@@ -28,8 +28,8 @@ def get_authors_as_list(row_object):
 def create_citation(content):
     # Insert citation
     citation_sql = text("""
-        INSERT INTO citations (citation_key, type, title, year, publisher, isbn, doi, url)
-        VALUES (:citation_key, :type, :title, :year, :publisher, :isbn, :doi, :url)
+        INSERT INTO citations (citation_key, type, title, year, publisher, isbn, doi, url, urldate)
+        VALUES (:citation_key, :type, :title, :year, :publisher, :isbn, :doi, :url, :urldate)
         RETURNING id;
     """)
 
@@ -41,7 +41,8 @@ def create_citation(content):
         "publisher": content.get("publisher"),
         "isbn": content.get("isbn"),
         "doi": content.get("doi"),
-        "url": content.get("url")
+        "url": content.get("url"),
+        "urldate": content.get("urldate")
     })
 
     citation_id = citation_result.scalar()  # Get the inserted citation ID
@@ -91,7 +92,8 @@ def update_citation(citation_id, data):
             publisher = :publisher,
             isbn = :isbn,
             doi = :doi,
-            url = :url
+            url = :url,
+            urldate = :urldate
         WHERE id = :id
     """)
 
@@ -104,6 +106,7 @@ def update_citation(citation_id, data):
     "isbn": data["isbn"],
     "doi": data["doi"],
     "url": data["url"],
+    "urldate": data["urldate"],
     "id": citation_id
     }
 
@@ -148,12 +151,13 @@ def get_citation(citation_id):
                 c.isbn,
                 c.doi,
                 c.url,
+                c.urldate,
                 STRING_AGG(a.name, ' and ' ORDER BY ca.author_order) as author_string
             FROM citations c
             LEFT JOIN citations_authors ca ON ca.citation_id = c.id
             LEFT JOIN authors a ON a.id = ca.author_id
             WHERE c.id = :citation_id
-            GROUP BY c.id, c.citation_key, c.title, c.type, c.publisher, c.year, c.isbn, c.doi, c.url
+            GROUP BY c.id, c.citation_key, c.title, c.type, c.publisher, c.year, c.isbn, c.doi, c.url, c.urldate
         """),
         {"citation_id": citation_id}
     ).fetchone()
