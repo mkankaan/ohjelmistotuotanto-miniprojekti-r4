@@ -72,7 +72,7 @@ citationKeyInput.addEventListener("input", async function() {
 
 urldateInput.addEventListener("input", async function() {
     const urldate = this.value;
-    console.log(urldate)
+    let lastCheckedDate = urldate;
 
     if (!urldate) {
         this.setCustomValidity("");
@@ -82,53 +82,22 @@ urldateInput.addEventListener("input", async function() {
         return;
     }
 
-    if(!/^\d{1,2}\.\d{1,2}\.\d{1,}$/.test(urldate)) {
+    const response = await fetch('/check_urldate?date=' + encodeURIComponent(urldate));
+    const result = await response.json();
+
+    if (this.value !== lastCheckedDate) {
+        return;
+    }
+   
+    if (result.date !== null) {
+        this.setCustomValidity("");
+        errorSpan.textContent = "";
+    } else {
         this.setCustomValidity("Not a valid date");
         errorSpan.textContent = "Not a valid date";
-        console.log("not valid date")
-    } else {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-        console.log("date ok")
     }
     updateButtonState();
-
-
-    // let parts = urldate.split(".");
-
-    // if(!isNaN(new Date([parseInt(parts[1]), parts[0], parts[2]].join("/"))))
-
-
-
-
-    /*
-    lastCheckedKey = key;
-
-    if (!key) {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-        updateButtonState();
-        return;
-    }
-
-    const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
-    const data = await response.json();
-
-    if (this.value !== lastCheckedKey) {
-        return;
-    }
-
-    if (data.exists) {
-        this.setCustomValidity("Citation key already in use.");
-        errorSpan.textContent = "Citation key already in use.";
-    } else {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-    }
-    updateButtonState();
-    */
 });
-
 
 for (const input of form.elements) {
     if (input !== citationKeyInput) {

@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env, db
-from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options
+from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options, is_date, is_date_in_past
 from sqlalchemy import text
 from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
 import markupsafe
@@ -60,6 +60,17 @@ def check_citation_key():
     exists = result is not None
     return jsonify({"exists": exists})
 
+@app.route("/check_urldate")
+def check_urldate():
+    date = request.args.get("date", "")
+    result = None
+
+    if is_date(date):
+        if(is_date_in_past(date)):
+            result = date
+
+    return jsonify({"date": result})
+
 
 @app.route("/populate-form", methods=["POST"])
 def doi_population():
@@ -85,8 +96,6 @@ def doi_population():
 
     })
 
-
-# testausta varten oleva reitti
 @app.route("/edit/<int:citation_id>", methods=["GET", "POST"])
 def edit(citation_id):
     citation = get_citation(citation_id)
