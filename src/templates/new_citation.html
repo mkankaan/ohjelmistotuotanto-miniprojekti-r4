@@ -33,7 +33,7 @@
 
     <div class="form-item">
       <label for="citation_key">Citation key*</label>
-      <input type="text" name="citation_key" required />
+      <input type="text" name="citation_key" required pattern="^\S+$"/>
     </div>
 
     <div class="form-item">
@@ -43,7 +43,7 @@
 
     <div class="form-item">
       <label for="title">Title*</label>
-      <input type="text" name="title" id="title" required />
+      <input type="text" name="title" id="title" required pattern=".*[\S].*"/>
     </div>
 
     <div class="form-item">
