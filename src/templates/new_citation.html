@@ -32,7 +32,10 @@
     {% endwith %}
 
     <div class="form-item">
-      <label for="citation_key">Citation key*</label>
+      <label for="citation_key">
+        Citation key*
+        <div class="info-icon" title="Citation key must be unique and must not include spaces or ,@~#%{}">i</div>
+      </label>
       <input type="text" name="citation_key" required pattern="^\S+$"/>
     </div>
 
@@ -80,7 +83,10 @@
     </div>
 
     <div class="form-item">
-      <label for="urldate">Visited</label>
+      <label for="urldate">
+        Visited
+      <div class="info-icon" title="Enter date in the format MM.DD.YYYY">i</div>
+      </label>
       <input type="text" name="urldate" id="urldate" />
     </div>
 
