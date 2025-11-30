@@ -28,8 +28,8 @@ Show Bibtex Of Multiple Citations
     Go To  ${HOME_URL}
     Create Citation Required Fields  testkey1  Book  Clean Code
     Create Citation Required Fields  testkey2  Book  Even Cleaner Code
+    Wait Until Page Contains    Amount of citations: 2    timeout=10
     Go To  ${BIBTEX_URL}
-    Wait Until Page Contains    @book{    timeout=10
     Page Should Contain  @book{testkey1,
     Page Should Contain  @book{testkey2,
     Page Should Contain  title = \{Clean Code\}
