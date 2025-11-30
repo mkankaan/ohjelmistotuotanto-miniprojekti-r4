@@ -6,8 +6,6 @@ Test Setup       Reset Citations
 Test Teardown    Reset Citations
 
 *** Test Cases ***
-
-
 Edit page should display existing citation data
     Go To  ${HOME_URL}
     Create Citation Required Fields  example  Article  Example Article
