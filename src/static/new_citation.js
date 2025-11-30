@@ -53,6 +53,12 @@ citationKeyInput.addEventListener("input", async function() {
         return;
     }
 
+    if (key.match(/.*[,@~#%{}]+.*/)) {
+        this.setCustomValidity("Character not allowed.");
+        errorSpan.textContent = "Character not allowed.";
+        updateButtonState();
+    }
+
     const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
     const data = await response.json();
 
@@ -84,8 +90,8 @@ urldateInput.addEventListener("input", async function() {
         this.setCustomValidity("");
         errorSpan.textContent = "";
     } else {
-        this.setCustomValidity("Not a valid date");
-        errorSpan.textContent = "Not a valid date";
+        this.setCustomValidity("Invalid date.");
+        errorSpan.textContent = "Invalid date.";
     }
     updateButtonState();
 });
