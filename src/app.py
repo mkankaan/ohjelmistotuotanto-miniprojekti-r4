@@ -28,6 +28,8 @@ def new():
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
     content = request.form.to_dict()
+    content = {k: v.strip() for k, v in content.items()}
+
     if content.get("year", "") == "": # pragma: no cover
         content["year"] = None
     else:
@@ -40,6 +42,7 @@ def citation_creation():
     try:
         split_names(content)
         create_citation(content)
+        print("created:", content)
         return redirect("/")
     except Exception as error: # pragma: no cover
         flash(str(error))
