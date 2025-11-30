@@ -10,7 +10,15 @@
 </head>
 
 <body>
-  {% block body %}{% endblock %}
+    <header class="top-bar">
+        {% if request.endpoint != 'index' %}
+            <a href="{{ url_for('index') }}" id="front_page">
+                <button type="button" name="front_page">Front page</button>
+            </a>
+        {% endif %}
+    </header>
+
+    {% block body %}{% endblock %}
 </body>
 
 </html>
