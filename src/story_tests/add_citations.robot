@@ -11,8 +11,6 @@ At start there are no citations
     Title Should Be  Citation helper
     Page Should Contain  Amount of citations: 0
 
-
-
 Citing a book with only a key and name should succeed
     Go To  ${HOME_URL}
     Create Citation Required Fields  example  Book  Example

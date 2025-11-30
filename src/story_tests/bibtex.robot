@@ -19,8 +19,8 @@ Button Should Be Clickable If There Are Citations
 Show Bibtex Correctly
     Go To  ${HOME_URL}
     Create Citation Required Fields  testkey  Book  Clean Code
+    Wait Until Page Contains    Amount of citations: 1    timeout=10
     Go To  ${BIBTEX_URL}
-    Wait Until Page Contains    @book{    timeout=10
     Page Should Contain  @book{testkey,
     Page Should Contain  title = \{Clean Code\}
 
