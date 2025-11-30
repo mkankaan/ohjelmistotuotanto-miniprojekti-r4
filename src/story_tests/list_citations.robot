@@ -6,7 +6,6 @@ Test Setup       Reset Citations
 
 *** Test Cases ***
 All Citation Fields Are Shown
-    Go To  ${HOME_URL}
     Create Citation  testkey  Book  Clean Code  Martin, Robert  2008  Prentice Hall  123-456-78987-6-5  10.1000/182  https://www.example.com
     Page Should Contain  testkey
     Page Should Contain  Clean Code

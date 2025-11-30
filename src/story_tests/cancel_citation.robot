@@ -28,4 +28,4 @@ Cancel button should cancel editing citation
     Click Button  Edit
     Input Text  name=title  Changed Title
     Click Button  Save changes
-    Page Should Not Contain  Original title
+    Page Should Not Contain  Original Title

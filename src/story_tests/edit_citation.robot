@@ -7,7 +7,6 @@ Test Teardown    Reset Citations
 
 *** Test Cases ***
 Edit page should display existing citation data
-    Go To  ${HOME_URL}
     Create Citation Required Fields  example  Article  Example Article
     Click Button  Edit
     Page Should Contain  Edit citation
@@ -16,7 +15,6 @@ Edit page should display existing citation data
     Textfield Value Should Be  name=title  Example Article
 
 Editing citation key should succeed
-    Go To  ${HOME_URL}
     Create Citation Required Fields  example  Article  Example
     Click Button  Edit
     Input Text  name=citation_key  edited_example
@@ -25,7 +23,6 @@ Editing citation key should succeed
     Page Should Not Contain  Citation key: example
 
  Editing title should succeed
-     Go To  ${HOME_URL}
      Create Citation Required Fields  example  Book  Example
      Click Button  Edit
      Input Text  name=title  Edited Title
@@ -34,7 +31,6 @@ Editing citation key should succeed
      Wait Until Page Contains  Edited Title  timeout=10s
 
  Editing all fields should succeed
-     Go To  ${HOME_URL}
      Create Citation Required Fields  example  Book  Example
      Click Button  Edit
      Input Text  name=citation_key  edited_key
@@ -51,7 +47,6 @@ Editing citation key should succeed
      Page Should Contain  Edited Title
 
 Editing citation to have non-unique key should fail
-    Go To  ${HOME_URL}
     Create Citation Required Fields  first  Book  First Book
     Create Citation Required Fields  second  Book  Second Book
     Click Button   Edit
@@ -60,7 +55,6 @@ Editing citation to have non-unique key should fail
     Page Should Contain  Error
 
  Canceling edit should return to home without changes
-     Go To  ${HOME_URL}
      Create Citation Required Fields  example  Book  Original Title
      Click Button  Edit
      Input Text  name=title  Changed Title
@@ -69,7 +63,6 @@ Editing citation to have non-unique key should fail
      Page Should Not Contain  Changed Title
 
 #Editing year to non-numerical value should disable save button
-     #Go To  ${HOME_URL}
      #Create Citation Required Fields  example  Book  Example
      #Click Button  Edit
      #Input Text  name=year  not_a_number

@@ -11,13 +11,11 @@ Generate Bibtex Button Should Be Unclickable If There Are No Citations
     Page Should Contain  Citation helper
 
 Button Should Be Clickable If There Are Citations
-    Go To  ${HOME_URL}
     Create Citation Required Fields  test  Book  Test
     Click Button  Generate BibTeX
     Page Should Contain  BibTeX
 
 Show Bibtex Correctly
-    Go To  ${HOME_URL}
     Create Citation Required Fields  testkey  Book  Clean Code
     Wait Until Page Contains    Amount of citations: 1    timeout=10
     Go To  ${BIBTEX_URL}

@@ -17,7 +17,6 @@ User can return to front page from bibtex page
 	Title Should Be  Citation helper
 	
 User can return to front page from edit citation page
-	Go To  ${HOME_URL}
 	Create Citation Required Fields  example  Book  Example Title
 	Click Button  Edit
 	Click Element  id=front_page

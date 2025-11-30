@@ -35,7 +35,7 @@ Citate creation succeeds with valid DOI
   Click Button  Create new citation
   Input Text  name=citation_key  monarch-kogmaw
   Input Text  name=doi-populate  10.1145/3699538.3699545
-  Element Should be Enabled  submit-doi
+  Element Should Be Enabled  submit-doi
   Click Button  submit-doi
   Wait Until Element Is Enabled  create  timeout=10
   Click Button  create
