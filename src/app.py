@@ -110,6 +110,15 @@ def edit(citation_id):
         }
         data = {k: v.strip() for k, v in data.items()}
 
+        if data.get("year", "") == "": # pragma: no cover
+            data["year"] = None
+        else:
+            try:
+                data["year"] = int(data["year"])
+            except ValueError:
+                flash("Year must be a number or left empty.")
+                return redirect("/edit_citation/" + str(citation_id))
+
         new_key = data["citation_key"].lower()
         sql = text("SELECT 1 FROM citations WHERE lower(citation_key) = :key AND id != :id LIMIT 1")
         result = db.session.execute(sql, {"key": new_key, "id": citation_id}).first()
