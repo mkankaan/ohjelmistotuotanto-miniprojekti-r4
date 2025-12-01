@@ -14,7 +14,7 @@
     {% endif %} {% endwith %}
     <div class="form-item">
       <label for="citation_key">Citation key</label>
-      <input type="text" name="citation_key" value="{{citation.citation_key}}" required />
+      <input type="text" name="citation_key" value="{{citation.citation_key}}" required pattern="^\S+$"/>
     </div>
 
 
@@ -34,7 +34,7 @@
 
     <div class="form-item">
       <label for="title">Title</label>
-      <input type="text" name="title" value="{{citation.title}}" required />
+      <input type="text" name="title" value="{{citation.title}}" required pattern=".*[\S].*"/>
     </div>
 
     <div class="form-item">
