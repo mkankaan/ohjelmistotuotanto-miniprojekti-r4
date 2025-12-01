@@ -1,6 +1,6 @@
 async function citationKeyListener(e) {
     const key = this.value;
-    lastCheckedKey = key;
+    let lastCheckedKey = key;
 
     if (!key) {
         this.setCustomValidity("");
@@ -83,3 +83,11 @@ const is_valid_date = date_str => {
     }
     return !(date > new Date())
 }
+
+const typeOptions = [
+    { value: 'article', label: 'Article' },
+    { value: 'book', label: 'Book' },
+    { value: 'inproceedings', label: 'Conference' },
+    { value: 'book-chapter', label: 'Book Chapter' },
+    { value: 'misc', label: 'Other' }
+];

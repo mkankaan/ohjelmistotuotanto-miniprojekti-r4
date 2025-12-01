@@ -1,10 +1,13 @@
 {% extends "layout.html" %} {% block title %} Edit citation {% endblock %}
-{% block script %} <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script> {% endblock %}
+{% block script %}
+<script defer src={{ url_for('static', filename='validation.js' ) }}></script>
+<script defer src={{ url_for('static', filename='edit_citation.js' ) }}></script>
+{% endblock %}
 {% block body %}
 <div class="form-container">
   <h2>Edit citation</h2>
 
-  <form action="/edit/{{ citation.id }}", method="post">
+  <form action="/edit/{{ citation.id }}" method="post" name="edit-form">
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul>
       {% for message in messages %}
@@ -21,7 +24,7 @@
 
     <div class="form-item">
       <label for="type">Type</label>
-      <select name="type" required>
+      <select name="type" id="edit_type" required>
         {% for option in type_options %}
           {% if citation.type == option["type"] %}
             <option value={{ option["type"] }} selected>{{ option["display_text"] }}</option>
@@ -82,7 +85,7 @@
 
     <div class="buttons">
       <button type="button" onclick="document.location='/'" id="cancel" >Cancel</button>
-      <button type="submit" id="create">Save changes</button>
+      <button type="submit" id="save">Save changes</button>
     </div>
   </form>
 </div>

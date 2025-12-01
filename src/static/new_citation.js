@@ -8,16 +8,8 @@ const populate_button = document.getElementById("submit-doi")
 populate_button.disabled = true;
 create_button.disabled = true;
 
+
 let lastCheckedKey = "";
-
-
-const typeOptions = [
-    { value: 'article', label: 'Article' },
-    { value: 'book', label: 'Book' },
-    { value: 'inproceedings', label: 'Conference' },
-    { value: 'book-chapter', label: 'Book Chapter' },
-    { value: 'misc', label: 'Other' }
-];
 
 
 const updateButtonState = () => {
