@@ -41,8 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("change", updateButtonState)
 
+citationKeyInput.addEventListener("input", citationKeyListener);
 
-citationKeyInput.addEventListener("input", async function() {
+async function citationKeyListener(e) {
     const key = this.value;
     lastCheckedKey = key;
 
@@ -74,7 +75,8 @@ citationKeyInput.addEventListener("input", async function() {
         errorSpan.textContent = "";
     }
     updateButtonState();
-});
+}
+
 
 urldateInput.addEventListener("input", async function() {
     const urldate = this.value;
