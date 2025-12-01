@@ -77,8 +77,9 @@ async function citationKeyListener(e) {
     updateButtonState();
 }
 
+urldateInput.addEventListener("input", urldateInputListener);
 
-urldateInput.addEventListener("input", async function() {
+async function urldateInputListener(e) {
     const urldate = this.value;
 
     if (!urldate) {
@@ -96,7 +97,7 @@ urldateInput.addEventListener("input", async function() {
         errorSpan.textContent = "Invalid date.";
     }
     updateButtonState();
-});
+}
 
 const is_valid_date = date_str => {
     if(!/^\d{1,2}\.\d{1,2}\.\d{1,}$/.test(date_str))
