@@ -13,14 +13,14 @@
     </ul>
     {% endif %} {% endwith %}
     <div class="form-item">
-      <label for="citation_key">Citation key</label>
-      <input type="text" name="citation_key" value="{{citation.citation_key}}" required pattern="^\S+$"/>
+      <label for="citation_key">Citation key*</label>
+      <input type="text" name="citation_key" value="{{citation.citation_key}}" required />
     </div>
 
 
 
     <div class="form-item">
-      <label for="type">Type</label>
+      <label for="type">Type*</label>
       <select name="type" required>
         {% for option in type_options %}
           {% if citation.type == option["type"] %}
@@ -33,8 +33,8 @@
     </div>
 
     <div class="form-item">
-      <label for="title">Title</label>
-      <input type="text" name="title" value="{{citation.title}}" required pattern=".*[\S].*"/>
+      <label for="title">Title*</label>
+      <input type="text" name="title" value="{{citation.title}}" required />
     </div>
 
     <div class="form-item">
@@ -73,11 +73,6 @@
     <div class="form-item">
       <label for="url">URL</label>
       <input type="text" name="url" value="{{citation.url}}"/>
-    </div>
-
-    <div class="form-item">
-      <label for="urldate">Visited</label>
-      <input type="text" name="urldate" value="{{citation.urldate}}"/>
     </div>
 
     <div class="buttons">
