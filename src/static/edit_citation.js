@@ -26,28 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("change", updateButtonState)
 
 edit_citationKeyInput.addEventListener("input", citationKeyListener);
+edit_urldateInput.addEventListener("input", urldateInputListener);
 
-// create_urldateInput.addEventListener("input", urldateInputListener);
-
-async function urldateInputListener(e) {
-    const urldate = this.value;
-
-    if (!urldate) {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-        updateButtonState();
-        return;
-    }
-   
-    if (is_valid_date(urldate)) {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-    } else {
-        this.setCustomValidity("Invalid date.");
-        errorSpan.textContent = "Invalid date.";
-    }
-    updateButtonState();
-}
 
 for (const input of edit_form.elements) {
     if (input !== edit_citationKeyInput) {
