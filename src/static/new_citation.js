@@ -1,7 +1,7 @@
-const form = document.forms["creation-form"];
+const create_form = document.forms["creation-form"];
 const create_button = document.getElementById("create");
-const citationKeyInput = form.elements["citation_key"];
-const urldateInput = form.elements["urldate"];
+const citationKeyInput = create_form.elements["citation_key"];
+const urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
@@ -21,7 +21,7 @@ const typeOptions = [
 
 
 const updateButtonState = () => {
-    create_button.disabled = !form.checkValidity();
+    create_button.disabled = !create_form.checkValidity();
     populate_button.disabled = !doi_form.checkValidity();
 }
 
@@ -126,7 +126,7 @@ const is_valid_date = date_str => {
     return !(date > new Date())
 }
 
-for (const input of form.elements) {
+for (const input of create_form.elements) {
     if (input !== citationKeyInput) {
         input.addEventListener("input", updateButtonState);
     }
