@@ -53,10 +53,12 @@ citationKeyInput.addEventListener("input", async function() {
         return;
     }
 
+
     if (key.match(/.*[,@~#%{}]+.*/)) {
         this.setCustomValidity("Character not allowed.");
         errorSpan.textContent = "Character not allowed.";
         updateButtonState();
+        return;
     }
 
     const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
@@ -75,6 +77,7 @@ citationKeyInput.addEventListener("input", async function() {
     }
     updateButtonState();
 });
+
 
 urldateInput.addEventListener("input", async function() {
     const urldate = this.value;
