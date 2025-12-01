@@ -1,7 +1,7 @@
 const create_form = document.forms["creation-form"];
 const create_button = document.getElementById("create");
 const create_citationKeyInput = create_form.elements["citation_key"];
-const urldateInput = create_form.elements["urldate"];
+const create_urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
@@ -77,7 +77,7 @@ async function citationKeyListener(e) {
     updateButtonState();
 }
 
-urldateInput.addEventListener("input", urldateInputListener);
+create_urldateInput.addEventListener("input", urldateInputListener);
 
 async function urldateInputListener(e) {
     const urldate = this.value;
