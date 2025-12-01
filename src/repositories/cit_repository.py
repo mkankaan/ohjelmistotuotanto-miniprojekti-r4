@@ -11,18 +11,10 @@ def get_citations():
     for citation in citations:
         citation_id = citation[0]
         authors = get_citation_authors(citation_id)
-        formatted_author_list = format_authors(get_authors_as_list(authors))
+        formatted_author_list = format_authors([author[0] for author in authors])
         citation_dicts.append(citation_as_dict(citation, formatted_author_list))
 
     return citation_dicts
-
-
-def get_authors_as_list(row_object):
-    author_list = []
-
-    for row in row_object:
-        author_list.append(row[0])
-    return author_list
 
 
 def create_citation(content):
