@@ -1,8 +1,5 @@
-from csv import Error
 import requests
 import re
-import time
-from datetime import datetime
 
 class UserInputError(Exception):
     pass
@@ -76,9 +73,3 @@ def request_crossref_data(doi):
 
     return message
 
-type_options = [
-        { "type": "book", "display_text": "Book" },
-        { "type": "article", "display_text": "Article" },
-        { "type": "inproceedings", "display_text": "Conference" },
-        { "type": "misc", "display_text": "Other" }
-]

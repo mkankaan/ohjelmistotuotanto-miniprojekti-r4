@@ -9,9 +9,6 @@ populate_button.disabled = true;
 create_button.disabled = true;
 
 
-let lastCheckedKey = "";
-
-
 const updateButtonState = () => {
     create_button.disabled = !create_form.checkValidity();
     populate_button.disabled = !doi_form.checkValidity();

@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const opt = document.createElement("option");
         opt.value = option.value;
         opt.textContent = option.label;
+        opt.selected = option.value == document.getElementById("selected_type").value;
         selectElement.appendChild(opt);
 
     updateButtonState()

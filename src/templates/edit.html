@@ -24,15 +24,7 @@
 
     <div class="form-item">
       <label for="type">Type</label>
-      <select name="type" id="edit_type" required>
-        {% for option in type_options %}
-          {% if citation.type == option["type"] %}
-            <option value={{ option["type"] }} selected>{{ option["display_text"] }}</option>
-          {% else %}
-            <option value={{ option["type"] }}>{{ option["display_text"] }}</option>
-          {% endif %}
-        {% endfor %}
-      </select>
+      <select name="type" id="edit_type" required></select>
     </div>
 
     <div class="form-item">
@@ -82,6 +74,8 @@
       <label for="urldate">Visited</label>
       <input type="text" name="urldate" value="{{citation.urldate}}"/>
     </div>
+
+    <input type="hidden" id="selected_type" value="{{citation.type}}"> 
 
     <div class="buttons">
       <button type="button" onclick="document.location='/'" id="cancel" >Cancel</button>
