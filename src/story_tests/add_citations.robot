@@ -27,6 +27,7 @@ Create button should be disabled if citation key field contains a non unique val
     Fill Citation Required Fields  example  Book  Example
     Sleep  5s					 # wait for possible async validation
     Click Button  create
+    Sleep  1s
     Page Should Contain  Create a new citation
 
 Citing a book with one author should succeed with all fields visible
@@ -49,7 +50,9 @@ Citing a book after editing a non unique citation key should succeed
     Create Citation Required Fields  example  Book  Example
     Fill Citation Required Fields  example  Book  Example
     Page Should Contain  Create a new citation
+    Sleep  5s
     Input Text  name=citation_key  notExample
     Input Text  name=title  Example
+    Sleep  5s
     Click Button  create
     Page Should Contain  Amount of citations: 2
