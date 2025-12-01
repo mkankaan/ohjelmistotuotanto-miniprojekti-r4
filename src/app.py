@@ -108,6 +108,7 @@ def edit(citation_id):
             "urldate": request.form.get("urldate"),
             "author_string": request.form.get("author"),
         }
+        data = {k: v.strip() for k, v in data.items()}
 
         new_key = data["citation_key"].lower()
         sql = text("SELECT 1 FROM citations WHERE lower(citation_key) = :key AND id != :id LIMIT 1")
