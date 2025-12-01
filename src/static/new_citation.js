@@ -1,6 +1,6 @@
 const create_form = document.forms["creation-form"];
 const create_button = document.getElementById("create");
-const citationKeyInput = create_form.elements["citation_key"];
+const create_citationKeyInput = create_form.elements["citation_key"];
 const urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("change", updateButtonState)
 
-citationKeyInput.addEventListener("input", citationKeyListener);
+create_citationKeyInput.addEventListener("input", citationKeyListener);
 
 async function citationKeyListener(e) {
     const key = this.value;
@@ -130,7 +130,7 @@ const is_valid_date = date_str => {
 }
 
 for (const input of create_form.elements) {
-    if (input !== citationKeyInput) {
+    if (input !== create_citationKeyInput) {
         input.addEventListener("input", updateButtonState);
     }
 }
@@ -140,7 +140,6 @@ for (const doi_input of doi_form.elements) {
         doi_input.addEventListener("input", updateButtonState);
     });
 }
-
 
 document.getElementById('doi-populate-form').addEventListener('submit', function(e) {
     e.preventDefault();
