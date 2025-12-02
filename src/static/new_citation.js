@@ -75,3 +75,13 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         document.dispatchEvent(new Event('change', { bubbles: true }))
     });
 });
+
+create_form.addEventListener("submit", async function (e) {
+    await citationKeyListener.call(create_citationKeyInput);
+
+    if (!create_form.checkValidity()) {
+        e.preventDefault();
+        create_form.reportValidity();
+        return;
+    }
+});
