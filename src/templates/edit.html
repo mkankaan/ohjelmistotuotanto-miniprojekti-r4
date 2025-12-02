@@ -1,10 +1,13 @@
 {% extends "layout.html" %} {% block title %} Edit citation {% endblock %}
-{% block script %} <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script> {% endblock %}
+{% block script %}
+<script defer src={{ url_for('static', filename='validation.js' ) }}></script>
+<script defer src={{ url_for('static', filename='edit_citation.js' ) }}></script>
+{% endblock %}
 {% block body %}
 <div class="form-container">
   <h2>Edit citation</h2>
 
-  <form action="/edit/{{ citation.id }}", method="post">
+  <form action="/edit/{{ citation.id }}" method="post" name="edit-form">
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul>
       {% for message in messages %}
@@ -13,33 +16,26 @@
     </ul>
     {% endif %} {% endwith %}
     <div class="form-item">
-      <label for="citation_key">Citation key*</label>
-      <input type="text" name="citation_key" value="{{citation.citation_key}}" required />
+      <label for="citation_key">
+        Citation key*
+        <div class="info-icon" title="Citation key must be unique and must not include spaces or ,@~#%{}">i</div>
+      </label>
+      <input type="text" name="citation_key" value="{{citation.citation_key}}" required pattern="^\S+$"/>
     </div>
-
-
 
     <div class="form-item">
       <label for="type">Type*</label>
-      <select name="type" required>
-        {% for option in type_options %}
-          {% if citation.type == option["type"] %}
-            <option value={{ option["type"] }} selected>{{ option["display_text"] }}</option>
-          {% else %}
-            <option value={{ option["type"] }}>{{ option["display_text"] }}</option>
-          {% endif %}
-        {% endfor %}
-      </select>
+      <select name="type" id="edit_type" required></select>
     </div>
 
     <div class="form-item">
       <label for="title">Title*</label>
-      <input type="text" name="title" value="{{citation.title}}" required />
+      <input type="text" name="title" value="{{citation.title}}" required pattern=".*[\S].*"/>
     </div>
 
     <div class="form-item">
       <label for="author"
-        >Author(s):
+        >Author(s)
         <div
           class="info-icon"
           title="The name(s) of the author(s) (in the case of more than one author, separated by and)"
@@ -75,9 +71,19 @@
       <input type="text" name="url" value="{{citation.url}}"/>
     </div>
 
+    <div class="form-item">
+      <label for="urldate">
+        Visited
+        <div class="info-icon" title="Enter date in the format MM.DD.YYYY">i</div>
+      </label>
+      <input type="text" name="urldate" value="{{citation.urldate}}"/>
+    </div>
+
+    <input type="hidden" id="selected_type" value="{{citation.type}}"> 
+
     <div class="buttons">
       <button type="button" onclick="document.location='/'" id="cancel" >Cancel</button>
-      <button type="submit" id="create">Save changes</button>
+      <button type="submit" id="save">Save changes</button>
     </div>
   </form>
 </div>
