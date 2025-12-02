@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, jsonify, flash
 from db_helper import reset_db
 from config import app, test_env, db
-from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options
+from util import request_crossref_data, split_names, get_bibtex, format_doi
 from sqlalchemy import text
 from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
 import markupsafe
@@ -92,7 +92,7 @@ def edit(citation_id):
     print(citation)
 
     if request.method == "GET":
-        return render_template("edit.html", citation=citation, type_options=type_options)
+        return render_template("edit.html", citation=citation)
 
     if request.method == "POST":
         data = {
@@ -117,18 +117,14 @@ def edit(citation_id):
                 data["year"] = int(data["year"])
             except ValueError:
                 flash("Year must be a number or left empty.")
-                return redirect("/edit_citation/" + str(citation_id))
+                return redirect("/edit/" + str(citation_id))
 
-        new_key = data["citation_key"].lower()
-        sql = text("SELECT 1 FROM citations WHERE lower(citation_key) = :key AND id != :id LIMIT 1")
-        result = db.session.execute(sql, {"key": new_key, "id": citation_id}).first()
-
-        if result is not None:
-            flash("Citation key already exists.")
-            return redirect(f"/edit/{citation_id}")
-
-        update_citation(citation_id, data)
-        return redirect("/")
+        try:
+            update_citation(citation_id, data)
+            return redirect("/")
+        except Exception as error: # pragma: no cover
+            flash(str(error))
+            return redirect("/edit/" + str(citation_id))
 
 #testausta varten oleva reitti
 if test_env: # pragma: no cover
