@@ -31,7 +31,7 @@ Create button should be disabled if citation key field contains a non unique val
     Page Should Contain  Create a new citation
 
 Citing a book with one author should succeed with all fields visible
-    Create Citation  example  Book  Example  Ex1  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com
+    Create Citation  example  Book  Example  Ex1  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com  1.1.2000
     Title Should Be  Citation helper
     Page Should Contain  Citation key
     Page Should Contain  Title
@@ -41,9 +41,10 @@ Citing a book with one author should succeed with all fields visible
     Page Should Contain  ISBN
     Page Should Contain  DOI
     Page Should Contain  URL
+    Page Should Contain  1.1.2000
 
 Citing a book with multiple authors should succeed
-    Create Citation  example  Book  Example  Ex1 and Ex2  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com
+    Create Citation  example  Book  Example  Ex1 and Ex2  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com  1.1.2000
     Page Should Contain  Authors
    
 Citing a book after editing a non unique citation key should succeed

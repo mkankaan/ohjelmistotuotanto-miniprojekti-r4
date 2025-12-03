@@ -64,10 +64,5 @@ Editing citation to have non-unique key should fail
      Page Should Contain  Original Title
      Page Should Not Contain  Changed Title
 
-#Editing year to non-numerical value should disable save button
-     #Create Citation Required Fields  example  Book  Example
-     #Click Button  Edit
-     #Input Text  name=year  not_a_number
-     #Element Should Be Disabled  id=create
 
 

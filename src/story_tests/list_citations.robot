@@ -6,7 +6,7 @@ Test Setup       Reset Citations
 
 *** Test Cases ***
 All Citation Fields Are Shown
-    Create Citation  testkey  Book  Clean Code  Martin, Robert  2008  Prentice Hall  123-456-78987-6-5  10.1000/182  https://www.example.com
+    Create Citation  testkey  Book  Clean Code  Martin, Robert  2008  Prentice Hall  123-456-78987-6-5  10.1000/182  https://www.example.com  3.12.2025
     Page Should Contain  testkey
     Page Should Contain  Clean Code
     Page Should Contain  Martin, Robert
@@ -15,6 +15,7 @@ All Citation Fields Are Shown
     Page Should Contain  123-456-78987-6-5
     Page Should Contain  10.1000/182
     Page Should Contain  https://www.example.com
+    Page Should Contain  3.12.2025
 
 Multiple Citations Are Shown
     Reset Citations And Go To Start Page
