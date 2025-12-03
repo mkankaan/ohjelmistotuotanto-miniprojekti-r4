@@ -3,7 +3,7 @@ from db_helper import reset_db
 from config import app, test_env, db
 from util import request_crossref_data, split_names, get_bibtex, format_doi, type_options
 from sqlalchemy import exc, text
-from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
+from repositories.cit_repository import get_citation_dict, get_citations, create_citation, get_citation, update_citation
 import markupsafe
 
 
@@ -61,7 +61,7 @@ def ids_to_bibtex():
 
     cits = []
     for id in ids:
-        cits.append(get_citation(id))
+        cits.append(get_citation_dict(id))
     bibtex = get_bibtex(cits)
     
     session["bibtex"] = bibtex

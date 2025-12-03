@@ -159,3 +159,13 @@ def get_citation(citation_id):
     ).fetchone()
 
     return result
+
+def get_citation_dict(citation_id):
+    citation = get_citation(citation_id)
+
+    cit_id = citation[0]
+    authors = get_citation_authors(cit_id)
+    formatted_author_list = format_authors(get_authors_as_list(authors))
+    citation = citation_as_dict(citation, formatted_author_list)
+
+    return citation
