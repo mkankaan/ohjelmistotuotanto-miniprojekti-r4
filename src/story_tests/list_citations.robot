@@ -5,13 +5,7 @@ Suite Teardown   Close Browser
 Test Setup       Reset Citations
 
 *** Test Cases ***
-At start there are no citations
-    Go To  ${HOME_URL}
-    Title Should Be  Citation helper
-    Page Should Contain  Amount of citations: 0
-
 All Citation Fields Are Shown
-    Go To  ${HOME_URL}
     Create Citation  testkey  Book  Clean Code  Martin, Robert  2008  Prentice Hall  123-456-78987-6-5  10.1000/182  https://www.example.com
     Page Should Contain  testkey
     Page Should Contain  Clean Code

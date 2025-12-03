@@ -1,84 +1,123 @@
 {% extends "layout.html" %} {% block title %} Edit citation {% endblock %}
-{% block script %} <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script> {% endblock %}
+{% block script %}
+<script defer src={{ url_for('static', filename='bibtex_config.js' ) }}></script>
+<script defer src={{ url_for('static', filename='validation.js' ) }}></script>
+<script defer src={{ url_for('static', filename='edit_citation.js' ) }}></script>
+{% endblock %}
 {% block body %}
 <div class="form-container">
-  <h2>Edit citation</h2>
+    <h2>Edit citation</h2>
 
-  <form action="/edit/{{ citation.id }}", method="post">
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
-    <div class="form-item">
-      <label for="citation_key">Citation key</label>
-      <input type="text" name="citation_key" value="{{citation.citation_key}}" required />
-    </div>
+    <form action="/edit/{{ citation.id }}" method="post" name="edit-form">
+        {% with messages = get_flashed_messages() %} {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
 
-
-
-    <div class="form-item">
-      <label for="type">Type</label>
-      <select name="type" required>
-        {% for option in type_options %}
-          {% if citation.type == option["type"] %}
-            <option value={{ option["type"] }} selected>{{ option["display_text"] }}</option>
-          {% else %}
-            <option value={{ option["type"] }}>{{ option["display_text"] }}</option>
-          {% endif %}
-        {% endfor %}
-      </select>
-    </div>
-
-    <div class="form-item">
-      <label for="title">Title</label>
-      <input type="text" name="title" value="{{citation.title}}" required />
-    </div>
-
-    <div class="form-item">
-      <label for="author"
-        >Author(s):
-        <div
-          class="info-icon"
-          title="The name(s) of the author(s) (in the case of more than one author, separated by and)"
-        >
-          i
+        <div class="form-item">
+            <label for="citation_key">
+                Citation key*
+                <div class="info-icon" title="Citation key must be unique and must not include spaces or ,@~#%{}">i</div>
+            </label>
+            <input type="text" name="citation_key" value="{{ citation.citation_key }}" required pattern="^\S+$" />
+            <span id="ck-error"></span>
         </div>
-      </label>
-      <input type="text" name="author" value="{{citation.author_string or ''}}"/>
-    </div>
 
-    <div class="form-item">
-      <label for="year">Year</label>
-      <input type="text" name="year" pattern="^\d*$" value="{{citation.year or ''}}"/>
-    </div>
+        <div class="form-item">
+            <label for="type">Type*</label>
+            <select name="type" id="edit_type" required></select>
+        </div>
 
-    <div class="form-item">
-      <label for="publisher">Publisher</label>
-      <input type="text" name="publisher" value="{{citation.publisher}}"/>
-    </div>
+        <div class="form-item">
+            <label for="title">Title*</label>
+            <input type="text" name="title" value="{{ citation.title }}" required pattern=".*[\S].*" />
+        </div>
 
-    <div class="form-item">
-      <label for="isbn">ISBN</label>
-      <input type="text" name="isbn" value="{{citation.isbn}}"/>
-    </div>
+        <div class="form-item">
+            <label for="author">
+                Author(s)
+                <div 
+                     class="info-icon"
+                     title="The name(s) of the author(s) (in the case of more than one author, separated by and)"
+                 >
+                    i
+                </div>
+            </label>
+            <input type="text" name="author" value="{{ citation.author_string or '' }}" />
+        </div>
 
-    <div class="form-item">
-      <label for="doi">DOI</label>
-      <input type="text" name="doi" value="{{citation.doi}}"/>
-    </div>
+        <div class="form-item bibtex-field" data-name="year">
+            <label for="year">Year</label>
+            <input type="text" name="year" pattern="^\d*$" value="{{ citation.year or '' }}" />
+        </div>
 
-    <div class="form-item">
-      <label for="url">URL</label>
-      <input type="text" name="url" value="{{citation.url}}"/>
-    </div>
+        <div class="form-item bibtex-field" data-name="publisher">
+            <label for="publisher">Publisher</label>
+            <input type="text" name="publisher" value="{{ citation.publisher }}" />
+        </div>
 
-    <div class="buttons">
-      <button type="button" onclick="document.location='/'" id="cancel" >Cancel</button>
-      <button type="submit" id="create">Save changes</button>
-    </div>
-  </form>
+        <div class="form-item bibtex-field" data-name="journal">
+            <label for="journal">Journal / Conference name</label>
+            <input type="text" name="journal" value="{{ citation.journal or '' }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="booktitle">
+            <label for="booktitle">Book / Proceedings title</label>
+            <input type="text" name="booktitle" value="{{ citation.booktitle or '' }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="pages">
+            <label for="pages">Pages</label>
+            <input type="text" name="pages" value="{{ citation.pages or '' }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="volume">
+            <label for="volume">Volume</label>
+            <input type="text" name="volume" value="{{ citation.volume or '' }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="number">
+            <label for="number">Number / Issue</label>
+            <input type="text" name="number" value="{{ citation.number or '' }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="chapter">
+            <label for="chapter">Chapter</label>
+            <input type="text" name="chapter" value="{{ citation.chapter or '' }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="isbn">
+            <label for="isbn">ISBN</label>
+            <input type="text" name="isbn" value="{{ citation.isbn }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="doi">
+            <label for="doi">DOI</label>
+            <input type="text" name="doi" value="{{ citation.doi }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="url">
+            <label for="url">URL</label>
+            <input type="text" name="url" value="{{ citation.url }}" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="urldate">
+            <label for="urldate">
+                Visited
+                <div class="info-icon" title="Enter date in the format MM.DD.YYYY">i</div>
+            </label>
+            <input type="text" name="urldate" value="{{ citation.urldate }}" />
+        </div>
+
+        <input type="hidden" id="selected_type" value="{{ citation.type }}">
+
+        <div class="buttons">
+            <button type="button" onclick="document.location='/'" id="cancel">Cancel</button>
+            <button type="submit" id="save">Save changes</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

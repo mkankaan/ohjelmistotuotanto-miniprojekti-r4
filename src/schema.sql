@@ -1,14 +1,20 @@
-
 CREATE TABLE citations (
   id SERIAL PRIMARY KEY,
   citation_key TEXT NOT NULL,
-  type TEXT NOT NULL,                 -- esim. 'book', 'article', 'webpage'
+  type TEXT NOT NULL,                 -- esim. 'book', 'article'
   title TEXT NOT NULL,
   year INTEGER,
   publisher TEXT,
   isbn TEXT,
   doi TEXT,
   url TEXT,
+  urldate TEXT,
+  journal TEXT,
+  booktitle TEXT,
+  pages TEXT,
+  volume TEXT,
+  number TEXT,
+  chapter TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -20,6 +26,6 @@ CREATE TABLE authors (
 CREATE TABLE citations_authors (
   citation_id INTEGER REFERENCES citations(id) ON DELETE CASCADE,
   author_id INTEGER REFERENCES authors(id) ON DELETE CASCADE,
-  author_order INTEGER, 
+  author_order INTEGER,
   PRIMARY KEY (citation_id, author_id)
 );

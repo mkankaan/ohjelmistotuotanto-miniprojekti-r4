@@ -1,88 +1,131 @@
 {% extends "layout.html" %}
 {% block title %} Create a new citation {% endblock %}
 {% block script %}
+<script defer src={{ url_for('static', filename='validation.js' ) }}></script>
 <script defer src={{ url_for('static', filename='new_citation.js' ) }}></script>
+<script defer src={{ url_for('static', filename='bibtex_config.js' ) }}></script>
 {% endblock %}
 {% block body %}
 <div class="form-container">
-  <h2 id="header-create">Create a new citation</h2>
+    <h2 id="header-create">Create a new citation</h2>
 
     <form name="doi-populate-form" id="doi-populate-form">
-      <div class="form-item">
-        <label for="doi-populate">
-          Populate fields with DOI
-          <div class="info-icon" title="At the moment the search only works for Crossref DOIs">i</div>
-        </label>
-        <input type="text" name="doi-populate" id="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+" />
-      </div>
-      <div class="buttons">
-        <button type="submit" id="submit-doi" disabled>Populate</button>
-      </div>
+        <div class="form-item">
+            <label for="doi-populate">
+                Populate fields with DOI
+                <div class="info-icon" title="At the moment the search only works for Crossref DOIs">i</div>
+            </label>
+            <input type="text" name="doi-populate" id="doi-populate" required pattern=".*10\.\d{4,9}\/[A-Za-z0-9_\-\.]+" />
+        </div>
+        <div class="buttons">
+            <button type="submit" id="submit-doi" disabled>Populate</button>
+        </div>
     </form>
 
-  <form action="/create_citation" method="post" name="creation-form">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+    <form action="/create_citation" method="post" name="creation-form">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
 
-    <div class="form-item">
-      <label for="citation_key">Citation key*</label>
-      <input type="text" name="citation_key" required />
-    </div>
+        <div class="form-item">
+            <label for="citation_key">
+                Citation key*
+                <div class="info-icon" title="Citation key must be unique and must not include spaces or ,@~#%{}">i</div>
+            </label>
+            <input type="text" name="citation_key" required pattern="^\S+$" />
+        </div>
 
-    <div class="form-item">
-      <label for="type">Type*</label>
-      <select name="type" id="type" required></select>
-    </div>
+        <div class="form-item">
+            <label for="type">Type*</label>
+            <select name="type" id="type" required></select>
+        </div>
 
-    <div class="form-item">
-      <label for="title">Title*</label>
-      <input type="text" name="title" id="title" required />
-    </div>
+        <div class="form-item">
+            <label for="title">Title*</label>
+            <input type="text" name="title" id="title" required pattern=".*[\S].*" />
+        </div>
 
-    <div class="form-item">
-      <label for="author">
-        Author(s)
-        <div class="info-icon" title="The name(s) of the author(s) (in the case of more than one author, separated by and)">i</div>
-      </label>
-      <input type="text" name="author" id="author" />
-    </div>
+        <div class="form-item">
+            <label for="author">
+                Author(s)
+                <div class="info-icon" title="The name(s) of the author(s) (in the case of more than one author, separated by and)">i</div>
+            </label>
+            <input type="text" name="author" id="author" />
+        </div>
 
-    <div class="form-item">
-      <label for="year">Year</label>
-      <input type="text" name="year" id="year" pattern="^\d*$" />
-    </div>
+        <div class="form-item bibtex-field" data-name="year">
+            <label for="year">Year</label>
+            <input type="text" name="year" id="year" pattern="^\d*$" />
+        </div>
 
-    <div class="form-item">
-      <label for="publisher">Publisher</label>
-      <input type="text" name="publisher" id="publisher" />
-    </div>
+        <div class="form-item bibtex-field" data-name="publisher">
+            <label for="publisher">Publisher</label>
+            <input type="text" name="publisher" id="publisher" />
+        </div>
 
-    <div class="form-item">
-      <label for="isbn">ISBN</label>
-      <input type="text" name="isbn" id="isbn" />
-    </div>
+        <div class="form-item bibtex-field" data-name="journal">
+            <label for="journal">Journal / Conference name</label>
+            <input type="text" name="journal" id="journal" />
+        </div>
 
-    <div class="form-item">
-      <label for="doi">DOI</label>
-      <input type="text" name="doi" id="doi" />
-    </div>
+        <div class="form-item bibtex-field" data-name="booktitle">
+            <label for="booktitle">Book / Proceedings title</label>
+            <input type="text" name="booktitle" id="booktitle" />
+        </div>
 
-    <div class="form-item">
-      <label for="url">URL</label>
-      <input type="text" name="url" id="url" />
-    </div>
+        <div class="form-item bibtex-field" data-name="pages">
+            <label for="pages">Pages</label>
+            <input type="text" name="pages" id="pages" />
+        </div>
 
-    <div class="buttons">
-      <button type="button" name="cancel" id="cancel" onclick="document.location='/'">Cancel</button>
-      <button type="submit" id="create">Create</button>
-    </div>
-  </form>
+        <div class="form-item bibtex-field" data-name="volume">
+            <label for="volume">Volume</label>
+            <input type="text" name="volume" id="volume" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="number">
+            <label for="number">Number / Issue</label>
+            <input type="text" name="number" id="number" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="chapter">
+            <label for="chapter">Chapter</label>
+            <input type="text" name="chapter" id="chapter" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="isbn">
+            <label for="isbn">ISBN</label>
+            <input type="text" name="isbn" id="isbn" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="doi">
+            <label for="doi">DOI</label>
+            <input type="text" name="doi" id="doi" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="url">
+            <label for="url">URL</label>
+            <input type="text" name="url" id="url" />
+        </div>
+
+        <div class="form-item bibtex-field" data-name="urldate">
+            <label for="urldate">
+                Visited
+                <div class="info-icon" title="Enter date in the format MM.DD.YYYY">i</div>
+            </label>
+            <input type="text" name="urldate" id="urldate" />
+        </div>
+
+        <div class="buttons">
+            <button type="button" name="cancel" id="cancel" onclick="document.location='/'">Cancel</button>
+            <button type="submit" id="create">Create</button>
+        </div>
+    </form>
 </div>
 {% endblock %}

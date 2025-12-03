@@ -63,3 +63,11 @@ Create Citation Required Fields
     Input Text  name=title  ${title}
     Click Button  Create
 
+Fill Citation Required Fields
+    [Arguments]  ${citation_key}  ${type}  ${title}
+    Go To  ${NEW_CITATION_URL}
+    Wait Until Element Is Visible    name=citation_key    timeout=10
+    Input Text  name=citation_key  ${citation_key}
+    Select From List By Label  name=type  ${type}
+    Input Text  name=title  ${title}
+

@@ -1,4 +1,3 @@
-from csv import Error
 import requests
 import re
 
@@ -19,12 +18,12 @@ def get_bibtex(citations):
     return "\n\n".join(citation_bibtex(c) for c in citations)
 
 def citation_bibtex(citation):
-    s = f"@{citation["type"]}{{{citation["citation_key"]},\n"
+    s = f"@{citation['type']}{{{citation['citation_key']},\n"
     fields = [bibtex_field(key, value) for key, value in citation.items()
               if value
-              and key is not "citation_key"
-              and key is not "type"
-              and key is not "id"]
+              and key != "citation_key"
+              and key != "type"
+              and key != "id"]
     s += ",\n".join(fields)
     return s + "\n}"
 
@@ -33,17 +32,25 @@ def bibtex_field(key, value):
 
 def citation_as_dict(citation, authors):
     return {
-            "id": citation[0],
-            "citation_key": citation[1],
-            "title": citation[2],
-            "type": citation[3],
-            "author": authors,
-            "publisher": citation[4],
-            "year": citation[5],
-            "isbn": citation[6],
-            "doi": citation[7],
-            "url": citation[8],
+        "id": citation[0],
+        "citation_key": citation[1],
+        "title": citation[2],
+        "type": citation[3],
+        "author": authors,
+        "publisher": citation[4],
+        "year": citation[5],
+        "isbn": citation[6],
+        "doi": citation[7],
+        "url": citation[8],
+        "urldate": citation[9],
+        "journal": citation[10],
+        "booktitle": citation[11],
+        "pages": citation[12],
+        "volume": citation[13],
+        "number": citation[14],
+        "chapter": citation[15],
     }
+
 
 def format_doi(doi):
     pattern = r'10\.(?:[1-9]\d{3,}(?:[.\d]*)?)/[A-Za-z0-9._-]+'
@@ -56,7 +63,7 @@ def format_doi(doi):
 def authors_to_list(auths):
     auth_list = []
     for auth in auths:
-        name = f"{auth.get("given")} {auth.get("family")}"
+        name = f"{auth.get('given')} {auth.get('family')}"
         auth_list.append(name)
     return auth_list
 
@@ -73,9 +80,3 @@ def request_crossref_data(doi):
 
     return message
 
-type_options = [
-        { "type": "book", "display_text": "Book" },
-        { "type": "article", "display_text": "Article" },
-        { "type": "inproceedings", "display_text": "Conference" },
-        { "type": "misc", "display_text": "Other" }
-]

@@ -22,10 +22,10 @@ Cancel button should cancel creating new citation
     Page Should Not Contain  Example title
 
 Cancel button should cancel editing citation
-    Go to  ${HOME_URL}
+    Go To  ${HOME_URL}
     Click Button  Create new citation
     Create Citation Required Fields  example  Book  Original Title
     Click Button  Edit
     Input Text  name=title  Changed Title
     Click Button  Save changes
-    Page Should Not Contain  Original title
+    Page Should Not Contain  Original Title

@@ -10,10 +10,8 @@ A Flask web application for managing citations in LaTeX and converting citations
     - [Database Setup](#setup) <br/>
     - [Run the Application](#run) <br/>
     - [Testing](#testing) <br/>
-- [Changelog v1.1.0 (2025-11-26)](#changelog) <br/>
+- [Changelog v1.2.0 (2025-12-04)](#changelog) <br/>
 - [Definition of Done](#dod) <br/>
-- [Acceptance Criteria](#acc) <br/>
-    - [Sprint 2](#sprint2) <br/>
 
 ## <a name="installation"></a> Installation
 ### <a name="setup"></a> Database Setup
@@ -36,18 +34,15 @@ Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog v1.1.0 (2025-11-26)
+## <a name="changelog"></a> Changelog v1.2.0 (2025-12-04)
 
 **Added features**
-- The user can generate a BibTeX snippet of all citations stored in the database.
-- The user can automatically fill the citation creation form using a Crossref DOI.
+- Citations can be edited.
+- The user can add the date at which the source was visited.
+- Added a button which allows the user to easily navigate to the front page from anywhere in the application.
 
 **Fixed issues**
-- Fixed the issue where the button on the citation creation form was clickable if the fields were not filled correctly.
-- Fixed the issue where the field names were not shown on the front page.
-
-**Known issues**
-- Cancelling the creation of a new citation creates said citation.
+- Fixed the issue where cancelling the creation of a new citation created said citation.
 
 ## <a name="dod"></a> Definition of Done
 
@@ -58,47 +53,3 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Documentation is kept up to date. The README includes instructions for running and testing the application locally.
 - Change history is maintained in a clear and documented way: commit messages describe the changes made.
 - Code is refactored for better quality.
-
-## <a name="acc"></a> Acceptance criteria
-
-(#) = priority
-
-### Sprint 1
-
-Forgot!
-
-### <a name="sprint2"></a> Sprint 2
-
-#### The fields of the form do not accept wrong data types and the form does not allow sending them (#1) [complete]
-- The user can only input numbers into the 'year' field
-- The user can only input a valid URL, ISBN and DOI into the respective fields
-- The submit button is not pressable if certain fields contain invalid values
-
-#### The user can see the names of different fields related to a citation (#1) [complete]
-- Correct names are displayed next to corresponding fields
-
-#### The user can fetch citation information using a DOI (#2) [complete]
-- The Populate button is disabled when field does not contain a valid DOI, or a string (such as an URL) ending in a valid DOI
-- Populating fills up all fields where information is found
-- Populating also checks validity of Submit button
-- Automatic fetching supports Crossref citations, more may be added later
-
-If there is time:
-
-#### The user can generate a BibTeX snippet containing the citations (#3) [complete]
-- The user can click a Generate BibTeX button to generate a copy-pasteable BibTeX snippet of all citations in the database
-- The button is unclickable if there are no citations
-- The generated BibTeX works correctly when pasted into a LaTeX document and the sources can be referred to with the citation key
-
-#### The user can edit citations (#4) [incomplete]
-- The user can click on an Edit button next to a citation to open the edit form
-- The content of the citation is pre-filled in the edit form fields
-- The user can edit the fields and press Save to save changes
-- The edit form fields don't accept wrong data types and the form does not allow sending them
-- The edited citation is shown correctly
-
-#### The user can delete a citation (#4) [incomplete]
-- The user can click on a Delete button next to a citation
-- A pop-up asks the user to confirm if they want to delete the citation
-- If the user clicks yes, the start page will reload and the deleted citation is gone
-- If the user clicks no, the citation is still on the page

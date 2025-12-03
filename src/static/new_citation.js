@@ -1,77 +1,62 @@
-const form = document.forms["creation-form"];
+const create_form = document.forms["creation-form"];
 const create_button = document.getElementById("create");
-const citationKeyInput = form.elements["citation_key"];
+const create_citationKeyInput = create_form.elements["citation_key"];
+const create_urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
 populate_button.disabled = true;
 create_button.disabled = true;
 
-let lastCheckedKey = "";
-
-
-const typeOptions = [
-    { value: 'article', label: 'Article' },
-    { value: 'book', label: 'Book' },
-    { value: 'inproceedings', label: 'Conference' },
-    { value: 'book-chapter', label: 'Book Chapter' },
-    { value: 'misc', label: 'Other' }
-];
-
-
 const updateButtonState = () => {
-    create_button.disabled = !form.checkValidity();
-    populate_button.disabled = !doi_form.checkValidity();
-}
+    const ckValid = create_citationKeyInput.checkValidity();
 
+    const formValid = create_form.checkValidity();
+
+    create_button.disabled = !(ckValid && formValid);
+    populate_button.disabled = !doi_form.checkValidity();
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-    const selectElement = document.getElementById('type');
-    typeOptions.forEach(option => {
-        const opt = document.createElement('option');
-        opt.value = option.value;
-        opt.textContent = option.label;
-        selectElement.appendChild(opt);
+    const typeSelect = document.getElementById('type');
+    const fields = document.querySelectorAll('.bibtex-field');
 
-    updateButtonState()
-    });
-});
-
-
-document.addEventListener("change", updateButtonState)
-
-
-citationKeyInput.addEventListener("input", async function() {
-    const key = this.value;
-    lastCheckedKey = key;
-
-    if (!key) {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-        updateButtonState();
-        return;
+    if (typeSelect.options.length === 0) {
+        typeOptions.forEach(opt => {
+            const o = document.createElement('option');
+            o.value = opt.value;
+            o.textContent = opt.label;
+            typeSelect.appendChild(o);
+        });
     }
 
-    const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
-    const data = await response.json();
+    function updateFields() {
+        const selected = typeSelect.value;
+        const allowed = new Set(fieldsByType[selected] || []);
 
-    if (this.value !== lastCheckedKey) {
-        return;
+        fields.forEach(f => {
+            const name = f.dataset.name;
+            if (allowed.has(name)) {
+                f.style.display = '';
+            } else {
+                f.style.display = 'none';
+            }
+        });
     }
 
-    if (data.exists) {
-        this.setCustomValidity("Citation key already in use.");
-        errorSpan.textContent = "Citation key already in use.";
-    } else {
-        this.setCustomValidity("");
-        errorSpan.textContent = "";
-    }
+    typeSelect.addEventListener('change', updateFields);
+    updateFields();
     updateButtonState();
 });
 
+document.addEventListener("change", updateButtonState)
 
-for (const input of form.elements) {
-    if (input !== citationKeyInput) {
+create_citationKeyInput.addEventListener("input", citationKeyListener);
+create_urldateInput.addEventListener("input", urldateInputListener);
+
+
+for (const input of create_form.elements) {
+    if (input !== create_citationKeyInput) {
         input.addEventListener("input", updateButtonState);
     }
 }
@@ -82,7 +67,6 @@ for (const doi_input of doi_form.elements) {
         doi_input.addEventListener("input", updateButtonState);
     });
 }
-
 
 document.getElementById('doi-populate-form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -107,10 +91,39 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         document.getElementById('isbn').value = data.isbn;
         document.getElementById('doi').value = data.doi;
         document.getElementById('url').value = data.url;
+        document.getElementById('booktitle').value = data.booktitle || '';
+        document.getElementById('pages').value = data.pages || '';
+        document.getElementById('chapter').value = data.chapter || '';
+        document.getElementById('journal').value = data.journal || '';
+        document.getElementById('volume').value = data.volume || '';
+        document.getElementById('number').value = data.number || '';
     })
     .then(() => {
-        document.dispatchEvent(new Event('change', { bubbles: true }))
+        const typeSelect = document.getElementById('type');
+        typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+        document.dispatchEvent(new Event('change', { bubbles: true }));
     });
 });
 
+create_form.addEventListener("submit", async function (e) {
+    const ck = create_citationKeyInput.value;
+    const unique = await isCitationKeyUnique(ck);
 
+    if (!unique) {
+        create_citationKeyInput.setCustomValidity("Citation key already in use.");
+        errorSpan.textContent = "Citation key already in use.";
+    } else {
+        create_citationKeyInput.setCustomValidity("");
+        if (errorSpan.textContent === "Citation key already in use.") {
+            errorSpan.textContent = "";
+        }
+    }
+
+    updateButtonState();
+
+    if (!create_form.checkValidity()) {
+        e.preventDefault();
+        create_form.reportValidity();
+        return;
+    }
+});
