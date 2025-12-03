@@ -155,3 +155,16 @@ def get_citation(citation_id):
     ).fetchone()
 
     return result
+
+def delete_citation(citation_id):
+    db.session.execute(
+        text("DELETE FROM citations_authors WHERE citation_id = :id"),
+        {"id": citation_id}
+    )
+
+    result = db.session.execute(
+        text("DELETE FROM citations WHERE id = :id"),
+        {"id": citation_id}
+    )
+    
+    db.session.commit()

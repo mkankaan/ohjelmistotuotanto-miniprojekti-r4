@@ -18,7 +18,7 @@ def get_bibtex(citations):
     return "\n\n".join(citation_bibtex(c) for c in citations)
 
 def citation_bibtex(citation):
-    s = f"@{citation["type"]}{{{citation["citation_key"]},\n"
+    s = f"@{citation['type']}{{{citation['citation_key']},\n"
     fields = [bibtex_field(key, value) for key, value in citation.items()
               if value
               and key != "citation_key"
@@ -56,7 +56,7 @@ def format_doi(doi):
 def authors_to_list(auths):
     auth_list = []
     for auth in auths:
-        name = f"{auth.get("given")} {auth.get("family")}"
+        name = f"{auth.get('given')} {auth.get('family')}"
         auth_list.append(name)
     return auth_list
 
