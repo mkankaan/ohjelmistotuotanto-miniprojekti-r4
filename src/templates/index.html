@@ -2,7 +2,7 @@
 {% block script %}
 <script defer src={{ url_for('static', filename='index.js' ) }}></script>
 {% endblock %}
-{%block body %}
+{% block body %}
 
 <div class="fp-container">
   <h2 id="fp-title">Citation helper</h2>
@@ -42,96 +42,14 @@
         <button onclick="document.location='/edit/{{citation.id}}'">
           Edit
         </button>
-        {% endif %}
-        <div class="left">Amount of citations: {{ citations | count }}</div>
-        <div class="right">
-          <button onclick="document.location='new_citation'">
-            Create new citation
+        <form action="/delete/{{ citation.id }}" method="POST" style="display:inline;">
+          <button type="submit" onclick="return confirm('Are you sure you want to delete this citation?');">
+            Delete
           </button>
-        </div>
+        </form>
       </div>
-      <ul>
-        {% for citation in citations %}
-        <li class="list-item">
-          <p>
-            <strong>Title:</strong>
-            <span class="cit-title">{{ citation.title }}</span>
-          </p>
-          <p><strong>Citation key:</strong> {{ citation.citation_key }}</p>
-          <p><strong>Type:</strong> {{ citation.type }}</p>
-
-          {% if citation.author %}
-          {% if " and " in citation.author %}
-          <p><strong>Authors:</strong> {{ citation.author }}</p>
-          {% else %}
-          <p><strong>Author:</strong> {{ citation.author }}</p>
-          {% endif %}
-          {% endif %}
-
-          {% if citation.publisher %}
-          <p><strong>Publisher:</strong> {{ citation.publisher }}</p>
-          {% endif %}
-
-          {% if citation.journal %}
-          <p><strong>Journal / Conference:</strong> {{ citation.journal }}</p>
-          {% endif %}
-
-          {% if citation.booktitle %}
-          <p><strong>Book / Proceedings title:</strong> {{ citation.booktitle }}</p>
-          {% endif %}
-
-          {% if citation.chapter %}
-          <p><strong>Chapter:</strong> {{ citation.chapter }}</p>
-          {% endif %}
-
-          {% if citation.pages %}
-          <p><strong>Pages:</strong> {{ citation.pages }}</p>
-          {% endif %}
-
-          {% if citation.volume %}
-          <p><strong>Volume:</strong> {{ citation.volume }}</p>
-          {% endif %}
-
-          {% if citation.number %}
-          <p><strong>Number / Issue:</strong> {{ citation.number }}</p>
-          {% endif %}
-
-          {% if citation.year %}
-          <p><strong>Year:</strong> {{ citation.year }}</p>
-          {% endif %}
-
-          {% if citation.isbn %}
-          <p><strong>ISBN:</strong> {{ citation.isbn }}</p>
-          {% endif %}
-
-          {% if citation.doi %}
-          <p><strong>DOI:</strong> {{ citation.doi }}</p>
-          {% endif %}
-
-          {% if citation.url %}
-          <p>
-            <strong>URL:</strong>
-            <a href="{{ citation.url }}">{{ citation.url }}</a>
-          </p>
-          {% endif %}
-
-          {% if citation.urldate %}
-          <p><strong>Visited:</strong> {{ citation.urldate }}</p>
-          {% endif %}
-
-          <div class="buttons">
-            <button onclick="document.location='/edit/{{ citation.id }}'">
-              Edit
-            </button>
-            <form action="/delete/{{ citation.id }}" method="POST" style="display:inline;">
-              <button type="submit" onclick="return confirm('Are you sure you want to delete this citation?');">
-                Delete
-              </button>
-            </form>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
-
 {% endblock %}

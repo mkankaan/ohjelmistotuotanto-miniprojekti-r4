@@ -2,7 +2,6 @@ from sqlalchemy import text
 from config import db
 from util import format_authors, citation_as_dict
 
-
 def get_citations():
     result = db.session.execute(text("""
         SELECT
@@ -15,7 +14,7 @@ def get_citations():
             isbn,         -- 6
             doi,          -- 7
             url,          -- 8
-            urldate,      -- 9
+            urldate,      -- 9::
             journal,      -- 10
             booktitle,    -- 11
             pages,        -- 12
@@ -35,7 +34,12 @@ def get_citations():
 
     return citation_dicts
 
+def get_authors_as_list(row_object):
+    author_list = []
 
+    for row in row_object:
+        author_list.append(row[0])
+    return author_list
 
 def create_citation(content):
     # Insert citation
@@ -99,7 +103,7 @@ def create_citation(content):
 
     # Insert authors and link them
     for order, name in enumerate(content["author"], start=1):
-        # Check if author exists
+        # Check if author exists:
         author_check_sql = text("SELECT id FROM authors WHERE name = :name")
         author_id = db.session.execute(author_check_sql, {"name": name}).scalar()
 
