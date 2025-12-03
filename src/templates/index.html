@@ -19,6 +19,17 @@
             </button>
         </div>
     </div>
+    <form>
+      <p>
+        <strong>Filter by year</strong><br />
+        <label for="min_year">Min:</label>
+        <input type="text" name="min_year" pattern="^\d*$" size="4" value="{{ filter_dict["min_year"] }}" />
+        <label for="max_year">Max:</label>
+        <input type="text" name="max_year" pattern="^\d*$" size="4" value="{{ filter_dict["max_year"] }}" />
+        <button type="submit">Apply</button>
+        <button type="button" name="reset" onclick="document.location='/'">Reset</button>
+      </p>
+    </form>
     <ul>
         {% for citation in citations %}
         <li class="list-item">
