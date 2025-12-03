@@ -8,13 +8,7 @@
   <h2 id="fp-title">Citation helper</h2>
   <div class="fp-header">
     <div>
-      {% if citations | count > 0 %}
-      <button id="generate-bibtex" onclick="document.location='bibtex'" disabled="true">Generate BibTeX</button>
-      {% else %}
-      <button id="generate-bibtex" onclick="document.location='bibtex'" disabled="true">
-        Generate BibTeX
-      </button>
-      {% endif %}
+      <button id="generate-bibtex" disabled="true">Generate BibTeX</button>
     </div>
     <div>
       <div id="cit-amount">Amount of citations: {{ citations | count }}</div>
@@ -28,7 +22,7 @@
   </div>
   <ul class="cit-grid">
     {% for citation in citations %}
-    <li class="list-item" data-id="{{  citation.citation_key  }}">
+    <li class="list-item" data-id="{{  citation.id  }}">
       <p>
         <strong>Title:</strong>
         <span class="cit-title">{{ citation.title }}</span>

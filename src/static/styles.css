@@ -116,6 +116,10 @@ button {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
+.list-item:hover:active {
+  transform: scale(1.01);
+}
+
 .list-item.selected {
   border-color: #36454F;
   background-color: #A9A9A9;

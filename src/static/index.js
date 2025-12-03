@@ -11,10 +11,17 @@ document.querySelectorAll('.list-item').forEach(item => {
     });
 });
 
-document.querySelector('#generateBibTex').addEventListener('click', () => {
+document.querySelector('#generate-bibtex').addEventListener('click', () => {
   const selectedItems = document.querySelectorAll('.list-item.selected');
-  const selectedKeys = Array.from(selectedItems).map(item => item.dataset.id);
-
-      
-  }
+  const selectedIds = Array.from(selectedItems).map(item => item.dataset.id);
+  
+  fetch('/bibtex', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ data: selectedIds })
+  })
+  .then(response => response.json())
+  .then(result => {
+    window.location.href = result.redirect_url;
+  });
 });
