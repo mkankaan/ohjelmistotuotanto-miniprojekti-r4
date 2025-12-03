@@ -83,7 +83,12 @@ def doi_population():
         "isbn": data.get("ISBN")[0] if data.get("ISBN") is not None else "",
         "doi": data.get("DOI"),
         "url": data.get("link")[0].get("URL") if data.get("link") is not None else "",
-
+        "booktitle": data.get("container-title")[0] if data.get("container-title") else "",
+        "pages": data.get("page") or "",
+        "chapter": data.get("article-number") or data.get("chapter") or "",
+        "journal": data.get("container-title")[0] if data.get("container-title") else "",
+        "volume": data.get("volume") or "",
+        "number": data.get("issue") or data.get("number") or "",
     })
 
 @app.route("/edit/<int:citation_id>", methods=["GET", "POST"])
@@ -107,8 +112,15 @@ def edit(citation_id):
             "url": request.form.get("url"),
             "urldate": request.form.get("urldate"),
             "author_string": request.form.get("author"),
+            "journal": request.form.get("journal"),
+            "booktitle": request.form.get("booktitle"),
+            "pages": request.form.get("pages"),
+            "volume": request.form.get("volume"),
+            "number": request.form.get("number"),
+            "chapter": request.form.get("chapter"),
         }
-        data = {k: v.strip() for k, v in data.items()}
+        data = {k: (v.strip() if isinstance(v, str) else v) for k, v in data.items()}
+
 
         if data.get("year", "") == "": # pragma: no cover
             data["year"] = None

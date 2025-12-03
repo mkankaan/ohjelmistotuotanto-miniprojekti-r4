@@ -32,18 +32,25 @@ def bibtex_field(key, value):
 
 def citation_as_dict(citation, authors):
     return {
-            "id": citation[0],
-            "citation_key": citation[1],
-            "title": citation[2],
-            "type": citation[3],
-            "author": authors,
-            "publisher": citation[4],
-            "year": citation[5],
-            "isbn": citation[6],
-            "doi": citation[7],
-            "url": citation[8],
-            "urldate": citation[9]
+        "id": citation[0],
+        "citation_key": citation[1],
+        "title": citation[2],
+        "type": citation[3],
+        "author": authors,
+        "publisher": citation[4],
+        "year": citation[5],
+        "isbn": citation[6],
+        "doi": citation[7],
+        "url": citation[8],
+        "urldate": citation[9],
+        "journal": citation[10],
+        "booktitle": citation[11],
+        "pages": citation[12],
+        "volume": citation[13],
+        "number": citation[14],
+        "chapter": citation[15],
     }
+
 
 def format_doi(doi):
     pattern = r'10\.(?:[1-9]\d{3,}(?:[.\d]*)?)/[A-Za-z0-9._-]+'

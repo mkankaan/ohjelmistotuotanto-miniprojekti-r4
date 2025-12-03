@@ -38,8 +38,10 @@ Editing citation key should succeed
      Input Text  name=title  Edited Title
      Input Text  name=author  New Author
      Input Text  name=year  2024
-     Input Text  name=publisher  New Publisher
-     Input Text  name=isbn  978-3-16-148410-0
+     Input Text  name=journal  New Journal
+     Input Text  name=volume  42
+     Input Text  name=number  7
+     Input Text  name=pages  100-110
      Input Text  name=doi  10.1234/edited
      Input Text  name=url  https://edited.example.com
      Click Button  Save changes
