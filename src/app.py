@@ -3,7 +3,7 @@ from db_helper import reset_db
 from config import app, test_env, db
 from util import request_crossref_data, split_names, get_bibtex, format_doi
 from sqlalchemy import text
-from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation
+from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation, delete_citation
 import markupsafe
 
 
@@ -138,6 +138,16 @@ def edit(citation_id):
             flash(str(error))
             return redirect("/edit/" + str(citation_id))
 
+@app.route("/delete/<int:citation_id>", methods=["POST"])
+def delete(citation_id):
+    print(f"Deleting citation {citation_id}")
+    try:
+        delete_citation(citation_id)
+        return redirect("/")
+    except Exception as error: # pragma: no cover
+        flash(f"Error deleting citation: {str(error)}")
+        return redirect("/")
+    
 #testausta varten oleva reitti
 if test_env: # pragma: no cover
     @app.route("/reset_db")
