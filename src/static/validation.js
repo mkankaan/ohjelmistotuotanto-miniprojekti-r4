@@ -1,6 +1,8 @@
+let lastCkChecked = "";
+
 async function citationKeyListener(e) {
     const key = this.value;
-    let lastCheckedKey = key;
+    lastCkChecked = key;
 
     if (!key) {
         this.setCustomValidity("");
@@ -13,12 +15,13 @@ async function citationKeyListener(e) {
         this.setCustomValidity("Character not allowed.");
         errorSpan.textContent = "Character not allowed.";
         updateButtonState();
+        return;
     }
 
     const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
     const data = await response.json();
 
-    if (this.value !== lastCheckedKey) {
+    if (this.value !== lastCkChecked) {
         return;
     }
 
@@ -31,6 +34,19 @@ async function citationKeyListener(e) {
     }
     updateButtonState();
 }
+
+async function isCitationKeyUnique(key) {
+    if (!key) {
+        return true;
+    }
+    if (key.match(/.*[,@~#%{}]+.*/)) {
+        return false;
+    }
+    const response = await fetch('/check_citation_key?key=' + encodeURIComponent(key));
+    const data = await response.json();
+    return !data.exists;
+}
+
 
 
 async function urldateInputListener(e) {
@@ -84,10 +100,3 @@ const is_valid_date = date_str => {
     return !(date > new Date())
 }
 
-const typeOptions = [
-    { value: 'article', label: 'Article' },
-    { value: 'book', label: 'Book' },
-    { value: 'inproceedings', label: 'Conference' },
-    { value: 'book-chapter', label: 'Book Chapter' },
-    { value: 'misc', label: 'Other' }
-];

@@ -83,7 +83,12 @@ def doi_population():
         "isbn": data.get("ISBN")[0] if data.get("ISBN") is not None else "",
         "doi": data.get("DOI"),
         "url": data.get("link")[0].get("URL") if data.get("link") is not None else "",
-
+        "booktitle": data.get("container-title")[0] if data.get("container-title") else "",
+        "pages": data.get("page") or "",
+        "chapter": data.get("article-number") or data.get("chapter") or "",
+        "journal": data.get("container-title")[0] if data.get("container-title") else "",
+        "volume": data.get("volume") or "",
+        "number": data.get("issue") or data.get("number") or "",
     })
 
 @app.route("/edit/<int:citation_id>", methods=["GET", "POST"])
