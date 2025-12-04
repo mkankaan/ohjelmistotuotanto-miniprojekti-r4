@@ -128,6 +128,7 @@ def create_citation(content):
         })
 
     db.session.commit()
+    return citation_id
 
 
 def get_citation_authors(citation_id):

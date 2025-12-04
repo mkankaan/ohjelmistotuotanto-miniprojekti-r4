@@ -41,3 +41,21 @@ def test_create_citation_for_existing_author():
     cits = cit_repo.get_citations()
     
     assert cits[0]["author"] == cits[1]["author"]
+
+def test_get_citation_dict():
+    content = {
+        "citation_key": "key6",
+        "type": "book",
+        "author": ["Luukkainen"],
+        "title": "Uusin Testamentti"
+    }
+    cit_id = cit_repo.create_citation(content)
+    cit_dict = cit_repo.get_citation_dict(cit_id)
+
+    content["author"] = "Luukkainen"
+
+    assert cit_dict["citation_key"] == content["citation_key"]
+    assert cit_dict["type"] == content["type"]
+    assert cit_dict["author"] == content["author"]
+    assert cit_dict["title"] == content["title"]
+    
