@@ -89,7 +89,7 @@ button {
   max-width: 95%;
   width: 100%;
   margin: 0 auto;
-  padding: 0, 32px;
+  padding: 0 32px;
   display: flex;
   flex-direction: column;
 }
