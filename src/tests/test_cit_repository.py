@@ -59,3 +59,25 @@ def test_get_citation_dict():
     assert cit_dict["author"] == content["author"]
     assert cit_dict["title"] == content["title"]
     
+def test_delete_citation():
+    content = {
+        "citation_key": "key7",
+        "type": "book",
+        "author": ["Luukkainen"],
+        "title": "Uusin Testamentti (2.0)"
+    }
+    cit_repo.create_citation(content)
+    
+    content = {
+        "citation_key": "key8",
+        "type": "book",
+        "author": ["Luukkainen"],
+        "title": "Uusin Testamentti (3.0)"
+    }
+    cit_id = cit_repo.create_citation(content)
+
+    cit_repo.delete_citation(cit_id)
+
+    cits = cit_repo.get_citations()
+
+    assert len(cits) == 1
