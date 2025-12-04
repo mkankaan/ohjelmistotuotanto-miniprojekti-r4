@@ -23,5 +23,9 @@ document.querySelector('#generate-bibtex').addEventListener('click', () => {
   .then(response => response.json())
   .then(result => {
     window.location.href = result.redirect_url;
+  })
+  .catch(error => {
+    alert('Failed to generate BibTeX. Please try again later.');
+    console.error('Error generating BibTeX:', error);
   });
 });
