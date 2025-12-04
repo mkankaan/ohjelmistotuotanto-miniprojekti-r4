@@ -1,9 +1,9 @@
-from flask import redirect, render_template, request, jsonify, flash
+from flask import redirect, render_template, request, jsonify, flash, session
 from db_helper import reset_db
 from config import app, test_env, db
 from util import request_crossref_data, split_names, get_bibtex, format_doi
 from sqlalchemy import text
-from repositories.cit_repository import get_citations, create_citation, get_citation, update_citation, delete_citation
+from repositories.cit_repository import get_citation_dict, get_citations, create_citation, get_citation, update_citation, delete_citation
 import markupsafe
 
 
@@ -48,10 +48,28 @@ def citation_creation():
         flash(str(error))
         return redirect("/new_citation")
 
-@app.route("/bibtex")
+
+@app.route("/bibtex", methods=["GET"])
 def bibtex():
-    bibtex = get_bibtex(get_citations())
-    return render_template("bibtex.html", bibtex=bibtex)
+    bibtex_data = session.get("bibtex")
+    if not bibtex_data:
+        return "No bibtex data found", 404
+    return render_template("bibtex.html", bibtex=bibtex_data)
+
+
+@app.route("/bibtex", methods=["POST"])
+def ids_to_bibtex():
+    json_ids = request.get_json()
+    ids = json_ids.get("data")
+
+    cits = []
+    for id in ids:
+        cits.append(get_citation_dict(id))
+    bibtex = get_bibtex(cits)
+    
+    session["bibtex"] = bibtex
+
+    return jsonify({"redirect_url": "/bibtex"})
 
 
 @app.route("/check_citation_key")

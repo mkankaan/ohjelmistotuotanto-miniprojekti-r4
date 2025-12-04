@@ -1,6 +1,7 @@
 import pytest
 from app import app, test_env
 from db_helper import reset_db
+import app as module_under_test
 
 @pytest.fixture
 def client():
@@ -42,10 +43,31 @@ def test_create_citation_invalid_year(client):
     response = client.post("/create_citation", data=data)
     assert response.status_code == 302
 
-def test_bibtex_route(client):
+def test_bibtex_get_route(client):
     response = client.get("/bibtex")
+    assert response.status_code == 404
+    assert b"No bibtex data found" in response.data
+
+def test_bibtex_post_route(client, monkeypatch):
+    def fake_get_citation_dict(i):
+        return {"id": i, "citation_key": "testi", "title": "testititteli", "type": "book"}
+
+    def fake_get_bibtex(cits):
+        return "BIB:" + ",".join(str(c["id"]) for c in cits)
+
+    monkeypatch.setattr(module_under_test, "get_citation_dict", fake_get_citation_dict)
+    monkeypatch.setattr(module_under_test, "get_bibtex", fake_get_bibtex)
+
+    payload = {"data": [1, 2, 3]}
+
+    response = client.post("/bibtex", json=payload)
+
     assert response.status_code == 200
-    assert b"bibtex" in response.data
+    assert response.is_json
+    assert response.get_json() == {"redirect_url": "/bibtex"}
+
+    with client.session_transaction() as sess:
+        assert sess["bibtex"] == "BIB:1,2,3"
 
 def test_reset_db_route(client): # pragma: no cover
     if test_env:
