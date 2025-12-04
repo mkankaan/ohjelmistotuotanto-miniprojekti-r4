@@ -14,7 +14,7 @@ def get_citations():
             isbn,         -- 6
             doi,          -- 7
             url,          -- 8
-            urldate,      -- 9::
+            urldate,      -- 9
             journal,      -- 10
             booktitle,    -- 11
             pages,        -- 12
