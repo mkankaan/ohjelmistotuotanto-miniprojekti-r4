@@ -37,7 +37,7 @@ Robot tests can be run with `$ robot src/story_tests`.
 ## <a name="changelog"></a> Changelog v1.2.0 (2025-12-04)
 
 **Added features**
-- Citations can be edited.
+- Citations can be edited and deleted.
 - The user can add the date at which the source was visited.
 - Added a button which allows the user to easily navigate to the front page from anywhere in the application.
 
