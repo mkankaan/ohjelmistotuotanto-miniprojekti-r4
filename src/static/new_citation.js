@@ -133,16 +133,12 @@ create_form.addEventListener("submit", async function (e) {
 for (const input of create_form.elements) {
     input.addEventListener("input", () => {
         const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
-        let noneFilled = true;
-        
-        for (const field of fields) {
-            if (field.value) {
-                noneFilled = false;
-                break;
-            }
-        }
-        create_clear_button.disabled = noneFilled;
+        const filled = fields.map(field => field.value.length).reduce((sum, l) => sum += l)
+        create_clear_button.disabled = filled === 0;
     });
 }
 
+create_clear_button.addEventListener("click", () => {
+    console.log("click")
+})
 
