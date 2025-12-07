@@ -139,6 +139,6 @@ for (const input of create_form.elements) {
 }
 
 create_clear_button.addEventListener("click", () => {
-    console.log("click")
+    create_form.reset()
 })
 
