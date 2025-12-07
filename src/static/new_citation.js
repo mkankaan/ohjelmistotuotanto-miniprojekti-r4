@@ -5,8 +5,10 @@ const create_urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
+const create_clear_button = document.getElementById("create-clear")
 populate_button.disabled = true;
 create_button.disabled = true;
+create_clear_button.disabled = true;
 
 const updateButtonState = () => {
     const ckValid = create_citationKeyInput.checkValidity();
@@ -127,3 +129,20 @@ create_form.addEventListener("submit", async function (e) {
         return;
     }
 });
+
+for (const input of create_form.elements) {
+    input.addEventListener("input", () => {
+        const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
+        let noneFilled = true;
+        
+        for (const field of fields) {
+            if (field.value) {
+                noneFilled = false;
+                break;
+            }
+        }
+        create_clear_button.disabled = noneFilled;
+    });
+}
+
+

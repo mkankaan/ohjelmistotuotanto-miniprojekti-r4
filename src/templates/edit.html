@@ -8,6 +8,8 @@
 <div class="form-container">
     <h2>Edit citation</h2>
 
+    <button id="edit-clear" disabled>Clear all fields</button>
+
     <form action="/edit/{{ citation.id }}" method="post" name="edit-form">
         {% with messages = get_flashed_messages() %} {% if messages %}
         <ul>
