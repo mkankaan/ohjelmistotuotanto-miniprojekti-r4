@@ -17,6 +17,9 @@ const updateButtonState = () => {
     populate_button.disabled = !doi_form.checkValidity();
 };
 
+const generateCkCheckbox = document.getElementById('generate_ck');
+const citationKeyField = document.getElementById('citation_key');
+
 document.addEventListener('DOMContentLoaded', () => {
     const typeSelect = document.getElementById('type');
     const fields = document.querySelectorAll('.bibtex-field');
@@ -105,25 +108,93 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
     });
 });
 
-create_form.addEventListener("submit", async function (e) {
-    const ck = create_citationKeyInput.value;
-    const unique = await isCitationKeyUnique(ck);
+//create_form.addEventListener("submit", async function (e) {
+//    const ck = create_citationKeyInput.value;
+//    const unique = await isCitationKeyUnique(ck);
+//
+//    if (!unique) {
+//        create_citationKeyInput.setCustomValidity("Citation key already in use.");
+//        errorSpan.textContent = "Citation key already in use.";
+//    } else {
+//        create_citationKeyInput.setCustomValidity("");
+//        if (errorSpan.textContent === "Citation key already in use.") {
+//            errorSpan.textContent = "";
+//        }
+//    }
+//
+//    updateButtonState();
+//
+//    if (!create_form.checkValidity()) {
+//        e.preventDefault();
+//        create_form.reportValidity();
+//        return;
+//    }
+//});
 
-    if (!unique) {
-        create_citationKeyInput.setCustomValidity("Citation key already in use.");
-        errorSpan.textContent = "Citation key already in use.";
-    } else {
-        create_citationKeyInput.setCustomValidity("");
-        if (errorSpan.textContent === "Citation key already in use.") {
-            errorSpan.textContent = "";
-        }
+async function generateCitationKey() {
+    const title = document.getElementById('title').value.trim();
+    const yearInput = document.getElementById('year').value.trim();
+
+    if (!title) return '';
+
+    const cleanTitle = title.replace(/\s+/g, '').toLowerCase();
+    let baseKey = cleanTitle.substring(0, yearInput ? 4 : 8);
+
+    if (!yearInput) {
+        return baseKey;
     }
 
-    updateButtonState();
+    let key = `${baseKey}${yearInput}`;
 
-    if (!create_form.checkValidity()) {
-        e.preventDefault();
-        create_form.reportValidity();
-        return;
+    let counter = 1;
+    while (!(await isCitationKeyUnique(key))) {
+        key = `${baseKey}${yearInput}${counter}`;
+        counter++;
+        if (counter > 100) break; 
+    }
+
+    return key;
+}
+
+generateCkCheckbox.addEventListener('change', async function () {
+    if (this.checked) {
+        citationKeyField.readOnly = true;
+        citationKeyField.style.backgroundColor = '#f0f0f0';
+        citationKeyField.style.opacity = '0.6';
+        citationKeyField.style.cursor = 'not-allowed';
+
+
+        const generatedKey = await generateCitationKey();
+        if (generatedKey) {
+            citationKeyField.value = generatedKey;
+            citationKeyListener.call(citationKeyField);
+        }
+    } else {
+        citationKeyField.readOnly = false;
+        citationKeyField.style.backgroundColor = '';
+        citationKeyField.style.opacity = '1';
+        citationKeyField.style.cursor = '';
+        citationKeyField.focus();
+    }
+    updateButtonState();
+});
+
+document.getElementById('title').addEventListener('input', async function () {
+    if (generateCkCheckbox.checked) {
+        const generatedKey = await generateCitationKey();
+        if (generatedKey) {
+            citationKeyField.value = generatedKey;
+            citationKeyListener.call(citationKeyField);
+        }
+    }
+});
+
+document.getElementById('year').addEventListener('input', async function () {
+    if (generateCkCheckbox.checked) {
+        const generatedKey = await generateCitationKey();
+        if (generatedKey) {
+            citationKeyField.value = generatedKey;
+            citationKeyListener.call(citationKeyField);
+        }
     }
 });

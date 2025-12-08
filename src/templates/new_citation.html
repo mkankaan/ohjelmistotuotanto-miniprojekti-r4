@@ -38,8 +38,16 @@
                 Citation key*
                 <div class="info-icon" title="Citation key must be unique and must not include spaces or ,@~#%{}">i</div>
             </label>
-            <input type="text" name="citation_key" required pattern="^\S+$" />
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" name="citation_key" id="citation_key" required pattern="^\S+$" />
+                <label class="checkbox-label">
+                    <input type="checkbox" id="generate_ck" />
+                    Generate citation key
+                </label>
+            </div>
+            <span id="ck-error" style="color: red; font-size: 0.9em; display: block;"></span>
         </div>
+
 
         <div class="form-item">
             <label for="type">Type*</label>
