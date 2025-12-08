@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    create_citationKeyInput.addEventListener("input", citationKeyListener);
+    create_urldateInput.addEventListener("input", urldateInputListener);
+
     typeSelect.addEventListener('change', updateFields);
     updateFields();
     updateButtonState();
@@ -54,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("change", updateButtonState)
 
-create_citationKeyInput.addEventListener("input", citationKeyListener);
-create_urldateInput.addEventListener("input", urldateInputListener);
 
 
 for (const input of create_form.elements) {
@@ -140,21 +141,18 @@ async function generateCitationKey() {
     const cleanTitle = title.replace(/\s+/g, '').toLowerCase();
     let baseKey = cleanTitle.substring(0, yearInput ? 4 : 8);
 
-    if (!yearInput) {
-        return baseKey;
-    }
-
-    let key = `${baseKey}${yearInput}`;
+    let key = yearInput ? `${baseKey}${yearInput}` : baseKey;
 
     let counter = 1;
     while (!(await isCitationKeyUnique(key))) {
-        key = `${baseKey}${yearInput}${counter}`;
+        key = yearInput ? `${baseKey}${yearInput}${counter}` : `${baseKey}${counter}`;
         counter++;
-        if (counter > 100) break; 
+        if (counter > 100) break;
     }
 
     return key;
 }
+
 
 generateCkCheckbox.addEventListener('change', async function () {
     if (this.checked) {
