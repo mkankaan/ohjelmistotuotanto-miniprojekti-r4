@@ -35,3 +35,26 @@ function copyBibtex() {
     // Select & copy
     ta.focus();
   };
+
+  function downloadBibtex() {
+    const el = document.getElementById('bibtex');
+    const text = (el?.textContent || '').trim();
+    if (!text) return alert('No bibtex available');
+
+    // IE/MS-only fallback
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      const blob = new Blob([text], { type: 'text/x-bibtex;charset=utf-8' });
+      window.navigator.msSaveOrOpenBlob(blob, 'citation.bib');
+      return;
+    }
+
+    const blob = new Blob([text], { type: 'text/x-bibtex;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'references.bib';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
