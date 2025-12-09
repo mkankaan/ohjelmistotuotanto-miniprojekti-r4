@@ -5,8 +5,10 @@ const create_urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
+const create_clear_button = document.getElementById("clear")
 populate_button.disabled = true;
 create_button.disabled = true;
+create_clear_button.disabled = true;
 
 const updateButtonState = () => {
     const ckValid = create_citationKeyInput.checkValidity();
@@ -102,6 +104,8 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         const typeSelect = document.getElementById('type');
         typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
         document.dispatchEvent(new Event('change', { bubbles: true }));
+    }).then(() => {
+        updateClearButtonState();
     });
 });
 
@@ -127,3 +131,27 @@ create_form.addEventListener("submit", async function (e) {
         return;
     }
 });
+
+for (const input of create_form.elements) {
+    input.addEventListener("input", updateClearButtonState);
+};
+
+doi_form.elements[0].addEventListener("input", updateClearButtonState);
+
+populate_button.addEventListener("input", updateClearButtonState);
+
+function updateClearButtonState() {
+    const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
+    const filled = fields.map(field => field.value.length).reduce((sum, l) => sum += l)
+    const doi_filled = doi_form.elements[0].value.length;
+    create_clear_button.disabled = filled + doi_filled === 0;
+};
+
+create_clear_button.addEventListener("click", () => {
+    create_form.reset();
+    doi_form.reset();
+    create_clear_button.disabled = true;
+    updateButtonState();
+});
+
+updateClearButtonState();
