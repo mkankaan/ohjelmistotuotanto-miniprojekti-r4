@@ -45,21 +45,22 @@
   <ul class="cit-grid">
     {% for citation in citations %}
     <li class="list-item" data-id="{{  citation.id  }}">
-      <p>
-        <strong>Title:</strong>
-        <span class="cit-title">{{ citation.title }}</span>
-      </p>
-      <p><strong>Citation key:</strong> {{ citation.citation_key }}</p>
-      <p><strong>Type:</strong> {{ citation.type }}</p>
+      <div>
+        <p>
+          <strong>Title:</strong>
+          <span class="cit-title">{{ citation.title }}</span>
+        </p>
+        <p><strong>Citation key:</strong> {{ citation.citation_key }}</p>
+        <p><strong>Type:</strong> {{ citation.type }}</p>
 
-      {% if citation.author %} {% if " and " in citation.author %}
-      <p><strong>Authors:</strong> {{ citation.author }}</p>
-      {% else %}
-      <p><strong>Author:</strong> {{ citation.author }}</p>
-      {% endif %} {% endif %} {% if citation.publisher %}
-      <p><strong>Year:</strong> {{ citation.year }}</p>
-      {% endif %}
-
+        {% if citation.author %} {% if " and " in citation.author %}
+        <p><strong>Authors:</strong> {{ citation.author }}</p>
+        {% else %}
+        <p><strong>Author:</strong> {{ citation.author }}</p>
+        {% endif %} {% endif %} {% if citation.publisher %}
+        <p><strong>Year:</strong> {{ citation.year }}</p>
+        {% endif %}
+      </div>
       <div class="buttons">
         <button onclick="document.location='/edit/{{citation.id}}'">
           Edit
