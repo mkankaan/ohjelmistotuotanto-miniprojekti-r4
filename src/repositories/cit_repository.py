@@ -1,6 +1,6 @@
 from sqlalchemy import text
 from config import db
-from util import format_authors, citation_as_dict
+from util import format_authors, citation_as_dict, filter_sql
 
 
 def get_citations(filter_dict = {}):
@@ -25,22 +25,7 @@ def get_citations(filter_dict = {}):
         FROM citations
     """
 
-    if len(filter_dict) > 0:
-        conditions = []
-        if filter_dict["min_year"]:
-            try:
-                filter_dict["min_year"] = int(filter_dict["min_year"])
-            except ValueError:
-                return []
-            conditions.append("year >= :min_year")
-        if filter_dict["max_year"]:
-            try:
-                filter_dict["max_year"] = int(filter_dict["max_year"])
-            except ValueError:
-                return []
-            conditions.append("year <= :max_year")
-        if len(conditions) > 0:
-            sql += " WHERE " + " AND ".join(conditions)
+    sql += filter_sql(filter_dict)
 
     result = db.session.execute(text(sql), filter_dict)
     citations = result.fetchall()
