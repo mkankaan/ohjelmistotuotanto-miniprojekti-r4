@@ -136,10 +136,15 @@ for (const input of create_form.elements) {
     input.addEventListener("input", updateClearButtonState);
 };
 
+doi_form.elements[0].addEventListener("input", updateClearButtonState);
+
+populate_button.addEventListener("input", updateClearButtonState);
+
 function updateClearButtonState() {
     const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
     const filled = fields.map(field => field.value.length).reduce((sum, l) => sum += l)
-    create_clear_button.disabled = filled === 0;
+    const doi_filled = doi_form.elements[0].value.length;
+    create_clear_button.disabled = filled + doi_filled === 0;
 };
 
 create_clear_button.addEventListener("click", () => {

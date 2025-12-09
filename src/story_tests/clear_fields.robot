@@ -16,6 +16,11 @@ Clear button should be enabled if any field is filled
     Input Text  name=title  Example
     Element Should Be Enabled  clear
 
+Clear button should be enabled if doi population field is filled
+    Go To  ${NEW_CITATION_URL}
+    Input Text  name=doi-populate  123
+    Element Should Be Enabled  clear
+
 Clicking clear button should clear all form fields
     Go To  ${NEW_CITATION_URL}
     Input Text  name=citation_key  ex
@@ -25,17 +30,33 @@ Clicking clear button should clear all form fields
     Input Text  name=year  1990
     Input Text  name=publisher  Moominvalley
     Input Text  name=isbn  444-555-66666-7-8
-    Input Text  name=doi  10.1000/moomin
+    Input Text  name=doi  10.1000/149
     Input Text  name=url  https://www.moominvalley.io
     Input Text  name=urldate  8.12.2025
+    Textfield Value Should Be  name=citation_key  ex
+    Textfield Value Should Be  name=title  Example
+    Textfield Value Should Be  name=author  Moomin Troll
+    Textfield Value Should Be  name=year  1990
+    Textfield Value Should Be  name=publisher  Moominvalley
+    Textfield Value Should Be  name=isbn  444-555-66666-7-8
+    Textfield Value Should Be  name=doi  10.1000/149
+    Textfield Value Should Be  name=url  https://www.moominvalley.io
+    Textfield Value Should Be  name=urldate  8.12.2025
     Click Button  clear
-    Textfield Should Contain  name=citation_key  ${EMPTY}
-    Textfield Should Contain  name=title  ${EMPTY}
-    Textfield Should Contain  name=author  ${EMPTY}
-    Textfield Should Contain  name=year  ${EMPTY}
-    Textfield Should Contain  name=publisher  ${EMPTY}
-    Textfield Should Contain  name=isbn  ${EMPTY}
-    Textfield Should Contain  name=doi  ${EMPTY}
-    Textfield Should Contain  name=url  ${EMPTY}
-    Textfield Should Contain  name=urldate  ${EMPTY}
+    Textfield Value Should Be  name=citation_key  ${EMPTY}
+    Textfield Value Should Be  name=title  ${EMPTY}
+    Textfield Value Should Be  name=author  ${EMPTY}
+    Textfield Value Should Be  name=year  ${EMPTY}
+    Textfield Value Should Be  name=publisher  ${EMPTY}
+    Textfield Value Should Be  name=isbn  ${EMPTY}
+    Textfield Value Should Be  name=doi  ${EMPTY}
+    Textfield Value Should Be  name=url  ${EMPTY}
+    Textfield Value Should Be  name=urldate  ${EMPTY}
+
+Clicking clear button should clear doi population field
+    Go To  ${NEW_CITATION_URL}
+    Input Text  name=doi-populate  10.1000/789  clear=True
+    Textfield Value Should Be  name=doi-populate  10.1000/789
+    Click Button  clear
+    Textfield Value Should Be  name=doi-populate  ${EMPTY}
 
