@@ -106,6 +106,14 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         const typeSelect = document.getElementById('type');
         typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
         document.dispatchEvent(new Event('change', { bubbles: true }));
+
+        if (generateCkCheckbox.checked) {
+            const titleField = document.getElementById('title');
+            const yearField = document.getElementById('year');
+
+            titleField.dispatchEvent(new Event('input', { bubbles: true }));
+            yearField.dispatchEvent(new Event('input', { bubbles: true }));
+        }
     });
 });
 
