@@ -3,6 +3,7 @@ Resource  resource.robot
 Suite Setup      Open And Configure Browser
 Suite Teardown   Close Browser
 Test Setup       Reset Citations And Go To Start Page
+Test Teardown  Reset Citations And Go To Start Page
 
 *** Test Cases ***
 Citations with year in selected range are shown

@@ -9,7 +9,7 @@
   <div class="index-header">
     <div class="index-header-el">
       <div>
-        <button id="generate-bibtex" disabled="true">Generate BibTeX</button>
+        <button type="button" id="generate-bibtex" disabled="true">Generate BibTeX</button>
       </div>
       <div id="selection-controls">
         <button type="button" id="select-all">Select all</button>
@@ -32,9 +32,9 @@
           <p>
             <strong>Filter by year</strong><br />
             <label for="min_year">Min:</label>
-            <input type="text" name="min_year" pattern="^\d*$" size="4" value="{{ filter_dict["min_year"] }}" />
+            <input type="text" name="min_year" pattern="^\d*$" size="4" value="{{ filter_dict[" min_year"] }}" />
             <label for="max_year">Max:</label>
-            <input type="text" name="max_year" pattern="^\d*$" size="4" value="{{ filter_dict["max_year"] }}" />
+            <input type="text" name="max_year" pattern="^\d*$" size="4" value="{{ filter_dict[" max_year"] }}" />
             <button type="submit" id="filter-apply">Apply</button>
             <button type="button" name="filter-reset" onclick="document.location='/'">Reset</button>
           </p>
