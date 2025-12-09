@@ -157,12 +157,12 @@ def edit(citation_id):
             flash(str(error))
             return redirect("/edit/" + str(citation_id))
 
-@app.route("/delete/<int:citation_id>", methods=["POST"])
+@app.route("/delete/<int:citation_id>", methods=["DELETE"])
 def delete(citation_id):
     print(f"Deleting citation {citation_id}")
     try:
         delete_citation(citation_id)
-        return redirect("/")
+        return "", 200
     except Exception as error: # pragma: no cover
         flash(f"Error deleting citation: {str(error)}")
         return redirect("/")
