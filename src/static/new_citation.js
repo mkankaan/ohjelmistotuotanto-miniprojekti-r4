@@ -104,6 +104,8 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         const typeSelect = document.getElementById('type');
         typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
         document.dispatchEvent(new Event('change', { bubbles: true }));
+    }).then(() => {
+        updateClearButtonState();
     });
 });
 
@@ -134,14 +136,15 @@ for (const input of create_form.elements) {
     input.addEventListener("input", updateClearButtonState);
 };
 
-async function updateClearButtonState() {
+function updateClearButtonState() {
     const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
     const filled = fields.map(field => field.value.length).reduce((sum, l) => sum += l)
     create_clear_button.disabled = filled === 0;
 };
 
 create_clear_button.addEventListener("click", () => {
-    create_form.reset()
+    create_form.reset();
+    doi_form.reset();
 });
 
 updateClearButtonState();
