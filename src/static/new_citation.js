@@ -145,6 +145,8 @@ function updateClearButtonState() {
 create_clear_button.addEventListener("click", () => {
     create_form.reset();
     doi_form.reset();
+    create_clear_button.disabled = true;
+    updateButtonState();
 });
 
 updateClearButtonState();
