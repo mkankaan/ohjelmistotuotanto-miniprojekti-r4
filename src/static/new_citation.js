@@ -131,10 +131,10 @@ create_form.addEventListener("submit", async function (e) {
 });
 
 for (const input of create_form.elements) {
-    input.addEventListener("input", allFieldsEmpty);
+    input.addEventListener("input", updateClearButtonState);
 };
 
-async function allFieldsEmpty() {
+async function updateClearButtonState() {
     const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
     const filled = fields.map(field => field.value.length).reduce((sum, l) => sum += l)
     create_clear_button.disabled = filled === 0;
@@ -144,4 +144,4 @@ create_clear_button.addEventListener("click", () => {
     create_form.reset()
 });
 
-allFieldsEmpty();
+updateClearButtonState();
