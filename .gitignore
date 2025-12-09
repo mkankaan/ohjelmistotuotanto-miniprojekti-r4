@@ -8,3 +8,4 @@ report.html
 *.png
 possu.sh
 .vs
+.coverage

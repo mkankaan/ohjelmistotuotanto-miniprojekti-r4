@@ -40,7 +40,7 @@ Reset Citations And Go To Bibtex Page
     Go To  ${BIBTEX_URL}
 
 Create Citation
-    [Arguments]  ${citation_key}  ${type}  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}
+    [Arguments]  ${citation_key}  ${type}  ${title}  ${authors}  ${year}  ${publisher}  ${isbn}  ${doi}  ${url}  ${urldate}
     Go To  ${NEW_CITATION_URL}
     Wait Until Element Is Visible    name=citation_key    timeout=10
     Input Text  name=citation_key  ${citation_key}
@@ -52,6 +52,7 @@ Create Citation
     Input Text  name=isbn  ${isbn}
     Input Text  name=doi  ${doi}
     Input Text  name=url  ${url}
+    Input Text  name=urldate  ${urldate}
     Click Button  Create
 
 Create Citation Required Fields

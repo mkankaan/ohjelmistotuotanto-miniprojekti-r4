@@ -1,6 +1,11 @@
 # Sprint retrospective notes
 
-## Sprint 1
+### Go to:
+- [Sprint 1](#sprint1)
+- [Sprint 2](#sprint2)
+- [Sprint 3](#sprint3)
+
+## <a name="sprint1"></a> Sprint 1
 
 The first sprint retrospective was held in the evening after the customer meeting and demo. The retrospective was held over Discord due to time constraints, although the team agreed that meeting face-to-face would be preferable. The Glad, Sad, Mad icebreaker was used. Points that were raised were:
 
@@ -31,7 +36,7 @@ As a result of the retrospective a team member was assigned to be in charge of e
 
 Although multiple people would be working on e.g. tests and backlogs, these roles were assigned to ensure that everything gets done and everything is properly maintained. The retrospective also gave us a better idea of how to improve working as a team.
 
-## Sprint 2
+## <a name="sprint2"></a> Sprint 2
 
 The second retrospective was held right after the customer meeting, fortunately face-to-face this time. The Glad, Sad, Mad icebreaker was used again. Things that were brought up were:
 
@@ -57,3 +62,24 @@ The second retrospective was held right after the customer meeting, fortunately 
 - Assigned one more person to check that the grading criteria for each sprint are met.
 
 Overall the team felt accomplished with the last sprint and there wasn't much that we were sad about. We felt that after two sprints we had gotten better at estimating the time and workload of a given task. We now also have a better idea of how to decide who works on which user stories so that we can work efficiently and avoid overlaps. After the retrospective we decided on a time for the group dev session.
+
+## <a name="sprint3"></a> Sprint 3
+
+The third sprint retrospective was held right after the customer meeting, using Glad, Sad, Mad again. Things that were brought up this time were:
+
+**Glad:**
+- Completed (almost) all user stories (with the exception of a few missing tests).
+- As a team we have gotten progressively more proactive in the requirements specification with the customer and know what questions to ask to make sure we're all on the same page.
+- Pair programming was a good idea and we got a few bugs fixed.
+
+**Sad:**
+- Test coverage dipped below 80% for a while.
+- Some of our top priority stories were left to the very end of the sprint because we had to reassign them to a different person than originally planned. (For example, person A was going to do stories #2 and #3, but only had time to do one of them). We had originally divided the stories in a way where we thought everyone could work on an isolated area of the project without having to wait for someone else to finish another feature first, but it turns out that this could have been planned better. Moreover, coordinating priorities in a team in such a small-scale project is difficult, given that sprints are only a week long and some features will inevitably depend on eachother. We figured that in a larger-scale project this would probably be less of an issue.
+
+**Mad:**
+- Other courses take away time from working on the project.
+- Computer got damaged, had trouble running the project on a borrowed computer.
+
+**Measures for improvement:**
+- Everyone makes sure to maintain test coverage at a sufficient level for their own part.
+- At least the top 5 priority stories are given to different people to make sure everything gets done.

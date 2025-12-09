@@ -18,12 +18,12 @@ body {
 }
 
 .top-bar {
-    max-width: 750px;
-    margin: 0 auto;
-    padding: 16px 0;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 form {
@@ -76,46 +76,63 @@ button {
   gap: 1em;
 }
 
-#header-list {
+#fp-title {
   margin-top: 40px;
+  text-align: center;
 }
 
-li {
-  background: #f5f5f5;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  box-shadow: 8px rgba(0, 0, 0, 0.35);
-  list-style: none;
-  display: flex;
-  flex-direction: column;
+.list-item p {
+  margin: 3px 0;
 }
 
-li p {
-  margin: 8px 0;
-}
-
-.list-wrapper {
-  width: 750px;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-}
-
-.list-wrapper ul {
+.fp-container {
+  max-width: 95%;
   width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 500px));
+  column-gap: 48px;
+  row-gap: 8px;
+  list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.list-wrapper li {
+  justify-content: center;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .list-item {
+  background: #B2BEB5;
+  padding: 16px;
+  margin: 8px;
+  border-radius: 8px;
+  box-shadow: 8px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
+  width: 100%;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-item:hover {
+  transform: scale(1.03);
+  border-color: #36454F;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.list-item:hover:active {
+  transform: scale(1.01);
+}
+
+.list-item.selected {
+  border-color: #36454F;
+  background-color: #A9A9A9;
+  transform: scale(1.02);
 }
 
 .cit-title {
@@ -123,11 +140,27 @@ li p {
   font-weight: bold;
 }
 
-.top-row {
-  display: flex;
-  justify-content: space-between;
+.fp-header {
+  max-width: 1000px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 0 auto 16px auto;
+}
+
+
+.fp-header>div:nth-child(1) {
+  grid-column: 1;
+}
+
+.fp-header>div:nth-child(2) {
+  grid-column: 2;
+  text-align: center;
+}
+
+.fp-header>div:nth-child(3) {
+  grid-column: 3;
 }
 
 .bibtex {
@@ -136,3 +169,6 @@ li p {
   padding: 0 1rem;
 }
 
+#bibtex {
+  white-space: pre;
+}

@@ -5,7 +5,7 @@ description = ""
 authors = [
     {name = "Matti Luukkainen",email = "mluukkai@iki.fi"}
 ]
-license = {text = "MIT"}
+license = {text = "GPL-2.0-or-later"}
 requires-python = "^3.12"
 dependencies = [
     "flask (>=3.1.2,<4.0.0)",

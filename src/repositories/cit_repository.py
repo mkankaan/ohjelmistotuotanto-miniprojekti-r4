@@ -39,7 +39,12 @@ def get_citations(filter_dict = {}):
 
     return citation_dicts
 
+def get_authors_as_list(row_object):
+    author_list = []
 
+    for row in row_object:
+        author_list.append(row[0])
+    return author_list
 
 def create_citation(content):
     # Insert citation
@@ -103,7 +108,7 @@ def create_citation(content):
 
     # Insert authors and link them
     for order, name in enumerate(content["author"], start=1):
-        # Check if author exists
+        # Check if author exists:
         author_check_sql = text("SELECT id FROM authors WHERE name = :name")
         author_id = db.session.execute(author_check_sql, {"name": name}).scalar()
 
@@ -128,6 +133,7 @@ def create_citation(content):
         })
 
     db.session.commit()
+    return citation_id
 
 
 def get_citation_authors(citation_id):
@@ -259,13 +265,25 @@ def get_citation(citation_id):
 
     return result
 
+
+def get_citation_dict(citation_id):
+    citation = get_citation(citation_id)
+
+    cit_id = citation[0]
+    authors = get_citation_authors(cit_id)
+    formatted_author_list = format_authors(get_authors_as_list(authors))
+    citation = citation_as_dict(citation, formatted_author_list)
+
+    return citation
+
+
 def delete_citation(citation_id):
     db.session.execute(
         text("DELETE FROM citations_authors WHERE citation_id = :id"),
         {"id": citation_id}
     )
 
-    result = db.session.execute(
+    db.session.execute(
         text("DELETE FROM citations WHERE id = :id"),
         {"id": citation_id}
     )

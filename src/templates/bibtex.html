@@ -1,7 +1,13 @@
-{% extends "layout.html" %} {% block title %} BibTeX {% endblock %} {% block
-body %}
+{% extends "layout.html" %} {% block title %} BibTeX {% endblock %}
+{% block script %}
+<script defer src={{ url_for('static', filename='bibtex.js' ) }}></script>
+{% endblock %}
+{% block body %}
 <div class="form-container">
   <h2>BibTeX</h2>
-  <div class="bibtex"><p>{{ bibtex | show_lines }}</p></div>
+  <div class="bibtex">
+    <p id="bibtex">{{ bibtex }}</p>
+  </div>
+  <button onclick="copyBibtex()">Copy BibTeX</button>
 </div>
 {% endblock %}
