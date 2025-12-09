@@ -91,17 +91,17 @@
 
         <div class="form-item bibtex-field" data-name="isbn">
             <label for="isbn">ISBN</label>
-            <input type="text" name="isbn" value="{{ citation.isbn }}" />
+            <input type="text" name="isbn" pattern="(?:\d+-){3,4}\d" value="{{ citation.isbn }}" />
         </div>
 
         <div class="form-item bibtex-field" data-name="doi">
             <label for="doi">DOI</label>
-            <input type="text" name="doi" value="{{ citation.doi }}" />
+            <input type="text" name="doi" pattern="\d+(?:\.\d+)*/\S+" value="{{ citation.doi }}" />
         </div>
 
         <div class="form-item bibtex-field" data-name="url">
             <label for="url">URL</label>
-            <input type="text" name="url" value="{{ citation.url }}" />
+            <input type="url" name="url" value="{{ citation.url }}" />
         </div>
 
         <div class="form-item bibtex-field" data-name="urldate">
