@@ -29,6 +29,22 @@ document.querySelectorAll('.list-item').forEach(item => {
     });
 });
 
+document.getElementById('select-all').addEventListener('click', () => {
+  document.querySelectorAll('.list-item').forEach(item => {
+    if (!item.classList.contains('selected')) {
+      item.classList.toggle('selected')
+    }
+  })
+})
+
+document.getElementById('deselect-all').addEventListener('click', () => {
+  document.querySelectorAll('.list-item').forEach(item => {
+    if (item.classList.contains('selected')) {
+      item.classList.toggle('selected')
+    }
+  })
+})
+
 document.querySelector('#generate-bibtex').addEventListener('click', () => {
   const selectedItems = document.querySelectorAll('.list-item.selected');
   const selectedIds = Array.from(selectedItems).map(item => item.dataset.id);

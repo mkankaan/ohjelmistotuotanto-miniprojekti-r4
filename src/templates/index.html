@@ -4,33 +4,44 @@
 {% endblock %}
 {% block body %}
 
-<div class="fp-container">
-  <h2 id="fp-title">Citation helper</h2>
-  <div class="fp-header">
-    <div>
-      <button id="generate-bibtex" disabled="true">Generate BibTeX</button>
+<div class="index-container">
+  <h2 id="index-title">Citation helper</h2>
+  <div class="index-header">
+    <div class="index-header-el">
+      <div>
+        <button id="generate-bibtex" disabled="true">Generate BibTeX</button>
+      </div>
+      <div id="selection-controls">
+        <button type="button" id="select-all">Select all</button>
+        <button type="button" id="deselect-all">De-select all</button>
+        <button type="button" id="delete-selected">Delete selected</button>
+      </div>
     </div>
-    <div>
+    <div class="index-header-el">
       <div id="cit-amount">Amount of citations: {{ citations | count }}</div>
       <div id="selected-amount">Citations selected: 0</div>
     </div>
-    <div>
-      <button onclick="document.location='new_citation'">
-        Create new citation
-      </button>
+    <div class="index-header-el" id="create-and-filter">
+      <div>
+        <button onclick="document.location='new_citation'">
+          Create new citation
+        </button>
+      </div>
+      <div>
+        <form id="filter-form">
+          <p>
+            <strong>Filter by year</strong><br />
+            <label for="min_year">Min:</label>
+            <input type="text" name="min_year" pattern="^\d*$" size="4" value="{{ filter_dict["min_year"] }}" />
+            <label for="max_year">Max:</label>
+            <input type="text" name="max_year" pattern="^\d*$" size="4" value="{{ filter_dict["max_year"] }}" />
+            <button type="submit" id="filter-apply">Apply</button>
+            <button type="button" name="filter-reset" onclick="document.location='/'">Reset</button>
+          </p>
+        </form>
+      </div>
     </div>
   </div>
-  <form id="filter-form">
-    <p>
-      <strong>Filter by year</strong><br />
-      <label for="min_year">Min:</label>
-      <input type="text" name="min_year" pattern="^\d*$" size="4" value="{{ filter_dict["min_year"] }}" />
-      <label for="max_year">Max:</label>
-      <input type="text" name="max_year" pattern="^\d*$" size="4" value="{{ filter_dict["max_year"] }}" />
-      <button type="submit" id="filter-apply">Apply</button>
-      <button type="button" name="filter-reset" onclick="document.location='/'">Reset</button>
-    </p>
-  </form>
   <ul class="cit-grid">
     {% for citation in citations %}
     <li class="list-item" data-id="{{  citation.id  }}">
