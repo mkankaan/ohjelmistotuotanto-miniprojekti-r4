@@ -16,8 +16,9 @@ def show_lines(content): # pragma: no cover
 
 @app.route("/")
 def index():
-    citations = get_citations()
-    return render_template("index.html", citations=citations)
+    filter_dict = request.args.to_dict()
+    citations = get_citations(filter_dict)
+    return render_template("index.html", citations=citations, filter_dict=filter_dict)
 
 
 @app.route("/new_citation")

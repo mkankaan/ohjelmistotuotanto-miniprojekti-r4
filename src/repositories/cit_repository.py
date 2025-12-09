@@ -1,9 +1,10 @@
 from sqlalchemy import text
 from config import db
-from util import format_authors, citation_as_dict
+from util import format_authors, citation_as_dict, filter_sql
 
-def get_citations():
-    result = db.session.execute(text("""
+
+def get_citations(filter_dict = {}):
+    sql = """
         SELECT
             id,          -- 0
             citation_key, -- 1
@@ -22,7 +23,11 @@ def get_citations():
             number,       -- 14
             chapter       -- 15
         FROM citations
-    """))
+    """
+
+    sql += filter_sql(filter_dict)
+
+    result = db.session.execute(text(sql), filter_dict)
     citations = result.fetchall()
     citation_dicts = []
 

@@ -80,3 +80,22 @@ def request_crossref_data(doi):
 
     return message
 
+def filter_sql(filter_dict):
+    if not filter_dict:
+        return ""
+
+    conditions = []
+    if filter_dict["min_year"]:
+        try:
+            filter_dict["min_year"] = int(filter_dict["min_year"])
+        except ValueError:
+            return ""
+        conditions.append("year >= :min_year")
+    if filter_dict["max_year"]:
+        try:
+            filter_dict["max_year"] = int(filter_dict["max_year"])
+        except ValueError:
+            return ""
+        conditions.append("year <= :max_year")
+
+    return " WHERE " + " AND ".join(conditions)

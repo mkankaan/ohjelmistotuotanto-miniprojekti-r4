@@ -20,6 +20,17 @@
       </button>
     </div>
   </div>
+  <form id="filter-form">
+    <p>
+      <strong>Filter by year</strong><br />
+      <label for="min_year">Min:</label>
+      <input type="text" name="min_year" pattern="^\d*$" size="4" value="{{ filter_dict["min_year"] }}" />
+      <label for="max_year">Max:</label>
+      <input type="text" name="max_year" pattern="^\d*$" size="4" value="{{ filter_dict["max_year"] }}" />
+      <button type="submit" id="filter-apply">Apply</button>
+      <button type="button" name="filter-reset" onclick="document.location='/'">Reset</button>
+    </p>
+  </form>
   <ul class="cit-grid">
     {% for citation in citations %}
     <li class="list-item" data-id="{{  citation.id  }}">
