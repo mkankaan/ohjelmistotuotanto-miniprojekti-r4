@@ -114,6 +114,9 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
             titleField.dispatchEvent(new Event('input', { bubbles: true }));
             yearField.dispatchEvent(new Event('input', { bubbles: true }));
         }
+    })
+    .then(() => {
+        updateClearButtonState();
     });
 });
 
@@ -139,6 +142,30 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
 //        return;
 //    }
 //});
+
+for (const input of create_form.elements) {
+    input.addEventListener("input", updateClearButtonState);
+};
+
+doi_form.elements[0].addEventListener("input", updateClearButtonState);
+
+populate_button.addEventListener("input", updateClearButtonState);
+
+function updateClearButtonState() {
+    const fields = Array.from(create_form.elements).filter(e => e.getAttribute('type') === 'text')
+    const filled = fields.map(field => field.value.length).reduce((sum, l) => sum += l)
+    const doi_filled = doi_form.elements[0].value.length;
+    create_clear_button.disabled = filled + doi_filled === 0;
+};
+
+create_clear_button.addEventListener("click", () => {
+    create_form.reset();
+    doi_form.reset();
+    create_clear_button.disabled = true;
+    updateButtonState();
+});
+
+updateClearButtonState();
 
 async function generateCitationKey() {
     const title = document.getElementById('title').value.trim();
