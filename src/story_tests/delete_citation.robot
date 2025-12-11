@@ -60,5 +60,5 @@ Delete Multiple Citations
 *** Keywords ***
 Click Delete Button For Citation
     [Arguments]  ${citation_key}
-    ${xpath}=  Set Variable  //li[contains(., 'Citation key:') and contains(., '${citation_key}')]//button[@type='submit' and contains(text(), 'Delete')]
+    ${xpath}=  Set Variable  //li[contains(., 'Citation key:') and contains(., '${citation_key}')]//button[contains(text(), 'Delete')]
     Click Button  ${xpath}

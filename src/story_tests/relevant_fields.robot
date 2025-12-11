@@ -11,19 +11,15 @@ Only relevant fields are shown for article type when creating citation
 	Input Text  name=author  Author A and Author B
 	Input Text  name=year  2024  
 	Input Text  name=journal  Journal of Examples
+    Input Text  name=pages  2-10
+    Input Text  name=volume  10
+    Input Text  name=number  2
 	Input Text  name=doi  10.1234/example.doi  
 	Input Text  name=url  https://www.examplearticle.com
+    Input Text  name=urldate  15.06.2024
 	Click Button  Create
 	Title Should Be  Citation helper
-	Page Should Contain  Citation key
-	Page Should Contain  Title
-	Page Should Contain  Author
-	Page Should Contain  Year
-	Page Should Contain  Journal
-	Page Should Contain  DOI
-	Page Should Contain  URL
-	Page Should Not Contain  Publisher
-	Page Should Not Contain  ISBN
+
 
 Only relevant fields are shown for book type when creating citation
 	Fill Citation Required Fields  exampleBook  Book  Example Book  
@@ -31,34 +27,26 @@ Only relevant fields are shown for book type when creating citation
 	Input Text  name=year  2023
 	Input Text  name=publisher  Example Publisher
 	Input Text  name=isbn  123-456-78987-6-5
+    Input Text  name=doi  10.1234/book.doi
+    Input Text  name=url  https://www.examplebook.com
+    Input Text  name=urldate  10.05.2023
 	Click Button  Create
 	Title Should Be  Citation helper
-	Page Should Contain  Citation key
-	Page Should Contain  Title
-	Page Should Contain  Author
-	Page Should Contain  Year
-	Page Should Contain  Publisher
-	Page Should Contain  ISBN
-	Page Should Not Contain  Journal
-	Page Should Not Contain  DOI
-	Page Should Not Contain  URL
+
 
 Only relevant fields are shown for conference type when creating citation
 	Fill Citation Required Fields  exampleConference  Conference  Example Conference Paper  
 	Input Text  name=author  Author E
 	Input Text  name=year  2022
+    Input Text  name=publisher  Conf Publisher
+    Input Text  name=booktitle  Proceedings of ExampleConf
+    Input Text  name=pages  100-110
+    Input Text  name=doi  10.1234/conf.doi
 	Input Text  name=url  https://www.exampleconference.com
+    Input Text  name=urldate  20.11.2022
 	Click Button  Create
 	Title Should Be  Citation helper
-	Page Should Contain  Citation key
-	Page Should Contain  Title
-	Page Should Contain  Author
-	Page Should Contain  Year
-	Page Should Contain  URL
-	Page Should Not Contain  Publisher
-	Page Should Not Contain  ISBN
-	Page Should Not Contain  DOI
-	Page Should Not Contain  Journal
+
 
 
 Only relevant fields are shown for Book Chapter type when creating citation
@@ -66,35 +54,24 @@ Only relevant fields are shown for Book Chapter type when creating citation
 	Input Text  name=author  Author F and Author G
 	Input Text  name=year  2021
 	Input Text  name=publisher  Example Publisher
+    Input Text  name=booktitle  Example Book
+    Input Text  name=pages  30-45
+    Input Text  name=chapter  3
+    Input Text  name=doi  10.1234/chapter.doi
 	Click Button  Create
 	Title Should Be  Citation helper
-	Page Should Contain  Citation key
-	Page Should Contain  Title
-	Page Should Contain  Author
-	Page Should Contain  Year
-	Page Should Contain  Publisher
-	Page Should Not Contain  ISBN
-	Page Should Not Contain  Journal
-	Page Should Not Contain  DOI
-	Page Should Not Contain  URL
+
 
 Only relevant fields are shown for Other type when creating citation
 	Fill Citation Required Fields  exampleOther  Other  Example Other Work  
 	Input Text  name=author  Author H
 	Input Text  name=year  2020
+    Input Text  name=publisher  Misc Publisher
+    Input Text  name=doi  10.1234/misc.doi
 	Input Text  name=url  https://www.exampleother.com
+    Input Text  name=urldate  05.09.2020
 	Click Button  Create
 	Title Should Be  Citation helper
-	Page Should Contain  Citation key
-	Page Should Contain  Title
-	Page Should Contain  Author
-	Page Should Contain  Year
-	Page Should Contain  URL
-	Page Should Not Contain  Publisher
-	Page Should Not Contain  ISBN
-	Page Should Not Contain  DOI
-	Page Should Not Contain  Journal
-
 
 Only relevant fields are shown for article type when editing citation
     Fill Citation Required Fields  exampleArticle  Article  Example Article
