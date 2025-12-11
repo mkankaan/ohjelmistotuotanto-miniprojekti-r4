@@ -19,6 +19,9 @@ const updateButtonState = () => {
     populate_button.disabled = !doi_form.checkValidity();
 };
 
+const generateCkCheckbox = document.getElementById('generate_ck');
+const citationKeyField = document.getElementById('citation_key');
+
 document.addEventListener('DOMContentLoaded', () => {
     const typeSelect = document.getElementById('type');
     const fields = document.querySelectorAll('.bibtex-field');
@@ -46,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    create_citationKeyInput.addEventListener("input", citationKeyListener);
+    create_urldateInput.addEventListener("input", urldateInputListener);
+
     typeSelect.addEventListener('change', updateFields);
     updateFields();
     updateButtonState();
@@ -53,8 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("change", updateButtonState)
 
-create_citationKeyInput.addEventListener("input", citationKeyListener);
-create_urldateInput.addEventListener("input", urldateInputListener);
 
 
 for (const input of create_form.elements) {
@@ -104,32 +108,18 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         const typeSelect = document.getElementById('type');
         typeSelect.dispatchEvent(new Event('change', { bubbles: true }));
         document.dispatchEvent(new Event('change', { bubbles: true }));
-    }).then(() => {
+
+        if (generateCkCheckbox.checked) {
+            const titleField = document.getElementById('title');
+            const yearField = document.getElementById('year');
+
+            titleField.dispatchEvent(new Event('input', { bubbles: true }));
+            yearField.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    })
+    .then(() => {
         updateClearButtonState();
     });
-});
-
-create_form.addEventListener("submit", async function (e) {
-    const ck = create_citationKeyInput.value;
-    const unique = await isCitationKeyUnique(ck);
-
-    if (!unique) {
-        create_citationKeyInput.setCustomValidity("Citation key already in use.");
-        errorSpan.textContent = "Citation key already in use.";
-    } else {
-        create_citationKeyInput.setCustomValidity("");
-        if (errorSpan.textContent === "Citation key already in use.") {
-            errorSpan.textContent = "";
-        }
-    }
-
-    updateButtonState();
-
-    if (!create_form.checkValidity()) {
-        e.preventDefault();
-        create_form.reportValidity();
-        return;
-    }
 });
 
 for (const input of create_form.elements) {
@@ -155,3 +145,68 @@ create_clear_button.addEventListener("click", () => {
 });
 
 updateClearButtonState();
+
+async function generateCitationKey() {
+    const title = document.getElementById('title').value.trim();
+    const yearInput = document.getElementById('year').value.trim();
+
+    if (!title) return '';
+
+    const cleanTitle = title.replace(/\s+/g, '').toLowerCase();
+    let baseKey = cleanTitle.substring(0, yearInput ? 4 : 8);
+
+    let key = yearInput ? `${baseKey}${yearInput}` : baseKey;
+
+    let counter = 1;
+    while (!(await isCitationKeyUnique(key))) {
+        key = yearInput ? `${baseKey}${yearInput}${counter}` : `${baseKey}${counter}`;
+        counter++;
+        if (counter > 100) break;
+    }
+
+    return key;
+}
+
+
+generateCkCheckbox.addEventListener('change', async function () {
+    if (this.checked) {
+        citationKeyField.readOnly = true;
+        citationKeyField.style.backgroundColor = '#f0f0f0';
+        citationKeyField.style.opacity = '0.6';
+        citationKeyField.style.cursor = 'not-allowed';
+
+
+        const generatedKey = await generateCitationKey();
+        if (generatedKey) {
+            citationKeyField.value = generatedKey;
+            citationKeyListener.call(citationKeyField);
+        }
+    } else {
+        citationKeyField.readOnly = false;
+        citationKeyField.style.backgroundColor = '';
+        citationKeyField.style.opacity = '1';
+        citationKeyField.style.cursor = '';
+        citationKeyField.focus();
+    }
+    updateButtonState();
+});
+
+document.getElementById('title').addEventListener('input', async function () {
+    if (generateCkCheckbox.checked) {
+        const generatedKey = await generateCitationKey();
+        if (generatedKey) {
+            citationKeyField.value = generatedKey;
+            citationKeyListener.call(citationKeyField);
+        }
+    }
+});
+
+document.getElementById('year').addEventListener('input', async function () {
+    if (generateCkCheckbox.checked) {
+        const generatedKey = await generateCitationKey();
+        if (generatedKey) {
+            citationKeyField.value = generatedKey;
+            citationKeyListener.call(citationKeyField);
+        }
+    }
+});

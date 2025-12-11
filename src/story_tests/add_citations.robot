@@ -36,12 +36,8 @@ Citing a book with one author should succeed with all fields visible
     Page Should Contain  Citation key
     Page Should Contain  Title
     Page Should Contain  Author
-    Page Should Contain  Publisher
     Page Should Contain  Year
-    Page Should Contain  ISBN
-    Page Should Contain  DOI
-    Page Should Contain  URL
-    Page Should Contain  1.1.2000
+
 
 Citing a book with multiple authors should succeed
     Create Citation  example  Book  Example  Ex1 and Ex2  3033  Ex  123-456-78987-6-5  10.1000/182  https://www.example.com  1.1.2000

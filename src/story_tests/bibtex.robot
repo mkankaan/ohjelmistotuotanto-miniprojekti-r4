@@ -13,13 +13,20 @@ Generate Bibtex Button Should Be Unclickable If There Are No Citations
 
 Button Should Be Clickable If There Are Citations
     Create Citation Required Fields  test  Book  Test
+    Click Button  Select all
+    Page Should Contain  Citations selected: 1
     Click Button  Generate BibTeX
-    Page Should Contain  BibTeX
+    Sleep  1s
+    Page Should Not Contain  Citation helper
 
 Show Bibtex Correctly
     Create Citation  testkey  Book  Mystery Book  Mystery Author  1990  WSOY  847-397-27609-1-2  10.1000/444  https://www.mysterybook.com  2.4.2011
     Wait Until Page Contains    Amount of citations: 1    timeout=10
-    Go To  ${BIBTEX_URL}
+    Click Button  Select all
+    Page Should Contain  Citations selected: 1
+    Sleep  1s
+    Click Button  Generate BibTeX
+    Sleep  2s
     Page Should Contain  @book{testkey,
     Page Should Contain  title = \{Mystery Book\}
     Page Should Contain  author = \{Mystery Author\}
@@ -35,7 +42,11 @@ Show Bibtex Of Multiple Citations
     Create Citation Required Fields  testkey1  Book  Clean Code
     Create Citation Required Fields  testkey2  Book  Even Cleaner Code
     Wait Until Page Contains    Amount of citations: 2    timeout=10
-    Go To  ${BIBTEX_URL}
+    Click Element  id=select-all
+    Page Should Contain  Citations selected: 2
+    Sleep  1s
+    Click Button  Generate BibTeX
+    Sleep  2s
     Page Should Contain  @book{testkey1,
     Page Should Contain  @book{testkey2,
     Page Should Contain  title = \{Clean Code\}
