@@ -289,3 +289,10 @@ def delete_citation(citation_id):
     )
     
     db.session.commit()
+
+def get_unique_citation_key(key):
+    result = db.session.execute(
+        text("SELECT 1 FROM citations WHERE lower(citation_key) = :key LIMIT 1"),
+        {"key": key}
+    ).first()
+    return result is not None

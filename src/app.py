@@ -1,9 +1,8 @@
 from flask import redirect, render_template, request, jsonify, flash, session
 from db_helper import reset_db, create_test_data
-from config import app, test_env, db
+from config import app, test_env
 from util import request_crossref_data, split_names, get_bibtex, format_doi
-from sqlalchemy import text
-from repositories.cit_repository import get_citation_dict, get_citations, create_citation, get_citation, update_citation, delete_citation
+from repositories.cit_repository import get_citation_dict, get_citations, create_citation, get_citation, update_citation, delete_citation, get_unique_citation_key
 import markupsafe
 
 
@@ -76,10 +75,9 @@ def ids_to_bibtex():
 @app.route("/check_citation_key")
 def check_citation_key():
     key = request.args.get("key", "").lower()
-    sql = text("SELECT 1 FROM citations WHERE lower(citation_key) = :key LIMIT 1")
-    result = db.session.execute(sql, {"key": key}).first()
-    exists = result is not None
+    exists = get_unique_citation_key(key)
     return jsonify({"exists": exists})
+
 
 @app.route("/populate-form", methods=["POST"])
 def doi_population():
