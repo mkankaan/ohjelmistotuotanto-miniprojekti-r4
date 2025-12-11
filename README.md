@@ -34,7 +34,7 @@ Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog v1.2.0 (2025-12-12)
+## <a name="changelog"></a> Changelog v1.3.0 (2025-12-12)
 
 **Added features**
 - Added an option for the user to automatically generate a citation key.
