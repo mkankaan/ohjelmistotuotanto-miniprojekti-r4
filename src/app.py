@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, jsonify, flash, session
-from db_helper import reset_db, create_test_data
+from db_helper import reset_db
 from config import app, test_env
 from util import request_crossref_data, split_names, get_bibtex, format_doi
 from repositories.cit_repository import get_citation_dict, get_citations, create_citation, get_citation, update_citation, delete_citation, get_unique_citation_key
@@ -171,10 +171,3 @@ if test_env: # pragma: no cover
     def reset_database():
         reset_db()
         return jsonify({ 'message': "db reset" })
-    
-#testausta varten oleva reitti
-if test_env: # pragma: no cover
-    @app.route("/test_data")
-    def test_data():
-        create_test_data()
-        return redirect("/")
