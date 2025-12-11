@@ -5,8 +5,10 @@ const create_urldateInput = create_form.elements["urldate"];
 const errorSpan = document.getElementById("ck-error");
 const doi_form = document.forms["doi-populate-form"]
 const populate_button = document.getElementById("submit-doi")
+const create_clear_button = document.getElementById("clear")
 populate_button.disabled = true;
 create_button.disabled = true;
+create_clear_button.disabled = true;
 
 const updateButtonState = () => {
     const ckValid = create_citationKeyInput.checkValidity();
@@ -119,29 +121,6 @@ document.getElementById('doi-populate-form').addEventListener('submit', function
         updateClearButtonState();
     });
 });
-
-//create_form.addEventListener("submit", async function (e) {
-//    const ck = create_citationKeyInput.value;
-//    const unique = await isCitationKeyUnique(ck);
-//
-//    if (!unique) {
-//        create_citationKeyInput.setCustomValidity("Citation key already in use.");
-//        errorSpan.textContent = "Citation key already in use.";
-//    } else {
-//        create_citationKeyInput.setCustomValidity("");
-//        if (errorSpan.textContent === "Citation key already in use.") {
-//            errorSpan.textContent = "";
-//        }
-//    }
-//
-//    updateButtonState();
-//
-//    if (!create_form.checkValidity()) {
-//        e.preventDefault();
-//        create_form.reportValidity();
-//        return;
-//    }
-//});
 
 for (const input of create_form.elements) {
     input.addEventListener("input", updateClearButtonState);

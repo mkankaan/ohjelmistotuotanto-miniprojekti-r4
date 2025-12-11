@@ -9,6 +9,8 @@
 <div class="form-container">
     <h2 id="header-create">Create a new citation</h2>
 
+    <button id="clear">Clear all fields</button>
+
     <form name="doi-populate-form" id="doi-populate-form">
         <div class="form-item">
             <label for="doi-populate">
@@ -109,17 +111,17 @@
 
         <div class="form-item bibtex-field" data-name="isbn">
             <label for="isbn">ISBN</label>
-            <input type="text" name="isbn" id="isbn" />
+            <input type="text" name="isbn" id="isbn" pattern="(?:\d+-){3,4}\d" />
         </div>
 
         <div class="form-item bibtex-field" data-name="doi">
             <label for="doi">DOI</label>
-            <input type="text" name="doi" id="doi" />
+            <input type="text" name="doi" id="doi" pattern="\d+(?:\.\d+)*/\S+" />
         </div>
 
         <div class="form-item bibtex-field" data-name="url">
             <label for="url">URL</label>
-            <input type="text" name="url" id="url" />
+            <input type="url" name="url" id="url" />
         </div>
 
         <div class="form-item bibtex-field" data-name="urldate">

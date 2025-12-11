@@ -134,11 +134,6 @@ def test_populate_form_valid_doi(monkeypatch, client):
     assert data["volume"] == "10"
     assert data["number"] == "2"
 
-
-
-
-
-
 def test_edit_route_invalid_year(client):
     data = {
         "citation_key": "key_edit3",

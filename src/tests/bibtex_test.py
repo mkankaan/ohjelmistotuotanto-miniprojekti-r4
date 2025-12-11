@@ -1,5 +1,6 @@
 import unittest
 from util import get_bibtex, citation_bibtex, bibtex_field
+from app import app
 
 class TestBibtex(unittest.TestCase):
     def setUp(self):
@@ -49,4 +50,28 @@ class TestBibtex(unittest.TestCase):
     def test_empty_list(self):
         self.assertEqual(get_bibtex([]), "")
 
+class TestDownloadBibtex(unittest.TestCase):
+    def setUp(self):
+        app.testing = True
+        self.client = app.test_client()
+        self.sample_bibtex = "@book{testkey,\n  title = {Test Book}\n}"
+
+    def test_bibtex_page_renders_with_content(self):
+        with self.client.session_transaction() as sess:
+            sess["bibtex"] = self.sample_bibtex
+
+        response = self.client.get('/bibtex')
+        self.assertEqual(response.status_code, 200)
+
+        self.assertIn(b'Download BibTeX', response.data)
+        self.assertIn(b'Copy BibTeX', response.data)
+
+    def test_bibtex_content_in_page(self):
+        with self.client.session_transaction() as sess:
+            sess["bibtex"] = self.sample_bibtex
+
+        response = self.client.get('/bibtex')
+        self.assertEqual(response.status_code, 200)
+
+        self.assertIn(b'@book{testkey', response.data)
 

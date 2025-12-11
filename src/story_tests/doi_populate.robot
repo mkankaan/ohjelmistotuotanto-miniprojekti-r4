@@ -3,6 +3,7 @@ Resource  resource.robot
 Suite Setup      Open And Configure Browser
 Suite Teardown   Close Browser
 Test Setup       Reset Citations
+Test Teardown  Reset Citations And Go To Start Page
 
 *** Test Cases ***
 At start create and populate buttons are disabled

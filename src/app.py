@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, jsonify, flash, session
-from db_helper import reset_db
+from db_helper import reset_db, create_test_data
 from config import app, test_env, db
 from util import request_crossref_data, split_names, get_bibtex, format_doi
 from sqlalchemy import text
@@ -16,8 +16,9 @@ def show_lines(content): # pragma: no cover
 
 @app.route("/")
 def index():
-    citations = get_citations()
-    return render_template("index.html", citations=citations)
+    filter_dict = request.args.to_dict()
+    citations = get_citations(filter_dict)
+    return render_template("index.html", citations=citations, filter_dict=filter_dict)
 
 
 @app.route("/new_citation")
@@ -156,12 +157,12 @@ def edit(citation_id):
             flash(str(error))
             return redirect("/edit/" + str(citation_id))
 
-@app.route("/delete/<int:citation_id>", methods=["POST"])
+@app.route("/delete/<int:citation_id>", methods=["DELETE"])
 def delete(citation_id):
     print(f"Deleting citation {citation_id}")
     try:
         delete_citation(citation_id)
-        return redirect("/")
+        return "", 200
     except Exception as error: # pragma: no cover
         flash(f"Error deleting citation: {str(error)}")
         return redirect("/")
@@ -172,3 +173,10 @@ if test_env: # pragma: no cover
     def reset_database():
         reset_db()
         return jsonify({ 'message': "db reset" })
+    
+#testausta varten oleva reitti
+if test_env: # pragma: no cover
+    @app.route("/test_data")
+    def test_data():
+        create_test_data()
+        return redirect("/")
