@@ -231,7 +231,6 @@ def get_citation(citation_id):
                 c.doi,
                 c.url,
                 c.urldate,
-                STRING_AGG(a.name, ' and ' ORDER BY ca.author_order) as author_string,
                 c.journal,
                 c.booktitle,
                 c.pages,
@@ -239,26 +238,7 @@ def get_citation(citation_id):
                 c.number,
                 c.chapter
             FROM citations c
-            LEFT JOIN citations_authors ca ON ca.citation_id = c.id
-            LEFT JOIN authors a ON a.id = ca.author_id
             WHERE c.id = :citation_id
-            GROUP BY
-                c.id,
-                c.citation_key,
-                c.title,
-                c.type,
-                c.publisher,
-                c.year,
-                c.isbn,
-                c.doi,
-                c.url,
-                c.urldate,
-                c.journal,
-                c.booktitle,
-                c.pages,
-                c.volume,
-                c.number,
-                c.chapter
         """),
         {"citation_id": citation_id}
     ).fetchone()
@@ -268,12 +248,11 @@ def get_citation(citation_id):
 
 def get_citation_dict(citation_id):
     citation = get_citation(citation_id)
-
     cit_id = citation[0]
     authors = get_citation_authors(cit_id)
     formatted_author_list = format_authors(get_authors_as_list(authors))
     citation = citation_as_dict(citation, formatted_author_list)
-
+    
     return citation
 
 

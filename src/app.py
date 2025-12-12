@@ -42,7 +42,6 @@ def citation_creation():
     try:
         split_names(content)
         create_citation(content)
-        print("created:", content)
         return redirect("/")
     except Exception as error: # pragma: no cover
         flash(str(error))
@@ -65,6 +64,7 @@ def ids_to_bibtex():
     cits = []
     for id in ids:
         cits.append(get_citation_dict(id))
+    
     bibtex = get_bibtex(cits)
     
     session["bibtex"] = bibtex
@@ -86,10 +86,22 @@ def doi_population():
         doi = data.get("query")
         doi = format_doi(doi)
         data = request_crossref_data(doi)
-        print(data)
     except Exception as error:
         flash(str(error))
         return redirect("/new_citation")
+
+    publication_type = data.get("type")
+    container_title = data.get("container-title")[0] if data.get("container-title") else ""
+
+    journal = ""
+    booktitle = ""
+    if publication_type in ["journal-article", "article"]:
+        journal = container_title
+    elif publication_type in ["proceedings-article", "book-chapter", "inproceedings"]:
+        booktitle = container_title
+    else:
+        journal = container_title
+
 
     return jsonify({
         "type": data.get("type"),
@@ -100,10 +112,10 @@ def doi_population():
         "isbn": data.get("ISBN")[0] if data.get("ISBN") is not None else "",
         "doi": data.get("DOI"),
         "url": data.get("link")[0].get("URL") if data.get("link") is not None else "",
-        "booktitle": data.get("container-title")[0] if data.get("container-title") else "",
+        "booktitle": booktitle,
         "pages": data.get("page") or "",
         "chapter": data.get("article-number") or data.get("chapter") or "",
-        "journal": data.get("container-title")[0] if data.get("container-title") else "",
+        "journal": journal,
         "volume": data.get("volume") or "",
         "number": data.get("issue") or data.get("number") or "",
     })
@@ -111,7 +123,6 @@ def doi_population():
 @app.route("/edit/<int:citation_id>", methods=["GET", "POST"])
 def edit(citation_id):
     citation = get_citation(citation_id)
-    print(citation)
 
     if request.method == "GET":
         return render_template("edit.html", citation=citation)
@@ -157,7 +168,6 @@ def edit(citation_id):
 
 @app.route("/delete/<int:citation_id>", methods=["DELETE"])
 def delete(citation_id):
-    print(f"Deleting citation {citation_id}")
     try:
         delete_citation(citation_id)
         return "", 200
