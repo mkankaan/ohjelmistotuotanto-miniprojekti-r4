@@ -10,7 +10,7 @@ A Flask web application for managing citations in LaTeX and converting citations
     - [Database Setup](#setup) <br/>
     - [Run the Application](#run) <br/>
     - [Testing](#testing) <br/>
-- [Changelog v1.2.0 (2025-12-04)](#changelog) <br/>
+- [Changelog v1.4.0 (2025-12-12)](#changelog) <br/>
 - [Definition of Done](#dod) <br/>
 
 ## <a name="installation"></a> Installation
@@ -34,7 +34,7 @@ Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog v1.3.0 (2025-12-12)
+## <a name="changelog"></a> Changelog v1.4.0 (2025-12-12)
 
 **Added features**
 - Added an option for the user to automatically generate a citation key.
