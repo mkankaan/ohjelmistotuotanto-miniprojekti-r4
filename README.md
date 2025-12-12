@@ -43,6 +43,10 @@ Robot tests can be run with `$ robot src/story_tests`.
 - The user can now download selected citations as a .bib file.
 - Multiple citations can be deleted at once.
 
+**Fixed issues**
+- Some field names in BibTeX displayed incorrectly.
+- Minor bug fixes.
+
 ## <a name="dod"></a> Definition of Done
 
 - Each user story has clearly defined acceptance criteria, which can be found in the README file and also the backlog that is linked in the README file.
