@@ -34,15 +34,14 @@ Unit tests can be run with `$ pytest src/tests`.
 
 Robot tests can be run with `$ robot src/story_tests`.
 
-## <a name="changelog"></a> Changelog v1.2.0 (2025-12-04)
+## <a name="changelog"></a> Changelog v1.3.0 (2025-12-12)
 
 **Added features**
-- Citations can be edited and deleted.
-- The user can add the date at which the source was visited.
-- Added a button which allows the user to easily navigate to the front page from anywhere in the application.
-
-**Fixed issues**
-- Fixed the issue where cancelling the creation of a new citation created said citation.
+- Added an option for the user to automatically generate a citation key.
+- Added a button to clear all fields in the form when creating a citation.
+- Citations can be filtered by year on the front page.
+- The user can now download selected citations as a .bib file.
+- Multiple citations can be deleted at once.
 
 ## <a name="dod"></a> Definition of Done
 
