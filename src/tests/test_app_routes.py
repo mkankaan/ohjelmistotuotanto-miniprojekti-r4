@@ -128,11 +128,75 @@ def test_populate_form_valid_doi(monkeypatch, client):
     assert data["doi"] == "10.1234/example"
     assert data["url"] == "https://example.com"
     assert data["journal"] == "Example Journal"
-    assert data["booktitle"] == "Example Journal"
+    assert data["booktitle"] == ""
     assert data["pages"] == "1-10"
     assert data["chapter"] == "3"
     assert data["volume"] == "10"
     assert data["number"] == "2"
+
+def test_populate_form_proceedings_article(monkeypatch, client):
+    from util import request_crossref_data
+
+    def fake_request_crossref_data(doi):
+        return {
+            "type": "proceedings-article",
+            "title": ["Conference Paper Title"],
+            "author": "A U Thor",
+            "publisher": "ACM",
+            "created": {"date-parts": [[2023, 6, 15]]},
+            "ISBN": None,
+            "DOI": doi,
+            "link": [{"URL": "https://example.com/conf"}],
+            "container-title": ["Conference Proceedings"],
+            "page": "100-110",
+            "article-number": None,
+            "volume": None,
+            "issue": None,
+        }
+
+    monkeypatch.setattr("app.request_crossref_data", fake_request_crossref_data)
+
+    response = client.post("/populate-form", json={"query": "10.1145/conf.example"})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["type"] == "proceedings-article"
+    assert data["title"] == "Conference Paper Title"
+    assert data["booktitle"] == "Conference Proceedings"
+    assert data["journal"] == ""
+    assert data["pages"] == "100-110"
+
+def test_populate_form_book_chapter(monkeypatch, client):
+    from util import request_crossref_data
+
+    def fake_request_crossref_data(doi):
+        return {
+            "type": "book-chapter",
+            "title": ["Chapter Title"],
+            "author": "A U Thor",
+            "publisher": "Publisher Name",
+            "created": {"date-parts": [[2021, 3, 10]]},
+            "ISBN": ["1234567890"],
+            "DOI": doi,
+            "link": None,
+            "container-title": ["Book Title"],
+            "page": "50-75",
+            "chapter": "5",
+            "volume": None,
+            "issue": None,
+        }
+
+    monkeypatch.setattr("app.request_crossref_data", fake_request_crossref_data)
+
+    response = client.post("/populate-form", json={"query": "10.1234/chapter.example"})
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["type"] == "book-chapter"
+    assert data["title"] == "Chapter Title"
+    assert data["booktitle"] == "Book Title"
+    assert data["journal"] == ""
+    assert data["pages"] == "50-75"
+    assert data["chapter"] == "5"
+
 
 def test_edit_route_invalid_year(client):
     data = {
