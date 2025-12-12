@@ -44,7 +44,7 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Multiple citations can be deleted at once.
 
 **Fixed issues**
-- Some field names in BibTeX displayed incorrectly.
+- Some field names in BibTeX were displayed incorrectly.
 - Minor bug fixes.
 
 ## <a name="dod"></a> Definition of Done
