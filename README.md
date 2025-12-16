@@ -56,3 +56,7 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Documentation is kept up to date. The README includes instructions for running and testing the application locally.
 - Change history is maintained in a clear and documented way: commit messages describe the changes made.
 - Code is refactored for better quality.
+
+## Report
+
+See the report about how the project went [here](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/blob/main/report.md).
