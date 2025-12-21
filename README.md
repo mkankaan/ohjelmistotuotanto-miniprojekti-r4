@@ -12,6 +12,7 @@ A Flask web application for managing citations in LaTeX and converting citations
     - [Testing](#testing) <br/>
 - [Changelog v1.4.0 (2025-12-12)](#changelog) <br/>
 - [Definition of Done](#dod) <br/>
+- [Report](#report) <br/>
 
 ## <a name="installation"></a> Installation
 ### <a name="setup"></a> Database Setup
@@ -57,6 +58,6 @@ Robot tests can be run with `$ robot src/story_tests`.
 - Change history is maintained in a clear and documented way: commit messages describe the changes made.
 - Code is refactored for better quality.
 
-## Report
+## <a name="report"></a> Report
 
 See the report about how the project went [here](https://github.com/mkankaan/ohjelmistotuotanto-miniprojekti-r4/blob/main/report.md).
